@@ -44,7 +44,6 @@ export function StoryStage({
 }: StoryStageProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
-  const [revealed, setRevealed] = useState(false);
   const [papers, setPapers] = useState([false, false, false]);
   const [bearSteps, setBearSteps] = useState(0);
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
@@ -145,13 +144,10 @@ export function StoryStage({
           <button
             className="action-button action-button--green"
             type="button"
-            onClick={() => {
-              setRevealed(true);
-              playFromStart();
-            }}
+            onClick={onNext}
           >
-            {revealed ? <Check aria-hidden="true" /> : <Sparkles aria-hidden="true" />}
-            {revealed ? "Misterio descubierto" : interaction.label}
+            <Sparkles aria-hidden="true" />
+            {interaction.label}
           </button>
         </div>
       ) : null}
