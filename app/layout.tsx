@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
+import "@fontsource/nunito/400.css";
+import "@fontsource/nunito/600.css";
+import "@fontsource/nunito/700.css";
+import "@fontsource/nunito/800.css";
 import "./globals.css";
 
 const SITE_TITLE = "Lola y Mario: Guardianes del bosque";
@@ -63,7 +67,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#174c3c",
+  themeColor: "#4b8b58",
   colorScheme: "light",
 };
 

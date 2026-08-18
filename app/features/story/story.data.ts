@@ -1,125 +1,211 @@
-import type { StoryScene } from "./story.types";
+import type { CharacterId, StoryScene } from "./story.types";
 
 export const STORY_TITLE = "Lola y Mario: Guardianes del bosque";
 
+export const STORY_SYNOPSIS =
+  "Lola y Mario encuentran un libro misterioso que los transporta a los bosques del Ecuador. Para volver a casa deberán observar, ayudar a sus nuevos amigos y descifrar las palabras que guarda un antiguo pergamino.";
+
+export const CHARACTERS: Record<CharacterId, {
+  name: string;
+  shortName: string;
+  description: string;
+  imageSrc: string;
+  accent: "purple" | "lime" | "red" | "brown";
+}> = {
+  lola: {
+    name: "Lola",
+    shortName: "Lola",
+    description: "Una pequeña científica curiosa, valiente y siempre dispuesta a descubrir cosas nuevas.",
+    imageSrc: "/assets/PERSONAJES/LOLA.png",
+    accent: "purple",
+  },
+  mario: {
+    name: "Mario",
+    shortName: "Mario",
+    description: "Un pequeño explorador curioso, divertido y siempre listo para vivir nuevas aventuras.",
+    imageSrc: "/assets/PERSONAJES/MARIO.png",
+    accent: "lime",
+  },
+  guacamayo: {
+    name: "Guacamayo verde mayor",
+    shortName: "Guacamayo",
+    description: "Vivo en los bosques de la Costa ecuatoriana y necesito grandes árboles para alimentarme, refugiarme y formar mi familia.",
+    imageSrc: "/assets/PERSONAJES/GUACAMAYO VERDE MAYOR.png",
+    accent: "red",
+  },
+  oso: {
+    name: "Oso de anteojos",
+    shortName: "Oso",
+    description: "Soy tranquilo y curioso. Vivo en los bosques andinos del Ecuador y las marcas de mi rostro son únicas.",
+    imageSrc: "/assets/PERSONAJES/OSO DE ANTEOJOS.png",
+    accent: "brown",
+  },
+};
+
 export const STORY_SCENES = [
   {
-    id: "una-mision-especial",
-    title: "Una misión especial",
-    narration:
-      "Lola y Mario llegaron al sendero con una pregunta: ¿cómo podían ayudar a cuidar aquel bosque lleno de vida?",
+    id: "una-tarde-especial",
+    title: "Una tarde especial",
+    narration: "En una tarde, mientras el sol se escondía entre colores brillantes, una gran aventura estaba a punto de comenzar.",
     videoSrc: "/assets/ANIMACIONES/P1.mp4",
+    posterSrc: "/assets/ESCENAS/P1.jpg",
+    copyPosition: "bottom-right",
+    copyTone: "dark",
   },
   {
-    id: "una-pluma-verde",
-    title: "Una pluma verde",
-    narration:
-      "Entre las hojas encontraron una pluma brillante. Era la primera pista de una aventura que apenas comenzaba.",
+    id: "la-biblioteca",
+    title: "En la biblioteca",
+    narration: "Lola y Mario entraron a la biblioteca y quedaron frente a frente. Habían buscado por todas partes, pero ningún libro llamaba su atención.",
     videoSrc: "/assets/ANIMACIONES/P2.mp4",
+    posterSrc: "/assets/ESCENAS/P2.jpg",
+    copyPosition: "bottom-center",
+    copyTone: "light",
+    interaction: { type: "characters" },
   },
   {
-    id: "el-guacamayo",
-    title: "El guacamayo",
-    narration:
-      "Un guacamayo verde apareció entre las ramas. Con sus alas abiertas, los invitó a seguirlo por el bosque.",
+    id: "el-libro-misterioso",
+    title: "El libro misterioso",
+    narration: "De pronto, un extraño libro con misteriosos símbolos de animales en sus bordes comenzó a brillar.",
     videoSrc: "/assets/ANIMACIONES/P3.mp4",
+    posterSrc: "/assets/ESCENAS/P3.jpg",
+    copyPosition: "top-center",
+    copyTone: "dark",
+    interaction: { type: "reveal", label: "Descubre qué guarda el libro" },
   },
   {
-    id: "el-mensaje-del-bosque",
-    title: "El mensaje del bosque",
-    narration:
-      "El guacamayo tenía algo importante que contar: muchos animales necesitaban un lugar seguro para vivir.",
+    id: "la-luz-magica",
+    title: "Una luz mágica",
+    narration: "Ante sus ojos, el libro salió volando del estante y se abrió en el aire, liberando una luz mágica de sus páginas.",
     videoSrc: "/assets/ANIMACIONES/P4.mp4",
+    posterSrc: "/assets/ESCENAS/P4.jpg",
+    copyPosition: "top-right",
+    copyTone: "dark",
   },
   {
-    id: "huellas-en-el-camino",
-    title: "Huellas en el camino",
-    narration:
-      "Mario descubrió unas huellas redondas sobre la tierra húmeda. Todos avanzaron despacio para no asustar a su dueño.",
+    id: "el-remolino",
+    title: "Todo comenzó a girar",
+    narration: "Libros, hojas de papel y un antiguo pergamino volaron por el aire, mientras árboles y hojas verdes brotaban por todos lados.",
     videoSrc: "/assets/ANIMACIONES/P5.mp4",
+    posterSrc: "/assets/ESCENAS/P5.jpg",
+    copyPosition: "bottom-right",
+    copyTone: "dark",
   },
   {
-    id: "un-nuevo-amigo",
-    title: "Un nuevo amigo",
-    narration:
-      "Las huellas pertenecían a un oso de anteojos. Parecía tímido, pero pronto comprendió que Lola y Mario querían ayudar.",
+    id: "un-bosque-enorme",
+    title: "¿Dónde estamos?",
+    narration: "Cuando todo se detuvo, la biblioteca había desaparecido. Lola y Mario estaban rodeados de enormes árboles y hojas verdes.",
     videoSrc: "/assets/ANIMACIONES/P6.mp4",
+    posterSrc: "/assets/ESCENAS/P6.jpg",
+    copyPosition: "top-center",
+    copyTone: "dark",
   },
   {
-    id: "un-hogar-que-cuidar",
-    title: "Un hogar que cuidar",
-    narration:
-      "El oso les mostró los árboles, las flores y el agua que daban alimento y refugio a todos los habitantes del bosque.",
+    id: "calmate-mario",
+    title: "Primero debemos observar",
+    narration: "Mario comenzó a gritar como loco. Lola se rio y le dijo: «¡Cálmate, Mario! Primero debemos descubrir dónde estamos».",
     videoSrc: "/assets/ANIMACIONES/P7.mp4",
+    posterSrc: "/assets/ESCENAS/P7.jpg",
+    copyPosition: "top-center",
+    copyTone: "dark",
   },
   {
-    id: "la-idea-de-lola",
-    title: "La idea de Lola",
-    narration:
-      "Lola observó cada detalle y tuvo una idea: podían recuperar el sendero sin molestar a los animales.",
+    id: "el-pergamino",
+    title: "El antiguo pergamino",
+    narration: "Lola tomó el antiguo pergamino. En su interior descubrió un extraño abecedario formado por símbolos.",
     videoSrc: "/assets/ANIMACIONES/P8.mp4",
+    posterSrc: "/assets/ESCENAS/P8.jpg",
+    copyPosition: "top-left",
+    copyTone: "dark",
+    interaction: { type: "reveal", label: "Descubre qué guarda el pergamino" },
   },
   {
-    id: "semillas-para-el-futuro",
-    title: "Semillas para el futuro",
-    narration:
-      "Juntos reunieron semillas de plantas nativas. Cada una guardaba la promesa de una nueva hoja, una flor o un fruto.",
+    id: "mensaje-ayuda",
+    title: "El primer mensaje",
+    narration: "Debajo del abecedario apareció un mensaje. Usa las pistas del pergamino para descubrir la palabra.",
     videoSrc: "/assets/ANIMACIONES/P9.mp4",
+    posterSrc: "/assets/ESCENAS/P9.jpg",
+    copyPosition: "bottom-right",
+    copyTone: "dark",
+    interaction: { type: "cipher", word: "AYUDA" },
   },
   {
-    id: "manos-a-la-obra",
-    title: "Manos a la obra",
-    narration:
-      "Mario preparó la tierra mientras Lola cuidaba las semillas. El guacamayo y el oso también encontraron una forma de colaborar.",
+    id: "una-sombra-enorme",
+    title: "Una enorme sombra",
+    narration: "De pronto, unas grandes alas se extendieron sobre Lola y Mario. Aún no lograban descubrir a quién pertenecían.",
     videoSrc: "/assets/ANIMACIONES/P10.mp4",
+    posterSrc: "/assets/ESCENAS/P10.jpg",
+    copyPosition: "top-right",
+    copyTone: "dark",
   },
   {
-    id: "cada-gota-cuenta",
-    title: "Cada gota cuenta",
-    narration:
-      "El agua era valiosa, así que aprendieron a usar solo la necesaria. Cada gota ayudó a despertar una pequeña semilla.",
+    id: "guacamayo-verde-mayor",
+    title: "El guacamayo verde mayor",
+    narration: "Un fuerte aleteo sacudió las hojas y un guacamayo verde mayor descendió frente a ellos. «No tengan miedo. Este bosque también forma parte de su hogar».",
     videoSrc: "/assets/ANIMACIONES/P11.mp4",
+    posterSrc: "/assets/ESCENAS/P11.jpg",
+    copyPosition: "bottom-left",
+    copyTone: "light",
+    interaction: { type: "character", characterId: "guacamayo", label: "Conoce al guacamayo" },
   },
   {
-    id: "una-lluvia-oportuna",
-    title: "Una lluvia oportuna",
-    narration:
-      "Las nubes cubrieron el cielo y llegó una lluvia suave. El bosque parecía cantar con el sonido de las gotas.",
+    id: "el-hogar-del-guacamayo",
+    title: "Un hogar entre los árboles",
+    narration: "El guacamayo les mostró los frutos que le servían de alimento y los grandes troncos donde su especie encontraba refugio.",
+    secondaryNarration: "Los árboles nos dan comida, protección y un lugar para formar nuestras familias.",
     videoSrc: "/assets/ANIMACIONES/P12.mp4",
+    posterSrc: "/assets/ESCENAS/P12.jpg",
+    copyPosition: "bottom-right",
+    copyTone: "light",
   },
   {
-    id: "el-bosque-responde",
-    title: "El bosque responde",
-    narration:
-      "Pasaron los días y aparecieron los primeros brotes. Eran pequeños, pero estaban fuertes y llenos de color.",
+    id: "el-bosque-en-silencio",
+    title: "El canto del bosque se apagó",
+    narration: "Frente a ellos apareció un espacio vacío, lleno de ramas cortadas y troncos caídos. Cada árbol que desaparece hace más pequeño el hogar de los animales.",
     videoSrc: "/assets/ANIMACIONES/P13.mp4",
+    posterSrc: "/assets/ESCENAS/P13.jpg",
+    copyPosition: "top-center",
+    copyTone: "light",
   },
   {
-    id: "todos-tienen-un-lugar",
-    title: "Todos tienen un lugar",
-    narration:
-      "Con nuevas plantas, regresaron insectos y aves. El sendero volvía a ser un hogar compartido.",
+    id: "la-pequena-planta",
+    title: "Proteger también es ayudar",
+    narration: "Lola encontró una pequeña planta entre las ramas. Mario retiró con cuidado los papeles que la cubrían para que recibiera la luz del sol.",
+    secondaryNarration: "Proteger el bosque también significa protegernos a nosotros.",
     videoSrc: "/assets/ANIMACIONES/P14.mp4",
+    posterSrc: "/assets/ESCENAS/P14.jpg",
+    copyPosition: "top-left",
+    copyTone: "light",
+    interaction: { type: "papers" },
   },
   {
-    id: "la-promesa",
-    title: "La promesa",
-    narration:
-      "Lola y Mario prometieron visitar el bosque y enseñar a otros que hasta las acciones pequeñas pueden proteger la naturaleza.",
+    id: "insignia-costa",
+    title: "La primera insignia",
+    narration: "Al proteger la planta, el pergamino mostró una nueva palabra y la primera insignia de la aventura.",
     videoSrc: "/assets/ANIMACIONES/P15.mp4",
+    posterSrc: "/assets/ESCENAS/P15.jpg",
+    copyPosition: "bottom-right",
+    copyTone: "dark",
+    interaction: { type: "cipher", word: "COSTA" },
   },
   {
-    id: "una-gran-celebracion",
-    title: "Una gran celebración",
-    narration:
-      "El guacamayo voló sobre los árboles y el oso dio un alegre salto. Habían conseguido algo importante trabajando juntos.",
+    id: "oso-de-anteojos",
+    title: "Entre montañas y neblina",
+    narration: "El bosque se cubrió de neblina y aparecieron entre montañas y árboles húmedos. Allí encontraron un oso con manchas claras alrededor de los ojos.",
+    secondaryNarration: "Cada oso de anteojos tiene marcas diferentes. Son como nuestro propio rostro.",
     videoSrc: "/assets/ANIMACIONES/P16.mp4",
+    posterSrc: "/assets/ESCENAS/P16.jpg",
+    copyPosition: "top-center",
+    copyTone: "dark",
+    interaction: { type: "bear" },
   },
   {
-    id: "el-bosque-sigue-hablando",
-    title: "El bosque sigue hablando",
-    narration:
-      "La aventura terminó, pero el bosque siguió contando historias. Solo hacía falta escuchar y recordar que también es nuestro hogar.",
+    id: "semillas-en-el-camino",
+    title: "Semillas para nuevos bosques",
+    narration: "Mientras caminaba buscando frutos, el oso dejaba caer semillas sobre la tierra. Así ayuda a que nuevas plantas crezcan en distintos lugares.",
     videoSrc: "/assets/ANIMACIONES/P17.mp4",
+    posterSrc: "/assets/ESCENAS/P17.jpg",
+    copyPosition: "top-center",
+    copyTone: "dark",
+    interaction: { type: "ending", word: "SIERRA" },
   },
 ] as const satisfies readonly StoryScene[];

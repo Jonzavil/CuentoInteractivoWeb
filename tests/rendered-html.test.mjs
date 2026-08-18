@@ -32,7 +32,10 @@ test("server-renders the interactive story shell", async () => {
   assert.match(html, /<html lang="es">/i);
   assert.match(html, /Lola y Mario: Guardianes del bosque/i);
   assert.match(html, /Escena 1 de 17/i);
-  assert.match(html, /Una misión especial/i);
+  assert.match(html, /Una tarde especial/i);
+  assert.match(html, /Sinopsis/i);
+  assert.match(html, /Créditos/i);
+  assert.match(html, /Galería/i);
   assert.match(html, /Abrir ajustes/i);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });
@@ -45,6 +48,7 @@ test("keeps the story content aligned with the delivered media", async () => {
   ]);
 
   assert.equal(storyData.match(/videoSrc:/g)?.length, 17);
+  assert.equal(storyData.match(/posterSrc:/g)?.length, 17);
   assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 17);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind/i);
 

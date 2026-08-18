@@ -2,87 +2,80 @@
 
 import Image from "next/image";
 import {
-  ArrowLeft,
-  ArrowRight,
-  Pause,
-  Play,
+  BookOpen,
+  Images,
   RotateCcw,
+  ScrollText,
   Settings,
-  Volume2,
-  VolumeX,
+  Users,
   X,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { STORY_SCENES, STORY_TITLE } from "@/app/features/story/story.data";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  CHARACTERS,
+  STORY_SCENES,
+  STORY_SYNOPSIS,
+  STORY_TITLE,
+} from "@/app/features/story/story.data";
 import { useStory } from "@/app/features/story/StoryProvider";
+import type { CharacterId, StoryView } from "@/app/features/story/story.types";
+import { StoryStage } from "./StoryStage";
+
+const VIEWS: Array<{ id: StoryView; label: string; icon: typeof BookOpen }> = [
+  { id: "cuento", label: "Cuento", icon: BookOpen },
+  { id: "sinopsis", label: "Sinopsis", icon: ScrollText },
+  { id: "creditos", label: "Créditos", icon: Users },
+  { id: "galeria", label: "Galería", icon: Images },
+];
 
 export function StoryExperience() {
   const { state, dispatch } = useStory();
-  const videoRef = useRef<HTMLVideoElement>(null);
   const settingsRef = useRef<HTMLDialogElement>(null);
-  const [readySceneId, setReadySceneId] = useState<string | null>(null);
+  const characterRef = useRef<HTMLDialogElement>(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<CharacterId>("lola");
 
   const scene = STORY_SCENES[state.currentSceneIndex];
-  const isFirstScene = state.currentSceneIndex === 0;
-  const isLastScene = state.currentSceneIndex === STORY_SCENES.length - 1;
   const progress = ((state.currentSceneIndex + 1) / STORY_SCENES.length) * 100;
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !state.hasHydrated) return;
+  const setPlaying = useCallback(
+    (playing: boolean) => dispatch({ type: "SET_PLAYING", payload: playing }),
+    [dispatch],
+  );
 
-    video.muted = state.preferences.muted;
+  const openCharacter = useCallback((characterId: CharacterId) => {
+    setSelectedCharacter(characterId);
+    characterRef.current?.showModal();
+  }, []);
 
-    if (state.isPlaying) {
-      void video.play().catch(() => {
-        dispatch({ type: "SET_PLAYING", payload: false });
-      });
-    } else {
-      video.pause();
-    }
-  }, [dispatch, scene.id, state.hasHydrated, state.isPlaying, state.preferences.muted]);
+  const goPrevious = useCallback(() => dispatch({ type: "PREVIOUS_SCENE" }), [dispatch]);
+  const goNext = useCallback(() => {
+    dispatch({
+      type: state.currentSceneIndex === STORY_SCENES.length - 1 ? "RESTART" : "NEXT_SCENE",
+    });
+  }, [dispatch, state.currentSceneIndex]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
+      if (state.currentView !== "cuento") return;
       const target = event.target;
       if (
         target instanceof HTMLElement &&
-        (target.isContentEditable ||
-          ["BUTTON", "INPUT", "SELECT", "TEXTAREA"].includes(target.tagName))
+        (target.isContentEditable || ["BUTTON", "INPUT", "SELECT", "TEXTAREA"].includes(target.tagName))
       ) {
         return;
       }
-
-      if (event.key === "ArrowLeft" && !isFirstScene) {
-        dispatch({ type: "PREVIOUS_SCENE" });
-      }
-
-      if (event.key === "ArrowRight") {
-        dispatch({ type: isLastScene ? "RESTART" : "NEXT_SCENE" });
-      }
-
+      if (event.key === "ArrowLeft" && state.currentSceneIndex > 0) goPrevious();
+      if (event.key === "ArrowRight") goNext();
       if (event.key === " ") {
         event.preventDefault();
-        dispatch({ type: "SET_PLAYING", payload: !state.isPlaying });
+        setPlaying(!state.isPlaying);
       }
     }
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [dispatch, isFirstScene, isLastScene, state.isPlaying]);
+  }, [goNext, goPrevious, setPlaying, state.currentSceneIndex, state.currentView, state.isPlaying]);
 
-  function togglePlayback() {
-    dispatch({ type: "SET_PLAYING", payload: !state.isPlaying });
-  }
-
-  function goForward() {
-    dispatch({ type: isLastScene ? "RESTART" : "NEXT_SCENE" });
-  }
-
-  function restartStory() {
-    dispatch({ type: "RESTART" });
-    settingsRef.current?.close();
-  }
+  const character = CHARACTERS[selectedCharacter];
 
   return (
     <main
@@ -90,248 +83,153 @@ export function StoryExperience() {
       data-contrast={state.preferences.highContrast ? "high" : "standard"}
       data-text-scale={state.preferences.textScale}
     >
-      <header className="story-header">
-        <div className="story-header__inner">
-          <div className="story-brand">
-            <Image
-              className="story-brand__bird"
-              src="/assets/PERSONAJES/GUACAMAYO VERDE MAYOR.png"
-              alt=""
-              width={68}
-              height={48}
-              priority
-            />
-            <div>
-              <p className="story-brand__eyebrow">Cuento interactivo</p>
-              <h1>{STORY_TITLE}</h1>
-            </div>
+      <header className="site-header">
+        <div className="site-header__brand">
+          <Image
+            src="/assets/PERSONAJES/GUACAMAYO VERDE MAYOR.png"
+            alt=""
+            width={80}
+            height={64}
+            priority
+          />
+          <div>
+            <p>Cuento interactivo</p>
+            <h1>{STORY_TITLE}</h1>
           </div>
-
-          <button
-            className="icon-button icon-button--light"
-            type="button"
-            onClick={() => settingsRef.current?.showModal()}
-            aria-label="Abrir ajustes"
-            title="Ajustes"
-          >
-            <Settings aria-hidden="true" />
-          </button>
         </div>
+
+        <nav className="main-tabs" aria-label="Secciones del sitio">
+          {VIEWS.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              type="button"
+              aria-current={state.currentView === id ? "page" : undefined}
+              onClick={() => dispatch({ type: "SET_VIEW", payload: id })}
+            >
+              <Icon aria-hidden="true" />
+              <span>{label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <button
+          className="icon-button icon-button--header"
+          type="button"
+          onClick={() => settingsRef.current?.showModal()}
+          aria-label="Abrir ajustes de lectura"
+          title="Ajustes de lectura"
+        >
+          <Settings aria-hidden="true" />
+        </button>
       </header>
 
-      <div className="story-progress" aria-label="Progreso del cuento">
-        <div className="story-progress__copy">
-          <span>
-            Escena {state.currentSceneIndex + 1} de {STORY_SCENES.length}
-          </span>
-          <strong>{scene.title}</strong>
-        </div>
-        <div
-          className="story-progress__track"
-          role="progressbar"
-          aria-valuemin={1}
-          aria-valuemax={STORY_SCENES.length}
-          aria-valuenow={state.currentSceneIndex + 1}
-          aria-valuetext={`Escena ${state.currentSceneIndex + 1} de ${STORY_SCENES.length}`}
-        >
-          <span style={{ width: `${progress}%` }} />
-        </div>
-      </div>
-
-      <section className="story-reader" aria-labelledby="scene-title">
-        <div className="story-stage">
-          <div className="story-stage__fallback" aria-hidden="true">
-            <Image
-              className="fallback-character fallback-character--lola"
-              src="/assets/PERSONAJES/LOLA.png"
-              alt=""
-              width={246}
-              height={354}
-              priority
-            />
-            <Image
-              className="fallback-character fallback-character--mario"
-              src="/assets/PERSONAJES/MARIO.png"
-              alt=""
-              width={246}
-              height={354}
-              priority
-            />
+      {state.currentView === "cuento" ? (
+        <div className="story-shell">
+          <div className="story-progress">
+            <div className="story-progress__label">
+              <span>Escena {state.currentSceneIndex + 1}</span>
+              <strong>{scene.title}</strong>
+            </div>
+            <div className="story-progress__track" role="progressbar" aria-valuemin={1} aria-valuemax={STORY_SCENES.length} aria-valuenow={state.currentSceneIndex + 1}>
+              <span style={{ width: `${progress}%` }} />
+            </div>
           </div>
-          <video
+          <StoryStage
             key={scene.id}
-            ref={videoRef}
-            className={
-              readySceneId === scene.id ? "story-video is-ready" : "story-video"
-            }
-            src={scene.videoSrc}
-            aria-label={`Animación: ${scene.title}`}
-            aria-describedby="scene-narration"
-            playsInline
-            preload="metadata"
+            scene={scene}
+            sceneIndex={state.currentSceneIndex}
+            totalScenes={STORY_SCENES.length}
+            isPlaying={state.isPlaying}
             muted={state.preferences.muted}
-            loop={!state.preferences.reducedMotion}
-            onCanPlay={() => setReadySceneId(scene.id)}
-            onPlay={() => dispatch({ type: "SET_PLAYING", payload: true })}
-            onPause={() => dispatch({ type: "SET_PLAYING", payload: false })}
-            onEnded={() => dispatch({ type: "SET_PLAYING", payload: false })}
+            reducedMotion={state.preferences.reducedMotion}
+            onPrevious={goPrevious}
+            onNext={goNext}
+            onPlayingChange={setPlaying}
+            onToggleMuted={() => dispatch({ type: "TOGGLE_MUTED" })}
+            onOpenCharacter={openCharacter}
           />
         </div>
+      ) : null}
 
-        <div className="story-narrative" aria-live="polite">
-          <p className="story-narrative__number">
-            {String(state.currentSceneIndex + 1).padStart(2, "0")}
-          </p>
-          <div>
-            <h2 id="scene-title">{scene.title}</h2>
-            <p id="scene-narration">{scene.narration}</p>
+      {state.currentView === "sinopsis" ? (
+        <section className="content-view content-view--synopsis" aria-labelledby="synopsis-title">
+          <Image src="/assets/ESCENAS/P1.jpg" alt="Lola y Mario al comienzo de su aventura" fill sizes="(max-width: 900px) 100vw, 1100px" priority />
+          <div className="content-view__copy">
+            <p className="content-view__eyebrow">Una aventura por el Ecuador</p>
+            <h2 id="synopsis-title">El bosque necesita guardianes</h2>
+            <p>{STORY_SYNOPSIS}</p>
+            <button className="action-button action-button--purple" type="button" onClick={() => dispatch({ type: "SET_VIEW", payload: "cuento" })}>
+              <BookOpen aria-hidden="true" /> Comenzar el cuento
+            </button>
           </div>
+        </section>
+      ) : null}
+
+      {state.currentView === "creditos" ? (
+        <section className="content-view content-view--credits" aria-labelledby="credits-title">
+          <div className="credits-art" aria-hidden="true">
+            <Image src={CHARACTERS.lola.imageSrc} alt="" width={260} height={360} />
+            <Image src={CHARACTERS.mario.imageSrc} alt="" width={260} height={360} />
+          </div>
+          <div className="credits-copy">
+            <p className="content-view__eyebrow">Detrás de la aventura</p>
+            <h2 id="credits-title">Créditos</h2>
+            <dl>
+              <div><dt>Diseño, ilustración y animación</dt><dd>Equipo creativo de Guardianes del bosque</dd></div>
+              <div><dt>Adaptación y desarrollo web</dt><dd>Jonathan Zavala</dd></div>
+              <div><dt>Proyecto</dt><dd>Cuento interactivo sobre la fauna y los bosques del Ecuador</dd></div>
+            </dl>
+          </div>
+        </section>
+      ) : null}
+
+      {state.currentView === "galeria" ? (
+        <section className="gallery-view" aria-labelledby="gallery-title">
+          <div className="gallery-view__heading">
+            <p className="content-view__eyebrow">Compañeros de viaje</p>
+            <h2 id="gallery-title">Conoce a los personajes</h2>
+          </div>
+          <div className="character-grid">
+            {(Object.keys(CHARACTERS) as CharacterId[]).map((characterId) => {
+              const item = CHARACTERS[characterId];
+              return (
+                <button key={characterId} className={`character-card character-card--${item.accent}`} type="button" onClick={() => openCharacter(characterId)}>
+                  <Image src={item.imageSrc} alt="" width={240} height={300} />
+                  <span><strong>{item.name}</strong><small>Ver ficha</small></span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
+      <dialog ref={characterRef} className={`character-dialog character-dialog--${character.accent}`} aria-labelledby="character-name">
+        <button className="icon-button character-dialog__close" type="button" onClick={() => characterRef.current?.close()} aria-label="Cerrar ficha" title="Cerrar">
+          <X aria-hidden="true" />
+        </button>
+        <Image src={character.imageSrc} alt={`Ilustración de ${character.name}`} width={400} height={480} />
+        <div>
+          <p>Hola, soy</p>
+          <h2 id="character-name">{character.name}</h2>
+          <p>{character.description}</p>
         </div>
+      </dialog>
 
-        <nav className="story-controls" aria-label="Controles del cuento">
-          <button
-            className="control-button control-button--secondary"
-            type="button"
-            onClick={() => dispatch({ type: "PREVIOUS_SCENE" })}
-            disabled={isFirstScene}
-          >
-            <ArrowLeft aria-hidden="true" />
-            <span>Atrás</span>
-          </button>
-
-          <div className="story-controls__media">
-            <button
-              className="icon-button icon-button--media"
-              type="button"
-              onClick={togglePlayback}
-              aria-label={state.isPlaying ? "Pausar animación" : "Reproducir animación"}
-              title={state.isPlaying ? "Pausar" : "Reproducir"}
-            >
-              {state.isPlaying ? (
-                <Pause aria-hidden="true" fill="currentColor" />
-              ) : (
-                <Play aria-hidden="true" fill="currentColor" />
-              )}
-            </button>
-            <button
-              className="icon-button icon-button--media"
-              type="button"
-              onClick={() => dispatch({ type: "TOGGLE_MUTED" })}
-              aria-label={state.preferences.muted ? "Activar sonido" : "Silenciar"}
-              title={state.preferences.muted ? "Activar sonido" : "Silenciar"}
-            >
-              {state.preferences.muted ? (
-                <VolumeX aria-hidden="true" />
-              ) : (
-                <Volume2 aria-hidden="true" />
-              )}
-            </button>
-          </div>
-
-          <button
-            className="control-button control-button--primary"
-            type="button"
-            onClick={goForward}
-          >
-            <span>{isLastScene ? "Repetir" : "Siguiente"}</span>
-            {isLastScene ? (
-              <RotateCcw aria-hidden="true" />
-            ) : (
-              <ArrowRight aria-hidden="true" />
-            )}
-          </button>
-        </nav>
-      </section>
-
-      <dialog
-        ref={settingsRef}
-        className="settings-dialog"
-        aria-labelledby="settings-title"
-        onClick={(event) => {
-          if (event.target === event.currentTarget) event.currentTarget.close();
-        }}
-      >
-        <div className="settings-dialog__content">
-          <div className="settings-dialog__header">
-            <h2 id="settings-title">Ajustes de lectura</h2>
-            <button
-              className="icon-button"
-              type="button"
-              onClick={() => settingsRef.current?.close()}
-              aria-label="Cerrar ajustes"
-              title="Cerrar"
-            >
-              <X aria-hidden="true" />
-            </button>
-          </div>
-
-          <fieldset className="settings-group">
-            <legend>Tamaño del texto</legend>
-            <div className="segmented-control">
-              <button
-                type="button"
-                aria-pressed={state.preferences.textScale === "normal"}
-                onClick={() =>
-                  dispatch({ type: "SET_TEXT_SCALE", payload: "normal" })
-                }
-              >
-                Normal
-              </button>
-              <button
-                type="button"
-                aria-pressed={state.preferences.textScale === "large"}
-                onClick={() =>
-                  dispatch({ type: "SET_TEXT_SCALE", payload: "large" })
-                }
-              >
-                Grande
-              </button>
-            </div>
-          </fieldset>
-
-          <label className="toggle-row">
-            <span>
-              <strong>Reducir movimiento</strong>
-              <small>Las animaciones esperan hasta que las reproduzcas.</small>
-            </span>
-            <input
-              type="checkbox"
-              checked={state.preferences.reducedMotion}
-              onChange={(event) =>
-                dispatch({
-                  type: "SET_REDUCED_MOTION",
-                  payload: event.target.checked,
-                })
-              }
-            />
-          </label>
-
-          <label className="toggle-row">
-            <span>
-              <strong>Más contraste</strong>
-              <small>Refuerza los colores de texto y controles.</small>
-            </span>
-            <input
-              type="checkbox"
-              checked={state.preferences.highContrast}
-              onChange={(event) =>
-                dispatch({
-                  type: "SET_HIGH_CONTRAST",
-                  payload: event.target.checked,
-                })
-              }
-            />
-          </label>
-
-          <button
-            className="restart-button"
-            type="button"
-            onClick={restartStory}
-          >
-            <RotateCcw aria-hidden="true" />
-            Empezar desde el inicio
-          </button>
+      <dialog ref={settingsRef} className="settings-dialog" aria-labelledby="settings-title">
+        <div className="settings-dialog__header">
+          <div><p>Personaliza tu experiencia</p><h2 id="settings-title">Ajustes de lectura</h2></div>
+          <button className="icon-button" type="button" onClick={() => settingsRef.current?.close()} aria-label="Cerrar ajustes" title="Cerrar"><X aria-hidden="true" /></button>
         </div>
+        <fieldset className="settings-group">
+          <legend>Tamaño del texto</legend>
+          <div className="segmented-control">
+            <button type="button" aria-pressed={state.preferences.textScale === "normal"} onClick={() => dispatch({ type: "SET_TEXT_SCALE", payload: "normal" })}>Normal</button>
+            <button type="button" aria-pressed={state.preferences.textScale === "large"} onClick={() => dispatch({ type: "SET_TEXT_SCALE", payload: "large" })}>Grande</button>
+          </div>
+        </fieldset>
+        <label className="toggle-row"><span><strong>Reducir movimiento</strong><small>Las animaciones esperan hasta que las reproduzcas.</small></span><input type="checkbox" checked={state.preferences.reducedMotion} onChange={(event) => dispatch({ type: "SET_REDUCED_MOTION", payload: event.target.checked })} /></label>
+        <label className="toggle-row"><span><strong>Más contraste</strong><small>Refuerza la lectura de textos y controles.</small></span><input type="checkbox" checked={state.preferences.highContrast} onChange={(event) => dispatch({ type: "SET_HIGH_CONTRAST", payload: event.target.checked })} /></label>
+        <button className="restart-button" type="button" onClick={() => { dispatch({ type: "RESTART" }); settingsRef.current?.close(); }}><RotateCcw aria-hidden="true" /> Empezar desde el inicio</button>
       </dialog>
     </main>
   );

@@ -10,6 +10,7 @@ const DEFAULT_PREFERENCES: StoryState["preferences"] = {
 
 export function createInitialStoryState(): StoryState {
   return {
+    currentView: "cuento",
     currentSceneIndex: 0,
     isPlaying: false,
     hasHydrated: false,
@@ -42,6 +43,12 @@ export function storyReducer(
         preferences,
       };
     }
+    case "SET_VIEW":
+      return {
+        ...state,
+        currentView: action.payload,
+        isPlaying: action.payload === "cuento" ? state.isPlaying : false,
+      };
     case "NEXT_SCENE":
       return {
         ...state,
@@ -92,6 +99,7 @@ export function storyReducer(
     case "RESTART":
       return {
         ...state,
+        currentView: "cuento",
         currentSceneIndex: 0,
         isPlaying: !state.preferences.reducedMotion,
       };
