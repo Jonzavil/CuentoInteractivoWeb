@@ -36,7 +36,7 @@ export const CHARACTERS: Record<CharacterId, {
   oso: {
     name: "Oso de anteojos",
     shortName: "Oso",
-    description: "Soy tranquilo y curioso. Vivo en los bosques andinos del Ecuador y las marcas de mi rostro son únicas.",
+    description: "Soy tranquilo y curioso, y vivo en los bosques andinos del Ecuador.",
     imageSrc: "/assets/PERSONAJES/OSO DE ANTEOJOS.png",
     accent: "brown",
   },

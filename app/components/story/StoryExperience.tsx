@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {
+  ArrowRight,
   BookOpen,
   Images,
   RotateCcw,
@@ -204,14 +205,34 @@ export function StoryExperience() {
       ) : null}
 
       <dialog ref={characterRef} className={`character-dialog character-dialog--${character.accent}`} aria-labelledby="character-name">
-        <button className="icon-button character-dialog__close" type="button" onClick={() => characterRef.current?.close()} aria-label="Cerrar ficha" title="Cerrar">
-          <X aria-hidden="true" />
-        </button>
-        <Image src={character.imageSrc} alt={`Ilustración de ${character.name}`} width={400} height={480} />
-        <div>
-          <p>Hola, soy</p>
-          <h2 id="character-name">{character.name}</h2>
-          <p>{character.description}</p>
+        <div className="character-dialog__scene">
+          <div className="character-dialog__card">
+            <Image
+              className="character-dialog__portrait"
+              src={character.imageSrc}
+              alt={`Ilustración de ${character.name}`}
+              width={440}
+              height={500}
+            />
+            <div className="character-dialog__copy">
+              <h2 id="character-name">
+                {selectedCharacter === "lola" || selectedCharacter === "mario"
+                  ? "Hola, soy"
+                  : "Hola, soy el"}{" "}
+                {character.name}
+              </h2>
+              <p>{character.description}</p>
+            </div>
+          </div>
+          <button
+            className="character-dialog__close"
+            type="button"
+            onClick={() => characterRef.current?.close()}
+            aria-label="Cerrar ficha y volver al cuento"
+            title="Volver al cuento"
+          >
+            <ArrowRight aria-hidden="true" />
+          </button>
         </div>
       </dialog>
 
