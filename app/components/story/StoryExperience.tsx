@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import {
-  ArrowRight,
   BookOpen,
   Images,
   RotateCcw,
@@ -21,6 +20,7 @@ import {
 import { useStory } from "@/app/features/story/StoryProvider";
 import type { CharacterId, StoryView } from "@/app/features/story/story.types";
 import { StoryStage } from "./StoryStage";
+import { CharacterOverlay } from "./CharacterOverlay";
 
 const VIEWS: Array<{ id: StoryView; label: string; icon: typeof BookOpen }> = [
   { id: "cuento", label: "Cuento", icon: BookOpen },
@@ -32,8 +32,7 @@ const VIEWS: Array<{ id: StoryView; label: string; icon: typeof BookOpen }> = [
 export function StoryExperience() {
   const { state, dispatch } = useStory();
   const settingsRef = useRef<HTMLDialogElement>(null);
-  const characterRef = useRef<HTMLDialogElement>(null);
-  const [selectedCharacter, setSelectedCharacter] = useState<CharacterId>("lola");
+  const [selectedCharacter, setSelectedCharacter] = useState<CharacterId | null>(null);
 
   const scene = STORY_SCENES[state.currentSceneIndex];
   const progress = ((state.currentSceneIndex + 1) / STORY_SCENES.length) * 100;
@@ -44,9 +43,11 @@ export function StoryExperience() {
   );
 
   const openCharacter = useCallback((characterId: CharacterId) => {
+    setPlaying(false);
     setSelectedCharacter(characterId);
-    characterRef.current?.showModal();
-  }, []);
+  }, [setPlaying]);
+
+  const closeCharacter = useCallback(() => setSelectedCharacter(null), []);
 
   const goPrevious = useCallback(() => dispatch({ type: "PREVIOUS_SCENE" }), [dispatch]);
   const goNext = useCallback(() => {
@@ -57,7 +58,7 @@ export function StoryExperience() {
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
-      if (state.currentView !== "cuento") return;
+      if (state.currentView !== "cuento" || selectedCharacter) return;
       const target = event.target;
       if (
         target instanceof HTMLElement &&
@@ -74,9 +75,7 @@ export function StoryExperience() {
     }
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [goNext, goPrevious, setPlaying, state.currentSceneIndex, state.currentView, state.isPlaying]);
-
-  const character = CHARACTERS[selectedCharacter];
+  }, [goNext, goPrevious, selectedCharacter, setPlaying, state.currentSceneIndex, state.currentView, state.isPlaying]);
 
   return (
     <main
@@ -148,6 +147,8 @@ export function StoryExperience() {
             onPlayingChange={setPlaying}
             onToggleMuted={() => dispatch({ type: "TOGGLE_MUTED" })}
             onOpenCharacter={openCharacter}
+            selectedCharacter={selectedCharacter}
+            onCloseCharacter={closeCharacter}
           />
         </div>
       ) : null}
@@ -201,40 +202,11 @@ export function StoryExperience() {
               );
             })}
           </div>
+          {selectedCharacter ? (
+            <CharacterOverlay characterId={selectedCharacter} onClose={closeCharacter} />
+          ) : null}
         </section>
       ) : null}
-
-      <dialog ref={characterRef} className={`character-dialog character-dialog--${character.accent}`} aria-labelledby="character-name">
-        <div className="character-dialog__scene">
-          <div className="character-dialog__card">
-            <Image
-              className="character-dialog__portrait"
-              src={character.imageSrc}
-              alt={`Ilustración de ${character.name}`}
-              width={440}
-              height={500}
-            />
-            <div className="character-dialog__copy">
-              <h2 id="character-name">
-                {selectedCharacter === "lola" || selectedCharacter === "mario"
-                  ? "Hola, soy"
-                  : "Hola, soy el"}{" "}
-                {character.name}
-              </h2>
-              <p>{character.description}</p>
-            </div>
-          </div>
-          <button
-            className="character-dialog__close"
-            type="button"
-            onClick={() => characterRef.current?.close()}
-            aria-label="Cerrar ficha y volver al cuento"
-            title="Volver al cuento"
-          >
-            <ArrowRight aria-hidden="true" />
-          </button>
-        </div>
-      </dialog>
 
       <dialog ref={settingsRef} className="settings-dialog" aria-labelledby="settings-title">
         <div className="settings-dialog__header">

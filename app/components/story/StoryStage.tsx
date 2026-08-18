@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { CharacterId, StoryScene } from "@/app/features/story/story.types";
+import { CharacterOverlay } from "./CharacterOverlay";
 import { CipherPuzzle } from "./CipherPuzzle";
 
 interface StoryStageProps {
@@ -27,6 +28,8 @@ interface StoryStageProps {
   onPlayingChange: (playing: boolean) => void;
   onToggleMuted: () => void;
   onOpenCharacter: (characterId: CharacterId) => void;
+  selectedCharacter: CharacterId | null;
+  onCloseCharacter: () => void;
 }
 
 export function StoryStage({
@@ -41,6 +44,8 @@ export function StoryStage({
   onPlayingChange,
   onToggleMuted,
   onOpenCharacter,
+  selectedCharacter,
+  onCloseCharacter,
 }: StoryStageProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
@@ -218,6 +223,10 @@ export function StoryStage({
             </button>
           </div>
         )
+      ) : null}
+
+      {selectedCharacter ? (
+        <CharacterOverlay characterId={selectedCharacter} onClose={onCloseCharacter} />
       ) : null}
 
       <button
