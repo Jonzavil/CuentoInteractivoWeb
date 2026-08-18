@@ -42,3 +42,6 @@ next-env.d.ts
 /outputs/
 /work/
 /.tmp/
+
+# local design reference
+/public/CUENTO.pptx
