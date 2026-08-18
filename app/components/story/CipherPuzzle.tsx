@@ -1,6 +1,6 @@
 "use client";
 
-import { Lightbulb, Sparkles } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 interface CipherPuzzleProps {
@@ -37,7 +37,7 @@ export function CipherPuzzle({ word, onSolved }: CipherPuzzleProps) {
   }
 
   return (
-    <div className="cipher" aria-label={`Descifra una palabra de ${word.length} letras`}>
+    <div className={`cipher cipher--${word.toLowerCase()}`} aria-label={`Descifra una palabra de ${word.length} letras`}>
       <p className="cipher__prompt">Completa los cuadros amarillos</p>
       <div className="cipher__letters">
         {word.split("").map((expectedLetter, index) => (
@@ -61,12 +61,10 @@ export function CipherPuzzle({ word, onSolved }: CipherPuzzleProps) {
         ))}
       </div>
       {solved ? (
-        <p className="cipher__success" role="status">
-          <Sparkles aria-hidden="true" /> ¡Descubriste {word}!
-        </p>
+        <p className="visually-hidden" role="status">¡Descubriste {word}!</p>
       ) : (
-        <button className="action-button action-button--hint" type="button" onClick={revealHint}>
-          <Lightbulb aria-hidden="true" /> Dame una pista
+        <button className="action-button action-button--hint" type="button" onClick={revealHint} aria-label="Mostrar una letra" title="Mostrar una letra">
+          <Lightbulb aria-hidden="true" />
         </button>
       )}
     </div>

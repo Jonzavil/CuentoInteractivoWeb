@@ -41,14 +41,21 @@ test("server-renders the interactive story shell", async () => {
 });
 
 test("keeps the story content aligned with the delivered media", async () => {
-  const [storyData, packageJson, animationFiles] = await Promise.all([
+  const [storyData, storyStyles, packageJson, animationFiles] = await Promise.all([
     readFile(new URL("../app/features/story/story.data.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readdir(new URL("../public/assets/ANIMACIONES/", import.meta.url)),
   ]);
 
   assert.equal(storyData.match(/videoSrc:/g)?.length, 17);
   assert.equal(storyData.match(/posterSrc:/g)?.length, 17);
+  assert.equal(storyData.match(/copyBlocks:/g)?.length, 17);
+  assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
+  assert.match(storyData, /no encontraban ni un solo libro que llamara su atención/);
+  assert.match(storyData, /Así ayudamos a que nuevas plantas crezcan en distintos lugares/);
+  assert.match(storyStyles, /\.scene-copy--dark \{ background: rgba\(255, 250, 235, \.12\)/);
+  assert.match(storyStyles, /\.scene-copy--light \{ background: rgba\(20, 48, 34, \.12\)/);
   assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 17);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind/i);
 

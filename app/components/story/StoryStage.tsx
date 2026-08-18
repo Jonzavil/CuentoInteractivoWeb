@@ -11,7 +11,7 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { CharacterId, StoryScene } from "@/app/features/story/story.types";
 import { CharacterOverlay } from "./CharacterOverlay";
 import { CipherPuzzle } from "./CipherPuzzle";
@@ -50,7 +50,7 @@ export function StoryStage({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
   const [papers, setPapers] = useState([false, false, false]);
-  const [bearSteps, setBearSteps] = useState(0);
+  const [, setBearSteps] = useState(0);
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
 
   const isFirst = sceneIndex === 0;
@@ -82,7 +82,7 @@ export function StoryStage({
   const interaction = scene.interaction;
 
   return (
-    <section className="story-stage" aria-labelledby="scene-title">
+    <section className="story-stage" data-scene={scene.id} aria-labelledby="scene-title">
       <video
         key={scene.id}
         ref={videoRef}
@@ -127,11 +127,22 @@ export function StoryStage({
         </button>
       </div>
 
-      <article className={`scene-copy scene-copy--${scene.copyPosition} scene-copy--${scene.copyTone}`}>
-        <h2 id="scene-title">{scene.title}</h2>
-        <p id="scene-narration">{scene.narration}</p>
-        {scene.secondaryNarration ? <strong>«{scene.secondaryNarration}»</strong> : null}
-      </article>
+      <h2 id="scene-title" className="visually-hidden">{scene.title}</h2>
+      <div className="scene-copy-layer" aria-label="Narración de la escena">
+        {scene.copyBlocks.map((copy, index) => (
+          <p
+            key={`${scene.id}-copy-${index}`}
+            className={`scene-copy scene-copy--${copy.tone} scene-copy--${copy.align}${copy.font === "open-sans" ? " scene-copy--open-sans" : ""}`}
+            style={{
+              "--copy-top": `${copy.top}%`,
+              "--copy-left": `${copy.left}%`,
+              "--copy-width": `${copy.width}%`,
+            } as CSSProperties}
+          >
+            {copy.text}
+          </p>
+        ))}
+      </div>
 
       {interaction?.type === "characters" ? (
         <div className="scene-actions scene-actions--characters">
@@ -139,7 +150,7 @@ export function StoryStage({
             Descubre quién es Lola
           </button>
           <button className="action-button action-button--lime" type="button" onClick={() => onOpenCharacter("mario")}>
-            Descubre quién es Mario
+            Descubre quién es MARIO
           </button>
         </div>
       ) : null}
@@ -187,26 +198,27 @@ export function StoryStage({
             ),
           )}
           <p className={allPapersCollected ? "paper-game__status is-complete" : "paper-game__status"} role="status">
-            {allPapersCollected ? <><Check aria-hidden="true" /> ¡La planta recibe la luz!</> : `Retira los papeles · ${papers.filter(Boolean).length}/3`}
+            {allPapersCollected ? <><Check aria-hidden="true" /> ¡La planta recibe la luz!</> : "Da click en los papeles para ayudarlos"}
           </p>
         </div>
       ) : null}
 
       {interaction?.type === "bear" ? (
         <div className="bear-game">
-          <button className="action-button action-button--brown" type="button" onClick={() => onOpenCharacter("oso")}>
-            Conoce al oso
-          </button>
           <button
             className="action-button action-button--green"
             type="button"
             onClick={() => {
-              setBearSteps((current) => Math.min(3, current + 1));
+              setBearSteps((current) => {
+                const next = Math.min(3, current + 1);
+                if (next === 3) onOpenCharacter("oso");
+                return next;
+              });
               playFromStart();
             }}
           >
-            {bearSteps === 3 ? <Check aria-hidden="true" /> : <Footprints aria-hidden="true" />}
-            {bearSteps === 3 ? "¡El oso llegó!" : `Haz que avance · ${bearSteps}/3`}
+            <Footprints aria-hidden="true" />
+            Da click para que el oso avance
           </button>
         </div>
       ) : null}
@@ -219,7 +231,7 @@ export function StoryStage({
         ) : (
           <div className="scene-actions">
             <button className="action-button action-button--green" type="button" onClick={() => setShowEndingPuzzle(true)}>
-              <Sparkles aria-hidden="true" /> Descubre la segunda insignia
+              <Sparkles aria-hidden="true" /> Completa los cuadros amarillos
             </button>
           </div>
         )

@@ -13,21 +13,22 @@ export type StoryInteraction =
   | { type: "bear" }
   | { type: "ending"; word: "SIERRA" };
 
+export interface StoryCopyBlock {
+  text: string;
+  top: number;
+  left: number;
+  width: number;
+  align: "left" | "center" | "right";
+  tone: "light" | "dark";
+  font?: "nunito" | "open-sans";
+}
+
 export interface StoryScene {
   id: string;
   title: string;
-  narration: string;
-  secondaryNarration?: string;
   videoSrc: string;
   posterSrc: string;
-  copyPosition:
-    | "top-left"
-    | "top-center"
-    | "top-right"
-    | "bottom-left"
-    | "bottom-center"
-    | "bottom-right";
-  copyTone: "light" | "dark";
+  copyBlocks: readonly StoryCopyBlock[];
   interaction?: StoryInteraction;
 }
 
