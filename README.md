@@ -8,8 +8,8 @@ táctil, y conserva el progreso únicamente en el navegador del dispositivo.
 
 - Node.js 24.16.0 (el proyecto requiere 22.13.0 o superior)
 - npm 11.13.0
-- React 19.2.6 y React DOM 19.2.6
-- Next.js 16.3.1 sobre vinext y Vite
+- React 19.2.8 y React DOM 19.2.8
+- Next.js 16.3.1 sobre vinext 1.0.0-beta.6 y Vite 8.2.1
 - TypeScript 5.9.3 con modo estricto
 - Lucide React para los iconos de interfaz
 
