@@ -30,6 +30,19 @@ npm run lint
 npm test
 ```
 
+## Despliegue
+
+El proyecto mantiene dos salidas de compilación:
+
+```bash
+npm run build:sites   # vinext/Cloudflare, genera dist/
+npm run build:vercel # Next.js nativo, genera .next/
+```
+
+`vercel.json` configura automáticamente Vercel para utilizar el build nativo
+de Next.js. En el panel de Vercel, el Framework Preset debe ser `Next.js` y el
+Output Directory debe permanecer sin override para que use `.next`.
+
 ## Arquitectura
 
 ```text
