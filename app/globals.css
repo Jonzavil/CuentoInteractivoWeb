@@ -375,6 +375,13 @@ button:focus-visible, input:focus-visible {
   background: var(--purple);
 }
 
+.character-overlay--purple .character-overlay__card {
+  top: 19.5%;
+  right: 13.2%;
+  bottom: 21.5%;
+  left: 33.6%;
+}
+
 .character-overlay--red .character-overlay__card {
   top: 14%;
   bottom: 12.3%;
@@ -393,6 +400,13 @@ button:focus-visible, input:focus-visible {
   height: 126%;
   object-fit: contain;
   object-position: center bottom;
+}
+
+.character-overlay--purple .character-overlay__portrait {
+  top: -41%;
+  left: -44%;
+  width: 86%;
+  height: 184%;
 }
 
 .character-overlay--red .character-overlay__portrait {
@@ -437,6 +451,22 @@ button:focus-visible, input:focus-visible {
   font-size: clamp(8.5px, 2.1cqw, 23px);
   font-weight: 600;
   line-height: 1.28;
+}
+
+.character-overlay--purple .character-overlay__copy h2 {
+  font-size: clamp(18px, 4.81cqw, 53.9px);
+  white-space: nowrap;
+}
+
+.character-overlay--purple .character-overlay__copy p {
+  font-size: clamp(11px, 2.83cqw, 31.7px);
+  white-space: nowrap;
+}
+
+.character-overlay--purple .character-overlay__copy {
+  margin-left: 15%;
+  padding-right: 2%;
+  padding-left: 2%;
 }
 
 .character-overlay--red .character-overlay__copy {
@@ -496,6 +526,12 @@ button:focus-visible, input:focus-visible {
 
 .character-overlay__close svg { width: 58%; height: 58%; stroke-width: 4; }
 .character-overlay__close:hover { transform: scale(1.05); }
+
+.character-overlay--purple .character-overlay__close {
+  top: calc(19.5% - 2.6cqw);
+  right: calc(13.2% - 2.6cqw);
+  bottom: auto;
+}
 
 .gallery-view > .character-overlay {
   position: fixed;

@@ -52,7 +52,19 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
             {characterId === "lola" || characterId === "mario" ? "Hola, soy" : "Hola, soy el"}{" "}
             {character.name}
           </h2>
-          <p>{character.description}</p>
+          <p>
+            {characterId === "lola" ? (
+              <>
+                Una pequeña científica curiosa,
+                <br />
+                valiente y siempre dispuesta a
+                <br />
+                descubrir cosas nuevas.
+              </>
+            ) : (
+              character.description
+            )}
+          </p>
         </div>
       </div>
       <button
