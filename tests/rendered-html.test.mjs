@@ -31,12 +31,17 @@ test("server-renders the interactive story shell", async () => {
   const html = await response.text();
   assert.match(html, /<html lang="es">/i);
   assert.match(html, /Lola y Mario: Guardianes del bosque/i);
-  assert.match(html, /Escena 1 de 17/i);
+  assert.doesNotMatch(html, /Escena 1 de 17/i);
   assert.match(html, /Una tarde especial/i);
   assert.match(html, /Sinopsis/i);
   assert.match(html, /Créditos/i);
   assert.match(html, /Galería/i);
-  assert.match(html, /Abrir ajustes/i);
+  assert.doesNotMatch(html, /Abrir ajustes/i);
+  assert.doesNotMatch(html, /Activar sonido|Silenciar/i);
+  assert.match(html, /Reproducir escena/i);
+  assert.match(html, /aria-label="Progreso del cuento"/i);
+  assert.match(html, /aria-valuenow="1"/i);
+  assert.doesNotMatch(html, /class="scene-play-button"[^>]*disabled/i);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });
 
@@ -54,10 +59,10 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
   assert.match(storyData, /no encontraban ni un solo libro que llamara su atención/);
   assert.match(storyData, /Así ayudamos a que nuevas plantas crezcan en distintos lugares/);
-  assert.match(storyStyles, /\.scene-copy--dark \{ background: rgba\(255, 250, 235, \.12\)/);
-  assert.match(storyStyles, /\.scene-copy--light \{ background: rgba\(20, 48, 34, \.12\)/);
+  assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
+  assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);
   assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 17);
-  assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind/i);
+  assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind|open-sans/i);
 
   await Promise.all(
     Array.from({ length: 17 }, (_, index) =>

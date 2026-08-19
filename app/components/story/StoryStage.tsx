@@ -1,15 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import {
-  ArrowLeft,
-  ArrowRight,
   Check,
   Footprints,
-  Pause,
-  Play,
   Sparkles,
-  Volume2,
-  VolumeX,
 } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { CharacterId, StoryScene } from "@/app/features/story/story.types";
@@ -26,7 +21,6 @@ interface StoryStageProps {
   onPrevious: () => void;
   onNext: () => void;
   onPlayingChange: (playing: boolean) => void;
-  onToggleMuted: () => void;
   onOpenCharacter: (characterId: CharacterId) => void;
   selectedCharacter: CharacterId | null;
   onCloseCharacter: () => void;
@@ -42,7 +36,6 @@ export function StoryStage({
   onPrevious,
   onNext,
   onPlayingChange,
-  onToggleMuted,
   onOpenCharacter,
   selectedCharacter,
   onCloseCharacter,
@@ -74,6 +67,12 @@ export function StoryStage({
     void video.play().then(() => onPlayingChange(true)).catch(() => onPlayingChange(false));
   }
 
+  function startPlayback() {
+    const video = videoRef.current;
+    if (!video) return;
+    void video.play().catch(() => onPlayingChange(false));
+  }
+
   function collectPaper(index: number) {
     setPapers((current) => current.map((collected, itemIndex) => collected || itemIndex === index));
   }
@@ -100,39 +99,30 @@ export function StoryStage({
         aria-hidden="true"
       />
 
-      <div className="scene-counter" aria-label={`Escena ${sceneIndex + 1} de ${totalScenes}`}>
-        <span>{String(sceneIndex + 1).padStart(2, "0")}</span>
-        <i aria-hidden="true" />
-        <span>{String(totalScenes).padStart(2, "0")}</span>
-      </div>
-
-      <div className="media-controls">
+      {!isPlaying ? (
         <button
-          className="icon-button icon-button--glass"
+          className="scene-play-button"
           type="button"
-          onClick={() => onPlayingChange(!isPlaying)}
-          aria-label={isPlaying ? "Pausar animación" : "Reproducir animación"}
-          title={isPlaying ? "Pausar" : "Reproducir"}
+          onClick={startPlayback}
+          aria-label="Reproducir escena"
+          title="Reproducir escena"
         >
-          {isPlaying ? <Pause aria-hidden="true" fill="currentColor" /> : <Play aria-hidden="true" fill="currentColor" />}
+          <Image
+            src="/assets/Iconos/Recurso 3@450x.png"
+            alt=""
+            width={100}
+            height={100}
+            priority
+          />
         </button>
-        <button
-          className="icon-button icon-button--glass"
-          type="button"
-          onClick={onToggleMuted}
-          aria-label={muted ? "Activar sonido" : "Silenciar"}
-          title={muted ? "Activar sonido" : "Silenciar"}
-        >
-          {muted ? <VolumeX aria-hidden="true" /> : <Volume2 aria-hidden="true" />}
-        </button>
-      </div>
+      ) : null}
 
       <h2 id="scene-title" className="visually-hidden">{scene.title}</h2>
       <div className="scene-copy-layer" aria-label="Narración de la escena">
         {scene.copyBlocks.map((copy, index) => (
           <p
             key={`${scene.id}-copy-${index}`}
-            className={`scene-copy scene-copy--${copy.tone} scene-copy--${copy.align}${copy.font === "open-sans" ? " scene-copy--open-sans" : ""}`}
+            className={`scene-copy scene-copy--${copy.tone} scene-copy--${copy.align}`}
             style={{
               "--copy-top": `${copy.top}%`,
               "--copy-left": `${copy.left}%`,
@@ -249,7 +239,12 @@ export function StoryStage({
         aria-label="Escena anterior"
         title="Escena anterior"
       >
-        <ArrowLeft aria-hidden="true" />
+        <Image
+          src="/assets/Iconos/Recurso 1@450x.png"
+          alt=""
+          width={64}
+          height={64}
+        />
       </button>
       <button
         className="page-arrow page-arrow--next"
@@ -258,7 +253,12 @@ export function StoryStage({
         aria-label={isLast ? "Volver al inicio" : "Siguiente escena"}
         title={isLast ? "Volver al inicio" : "Siguiente escena"}
       >
-        <ArrowRight aria-hidden="true" />
+        <Image
+          src="/assets/Iconos/Recurso 2@450x.png"
+          alt=""
+          width={64}
+          height={64}
+        />
       </button>
     </section>
   );

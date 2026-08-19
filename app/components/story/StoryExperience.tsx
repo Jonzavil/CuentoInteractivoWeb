@@ -4,13 +4,10 @@ import Image from "next/image";
 import {
   BookOpen,
   Images,
-  RotateCcw,
   ScrollText,
-  Settings,
   Users,
-  X,
 } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   CHARACTERS,
   STORY_SCENES,
@@ -30,7 +27,6 @@ const VIEWS: Array<{ id: StoryView; label: string; icon: typeof BookOpen }> = [
 
 export function StoryExperience() {
   const { state, dispatch } = useStory();
-  const settingsRef = useRef<HTMLDialogElement>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<CharacterId | null>(null);
 
   const scene = STORY_SCENES[state.currentSceneIndex];
@@ -96,16 +92,6 @@ export function StoryExperience() {
             </button>
           ))}
         </nav>
-
-        <button
-          className="icon-button icon-button--header"
-          type="button"
-          onClick={() => settingsRef.current?.showModal()}
-          aria-label="Abrir ajustes de lectura"
-          title="Ajustes de lectura"
-        >
-          <Settings aria-hidden="true" />
-        </button>
       </header>
 
       {state.currentView === "cuento" ? (
@@ -115,7 +101,14 @@ export function StoryExperience() {
               <span>Escena {state.currentSceneIndex + 1}</span>
               <strong>{scene.title}</strong>
             </div>
-            <div className="story-progress__track" role="progressbar" aria-valuemin={1} aria-valuemax={STORY_SCENES.length} aria-valuenow={state.currentSceneIndex + 1}>
+            <div
+              className="story-progress__track"
+              role="progressbar"
+              aria-label="Progreso del cuento"
+              aria-valuemin={1}
+              aria-valuemax={STORY_SCENES.length}
+              aria-valuenow={state.currentSceneIndex + 1}
+            >
               <span style={{ width: `${progress}%` }} />
             </div>
           </div>
@@ -130,7 +123,6 @@ export function StoryExperience() {
             onPrevious={goPrevious}
             onNext={goNext}
             onPlayingChange={setPlaying}
-            onToggleMuted={() => dispatch({ type: "TOGGLE_MUTED" })}
             onOpenCharacter={openCharacter}
             selectedCharacter={selectedCharacter}
             onCloseCharacter={closeCharacter}
@@ -193,22 +185,6 @@ export function StoryExperience() {
         </section>
       ) : null}
 
-      <dialog ref={settingsRef} className="settings-dialog" aria-labelledby="settings-title">
-        <div className="settings-dialog__header">
-          <div><p>Personaliza tu experiencia</p><h2 id="settings-title">Ajustes de lectura</h2></div>
-          <button className="icon-button" type="button" onClick={() => settingsRef.current?.close()} aria-label="Cerrar ajustes" title="Cerrar"><X aria-hidden="true" /></button>
-        </div>
-        <fieldset className="settings-group">
-          <legend>Tamaño del texto</legend>
-          <div className="segmented-control">
-            <button type="button" aria-pressed={state.preferences.textScale === "normal"} onClick={() => dispatch({ type: "SET_TEXT_SCALE", payload: "normal" })}>Normal</button>
-            <button type="button" aria-pressed={state.preferences.textScale === "large"} onClick={() => dispatch({ type: "SET_TEXT_SCALE", payload: "large" })}>Grande</button>
-          </div>
-        </fieldset>
-        <label className="toggle-row"><span><strong>Reducir movimiento</strong><small>Las animaciones esperan hasta que las reproduzcas.</small></span><input type="checkbox" checked={state.preferences.reducedMotion} onChange={(event) => dispatch({ type: "SET_REDUCED_MOTION", payload: event.target.checked })} /></label>
-        <label className="toggle-row"><span><strong>Más contraste</strong><small>Refuerza la lectura de textos y controles.</small></span><input type="checkbox" checked={state.preferences.highContrast} onChange={(event) => dispatch({ type: "SET_HIGH_CONTRAST", payload: event.target.checked })} /></label>
-        <button className="restart-button" type="button" onClick={() => { dispatch({ type: "RESTART" }); settingsRef.current?.close(); }}><RotateCcw aria-hidden="true" /> Empezar desde el inicio</button>
-      </dialog>
     </main>
   );
 }

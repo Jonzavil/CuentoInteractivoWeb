@@ -20,7 +20,6 @@ export interface StoryCopyBlock {
   width: number;
   align: "left" | "center" | "right";
   tone: "light" | "dark";
-  font?: "nunito" | "open-sans";
 }
 
 export interface StoryScene {

@@ -50,11 +50,11 @@ export const STORY_SCENES = [
     posterSrc: "/assets/ESCENAS/P1.jpg",
     copyBlocks: [{
       text: "En una tarde, mientras el sol se escondía entre colores brillantes, una gran aventura estaba a punto de comenzar.",
-      top: 66,
-      left: 69,
+      top: 15,
+      left: 3,
       width: 24.6,
-      align: "right",
-      tone: "dark",
+      align: "left",
+      tone: "light",
     }],
   },
   {
@@ -261,7 +261,6 @@ export const STORY_SCENES = [
         width: 20.6,
         align: "right",
         tone: "light",
-        font: "open-sans",
       },
     ],
     interaction: { type: "papers" },

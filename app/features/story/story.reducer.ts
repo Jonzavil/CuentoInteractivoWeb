@@ -38,7 +38,7 @@ export function storyReducer(
         currentSceneIndex: clampSceneIndex(
           action.payload.currentSceneIndex ?? state.currentSceneIndex,
         ),
-        isPlaying: !preferences.reducedMotion,
+        isPlaying: false,
         hasHydrated: true,
         preferences,
       };
@@ -53,13 +53,13 @@ export function storyReducer(
       return {
         ...state,
         currentSceneIndex: clampSceneIndex(state.currentSceneIndex + 1),
-        isPlaying: !state.preferences.reducedMotion,
+        isPlaying: false,
       };
     case "PREVIOUS_SCENE":
       return {
         ...state,
         currentSceneIndex: clampSceneIndex(state.currentSceneIndex - 1),
-        isPlaying: !state.preferences.reducedMotion,
+        isPlaying: false,
       };
     case "SET_PLAYING":
       return { ...state, isPlaying: action.payload };
@@ -101,7 +101,7 @@ export function storyReducer(
         ...state,
         currentView: "cuento",
         currentSceneIndex: 0,
-        isPlaying: !state.preferences.reducedMotion,
+        isPlaying: false,
       };
     default:
       return state;
