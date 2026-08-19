@@ -61,6 +61,14 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
                 <br />
                 descubrir cosas nuevas.
               </>
+            ) : characterId === "mario" ? (
+              <>
+                Un pequeño explorador curioso,
+                <br />
+                divertido y siempre listo para vivir
+                <br />
+                nuevas aventuras.
+              </>
             ) : (
               character.description
             )}

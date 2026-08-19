@@ -371,6 +371,13 @@ button:focus-visible, input:focus-visible {
   --lola-card-left: 26%;
 }
 
+.character-overlay--lime {
+  --mario-card-top: 19.5%;
+  --mario-card-right: 13.8%;
+  --mario-card-bottom: 21.5%;
+  --mario-card-left: 26%;
+}
+
 .character-overlay__card {
   position: absolute;
   z-index: 1;
@@ -387,6 +394,13 @@ button:focus-visible, input:focus-visible {
   right: var(--lola-card-right);
   bottom: var(--lola-card-bottom);
   left: var(--lola-card-left);
+}
+
+.character-overlay--lime .character-overlay__card {
+  top: var(--mario-card-top);
+  right: var(--mario-card-right);
+  bottom: var(--mario-card-bottom);
+  left: var(--mario-card-left);
 }
 
 .character-overlay--red .character-overlay__card {
@@ -412,6 +426,13 @@ button:focus-visible, input:focus-visible {
 .character-overlay--purple .character-overlay__portrait {
   top: -43%;
   left: -41%;
+  width: 76.3%;
+  height: 196%;
+}
+
+.character-overlay--lime .character-overlay__portrait {
+  top: -43%;
+  left: -38%;
   width: 76.3%;
   height: 196%;
 }
@@ -465,12 +486,28 @@ button:focus-visible, input:focus-visible {
   white-space: nowrap;
 }
 
+.character-overlay--lime .character-overlay__copy h2 {
+  font-size: clamp(18px, 4.81cqw, 53.9px);
+  white-space: nowrap;
+}
+
 .character-overlay--purple .character-overlay__copy p {
   font-size: clamp(11px, 2.83cqw, 31.7px);
   white-space: nowrap;
 }
 
+.character-overlay--lime .character-overlay__copy p {
+  font-size: clamp(11px, 2.83cqw, 31.7px);
+  white-space: nowrap;
+}
+
 .character-overlay--purple .character-overlay__copy {
+  margin-left: 0;
+  padding-right: 2%;
+  padding-left: 2%;
+}
+
+.character-overlay--lime .character-overlay__copy {
   margin-left: 0;
   padding-right: 2%;
   padding-left: 2%;
@@ -537,6 +574,12 @@ button:focus-visible, input:focus-visible {
 .character-overlay--purple .character-overlay__close {
   top: calc(var(--lola-card-top) - 2.6cqw);
   right: calc(var(--lola-card-right) - 2.6cqw);
+  bottom: auto;
+}
+
+.character-overlay--lime .character-overlay__close {
+  top: calc(var(--mario-card-top) - 2.6cqw);
+  right: calc(var(--mario-card-right) - 2.6cqw);
   bottom: auto;
 }
 
