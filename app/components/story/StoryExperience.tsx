@@ -15,7 +15,6 @@ import {
   CHARACTERS,
   STORY_SCENES,
   STORY_SYNOPSIS,
-  STORY_TITLE,
 } from "@/app/features/story/story.data";
 import { useStory } from "@/app/features/story/StoryProvider";
 import type { CharacterId, StoryView } from "@/app/features/story/story.types";
@@ -84,20 +83,6 @@ export function StoryExperience() {
       data-text-scale={state.preferences.textScale}
     >
       <header className="site-header">
-        <div className="site-header__brand">
-          <Image
-            src="/assets/PERSONAJES/GUACAMAYO VERDE MAYOR.png"
-            alt=""
-            width={80}
-            height={64}
-            priority
-          />
-          <div>
-            <p>Cuento interactivo</p>
-            <h1>{STORY_TITLE}</h1>
-          </div>
-        </div>
-
         <nav className="main-tabs" aria-label="Secciones del sitio">
           {VIEWS.map(({ id, label, icon: Icon }) => (
             <button

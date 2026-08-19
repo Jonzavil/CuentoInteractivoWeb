@@ -61,19 +61,13 @@ button:focus-visible, input:focus-visible {
   min-height: 92px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) auto 52px;
+  grid-template-columns: minmax(0, 1fr) 52px;
   align-items: center;
   gap: 24px;
   padding: 10px 0;
 }
 
-.site-header__brand { min-width: 0; display: flex; align-items: center; gap: 9px; }
-.site-header__brand img { width: 64px; height: 58px; object-fit: contain; }
-.site-header__brand p, .site-header__brand h1 { margin: 0; }
-.site-header__brand p { color: var(--green); font-size: 11px; font-weight: 900; text-transform: uppercase; }
-.site-header__brand h1 { max-width: 330px; font-size: 19px; line-height: 1.05; }
-
-.main-tabs { display: grid; grid-template-columns: repeat(4, minmax(118px, 1fr)); gap: 10px; }
+.main-tabs { width: min(100%, 650px); justify-self: center; display: grid; grid-template-columns: repeat(4, minmax(118px, 1fr)); gap: 10px; }
 .main-tabs button {
   min-height: 48px;
   display: inline-flex;
@@ -546,20 +540,17 @@ button:focus-visible, input:focus-visible {
 }
 
 @media (max-width: 900px) {
-  .site-header { grid-template-columns: 1fr 48px; gap: 10px; }
-  .main-tabs { grid-column: 1 / -1; grid-row: 2; width: 100%; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .site-header { grid-template-columns: minmax(0, 1fr) 48px; gap: 10px; }
+  .main-tabs { width: 100%; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
   .main-tabs button { min-width: 0; min-height: 42px; padding: 6px; font-size: 13px; }
-  .story-shell { width: min(calc(100vw - 20px), calc((100dvh - 210px) * 16 / 9)); }
+  .story-shell { width: min(calc(100vw - 20px), calc((100dvh - 145px) * 16 / 9)); }
   .content-view { min-height: calc(100dvh - 170px); }
   .character-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 600px) {
   .story-app { background: var(--cream); }
-  .site-header { width: calc(100% - 20px); min-height: 124px; padding-top: 7px; }
-  .site-header__brand img { width: 48px; height: 44px; }
-  .site-header__brand p { font-size: 9px; }
-  .site-header__brand h1 { font-size: 15px; }
+  .site-header { width: calc(100% - 20px); min-height: 64px; padding: 7px 0; }
   .main-tabs button svg { display: none; }
   .icon-button--header { width: 44px; height: 44px; }
   .story-shell { width: calc(100vw - 12px); padding-bottom: 12px; }
