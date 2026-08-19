@@ -247,6 +247,18 @@ button:focus-visible, input:focus-visible {
 
 .story-stage[data-scene="el-libro-misterioso"] .scene-play-button { top: 69%; }
 
+.story-stage[data-scene="la-luz-magica"] .scene-copy {
+  right: var(--stage-edge-inset);
+  left: auto;
+  padding-right: 0;
+  text-align: right;
+}
+
+.story-stage[data-scene="la-luz-magica"] .scene-play-button {
+  top: 62%;
+  left: 59%;
+}
+
 .story-stage[data-scene="el-pergamino"] .scene-actions {
   top: 21.8%;
   bottom: auto;

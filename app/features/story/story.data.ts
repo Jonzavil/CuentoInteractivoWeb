@@ -92,7 +92,7 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P4.mp4",
     posterSrc: "/assets/ESCENAS/P4.jpg",
     copyBlocks: [{
-      text: "Ante sus ojos, salió volando del estante y se abrió en el aire, liberando una luz mágica de sus páginas.",
+      text: "Un libro volando del\nestante se abrió en el\naire, liberando una luz\nmágica de sus páginas.",
       top: 7.6,
       left: 59.7,
       width: 32.1,
