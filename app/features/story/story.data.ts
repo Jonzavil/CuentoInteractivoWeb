@@ -120,10 +120,10 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P6.mp4",
     posterSrc: "/assets/ESCENAS/P6.jpg",
     copyBlocks: [{
-      text: "Cuando todo se detuvo, Lola y Mario abrieron los ojos con asombro. La biblioteca había desaparecido y ahora estaban rodeados de enormes árboles y hojas verdes.",
+      text: "Cuando todo se detuvo, Lola y Mario abrieron\nlos ojos con asombro. La biblioteca había\ndesaparecido y ahora estaban rodeados de\nenormes árboles y hojas verdes.",
       top: 7.8,
-      left: 30.9,
-      width: 38.2,
+      left: 25,
+      width: 50,
       align: "center",
       tone: "dark",
     }],
