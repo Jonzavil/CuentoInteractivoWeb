@@ -502,13 +502,13 @@ button:focus-visible, input:focus-visible {
 }
 
 .character-overlay--purple .character-overlay__copy {
-  margin-left: 0;
+  margin-left: 13%;
   padding-right: 2%;
   padding-left: 2%;
 }
 
 .character-overlay--lime .character-overlay__copy {
-  margin-left: 0;
+  margin-left: 13%;
   padding-right: 2%;
   padding-left: 2%;
 }
