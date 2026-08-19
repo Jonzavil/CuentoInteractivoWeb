@@ -175,6 +175,17 @@ button:focus-visible, input:focus-visible {
 .scene-copy--center, .scene-copy--right { text-align: left; }
 
 .story-stage[data-scene="una-tarde-especial"] .scene-copy { color: #fff; }
+.story-stage[data-scene="la-biblioteca"] .scene-copy {
+  top: auto;
+  bottom: 3%;
+  border-radius: 1.4cqw;
+  padding: .7cqw 1.2cqw;
+  background: rgba(48, 34, 50, .36);
+  color: #fff;
+  text-align: center;
+}
+.story-stage[data-scene="la-biblioteca"] .scene-play-button { left: 54%; }
+.story-stage[data-scene="la-biblioteca"] .scene-actions--characters { left: 39.25%; }
 
 .scene-actions {
   position: absolute;
@@ -186,6 +197,13 @@ button:focus-visible, input:focus-visible {
   transform: translateX(-50%);
 }
 .scene-actions--characters { top: 34%; bottom: auto; left: 35.3%; width: 29.5%; flex-direction: column; gap: 1.2cqw; transform: none; }
+.scene-actions--characters .action-button { animation: character-action-pulse 1.25s ease-in-out infinite; }
+.scene-actions--characters .action-button:nth-child(2) { animation-delay: .16s; }
+
+@keyframes character-action-pulse {
+  0%, 100% { transform: scale(.96); }
+  50% { transform: scale(1.05); }
+}
 
 .action-button {
   min-height: 44px;
@@ -504,6 +522,7 @@ button:focus-visible, input:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
   .scene-play-button { animation: none; }
+  .scene-actions--characters .action-button { animation: none; }
 }
 
 @media (max-width: 900px) {

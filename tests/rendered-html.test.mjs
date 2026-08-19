@@ -57,7 +57,7 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.equal(storyData.match(/posterSrc:/g)?.length, 17);
   assert.equal(storyData.match(/copyBlocks:/g)?.length, 17);
   assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
-  assert.match(storyData, /no encontraban ni un solo libro que llamara su atención/);
+  assert.match(storyData, /Lola y Mario entraron a la biblioteca\\nen busca de una nueva historia/);
   assert.match(storyData, /Así ayudamos a que nuevas plantas crezcan en distintos lugares/);
   assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
   assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);

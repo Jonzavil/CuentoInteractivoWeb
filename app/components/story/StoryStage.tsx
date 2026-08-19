@@ -42,12 +42,14 @@ export function StoryStage({
 }: StoryStageProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
+  const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const [papers, setPapers] = useState([false, false, false]);
   const [, setBearSteps] = useState(0);
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
 
   const isFirst = sceneIndex === 0;
   const isLast = sceneIndex === totalScenes - 1;
+  const waitsForAnimationEnd = scene.id === "la-biblioteca";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -91,15 +93,21 @@ export function StoryStage({
         playsInline
         preload="metadata"
         muted={muted}
-        loop={!reducedMotion}
+        loop={!reducedMotion && !waitsForAnimationEnd}
         onCanPlay={() => setVideoReady(true)}
-        onPlay={() => onPlayingChange(true)}
+        onPlay={() => {
+          setHasAnimationEnded(false);
+          onPlayingChange(true);
+        }}
         onPause={() => onPlayingChange(false)}
-        onEnded={() => onPlayingChange(false)}
+        onEnded={() => {
+          if (waitsForAnimationEnd) setHasAnimationEnded(true);
+          onPlayingChange(false);
+        }}
         aria-hidden="true"
       />
 
-      {!isPlaying ? (
+      {!isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button
           className="scene-play-button"
           type="button"
@@ -134,13 +142,13 @@ export function StoryStage({
         ))}
       </div>
 
-      {interaction?.type === "characters" ? (
+      {interaction?.type === "characters" && hasAnimationEnded ? (
         <div className="scene-actions scene-actions--characters">
           <button className="action-button action-button--purple" type="button" onClick={() => onOpenCharacter("lola")}>
             Descubre quién es Lola
           </button>
           <button className="action-button action-button--lime" type="button" onClick={() => onOpenCharacter("mario")}>
-            Descubre quién es MARIO
+            Descubre quién es Mario
           </button>
         </div>
       ) : null}
