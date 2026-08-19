@@ -241,13 +241,11 @@ button:focus-visible, input:focus-visible {
   font-size: clamp(6px, 1.8cqw, 20px);
 }
 
-.story-stage[data-scene="el-libro-misterioso"] .scene-actions {
-  top: 36.1%;
-  bottom: auto;
-  left: 36.1%;
-  width: 27.8%;
-  transform: none;
+.story-stage[data-scene="el-libro-misterioso"] .scene-copy {
+  text-align: center;
 }
+
+.story-stage[data-scene="el-libro-misterioso"] .scene-play-button { top: 69%; }
 
 .story-stage[data-scene="el-pergamino"] .scene-actions {
   top: 21.8%;
@@ -265,7 +263,6 @@ button:focus-visible, input:focus-visible {
   transform: none;
 }
 
-.story-stage[data-scene="el-libro-misterioso"] .scene-actions .action-button,
 .story-stage[data-scene="el-pergamino"] .scene-actions .action-button,
 .story-stage[data-scene="guacamayo-verde-mayor"] .scene-actions .action-button { width: 100%; }
 

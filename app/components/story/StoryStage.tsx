@@ -160,7 +160,6 @@ export function StoryStage({
             type="button"
             onClick={onNext}
           >
-            <Sparkles aria-hidden="true" />
             {interaction.label}
           </button>
         </div>

@@ -78,14 +78,13 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P3.mp4",
     posterSrc: "/assets/ESCENAS/P3.jpg",
     copyBlocks: [{
-      text: "De pronto, un extraño libro con misteriosos símbolos de animales en sus bordes comenzó a brillar.",
+      text: "De pronto, un extraño libro\ncon misteriosos símbolos en\nsus bordes comenzó a brillar.",
       top: 20,
       left: 35.3,
       width: 29.5,
       align: "center",
       tone: "dark",
     }],
-    interaction: { type: "reveal", label: "Da click para descubrir qué guarda el libro" },
   },
   {
     id: "la-luz-magica",
