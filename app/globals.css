@@ -364,6 +364,13 @@ button:focus-visible, input:focus-visible {
 .character-overlay--red { background: rgba(119, 139, 33, .62); }
 .character-overlay--brown { background: rgba(191, 143, 86, .64); }
 
+.character-overlay--purple {
+  --lola-card-top: 19.5%;
+  --lola-card-right: 13.8%;
+  --lola-card-bottom: 21.5%;
+  --lola-card-left: 26%;
+}
+
 .character-overlay__card {
   position: absolute;
   z-index: 1;
@@ -376,10 +383,10 @@ button:focus-visible, input:focus-visible {
 }
 
 .character-overlay--purple .character-overlay__card {
-  top: 19.5%;
-  right: 13.2%;
-  bottom: 21.5%;
-  left: 33.6%;
+  top: var(--lola-card-top);
+  right: var(--lola-card-right);
+  bottom: var(--lola-card-bottom);
+  left: var(--lola-card-left);
 }
 
 .character-overlay--red .character-overlay__card {
@@ -403,10 +410,10 @@ button:focus-visible, input:focus-visible {
 }
 
 .character-overlay--purple .character-overlay__portrait {
-  top: -41%;
-  left: -44%;
-  width: 86%;
-  height: 184%;
+  top: -43%;
+  left: -41%;
+  width: 76.3%;
+  height: 196%;
 }
 
 .character-overlay--red .character-overlay__portrait {
@@ -464,7 +471,7 @@ button:focus-visible, input:focus-visible {
 }
 
 .character-overlay--purple .character-overlay__copy {
-  margin-left: 15%;
+  margin-left: 0;
   padding-right: 2%;
   padding-left: 2%;
 }
@@ -528,8 +535,8 @@ button:focus-visible, input:focus-visible {
 .character-overlay__close:hover { transform: scale(1.05); }
 
 .character-overlay--purple .character-overlay__close {
-  top: calc(19.5% - 2.6cqw);
-  right: calc(13.2% - 2.6cqw);
+  top: calc(var(--lola-card-top) - 2.6cqw);
+  right: calc(var(--lola-card-right) - 2.6cqw);
   bottom: auto;
 }
 
