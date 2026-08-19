@@ -259,6 +259,13 @@ button:focus-visible, input:focus-visible {
   left: 59%;
 }
 
+.story-stage[data-scene="el-remolino"] .scene-copy {
+  right: var(--stage-edge-inset);
+  left: auto;
+  padding-right: 0;
+  text-align: right;
+}
+
 .story-stage[data-scene="el-pergamino"] .scene-actions {
   top: 21.8%;
   bottom: auto;

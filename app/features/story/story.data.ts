@@ -106,8 +106,8 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P5.mp4",
     posterSrc: "/assets/ESCENAS/P5.jpg",
     copyBlocks: [{
-      text: "De repente, todo comenzó a dar vueltas. Libros, hojas de papel y un antiguo pergamino volaron por el aire, mientras árboles y hojas verdes brotaban por todos lados.",
-      top: 63.2,
+      text: "De repente, todo\ncomenzó a dar vueltas.\nLibros, palmeras y un\nantiguo pergamino\nvolaron por el aire.",
+      top: 60,
       left: 68.5,
       width: 29.1,
       align: "right",
