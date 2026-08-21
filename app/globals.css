@@ -350,14 +350,29 @@ button:focus-visible, input:focus-visible {
 }
 
 .story-stage[data-scene="guacamayo-verde-mayor"] .scene-actions {
-  top: 34.3%;
+  top: 72%;
   bottom: auto;
-  left: 4.4%;
-  width: 21.8%;
-  transform: none;
+  left: 54%;
+  width: 22%;
+  transform: translateX(-50%);
 }
 
-.story-stage[data-scene="guacamayo-verde-mayor"] .scene-actions .action-button { width: 100%; }
+.story-stage[data-scene="guacamayo-verde-mayor"] .scene-actions .action-button {
+  width: 100%;
+  text-transform: uppercase;
+  white-space: pre-line;
+}
+
+.story-stage[data-scene="guacamayo-verde-mayor"] .scene-copy {
+  left: var(--stage-edge-inset);
+  padding-left: 0;
+  text-align: left;
+}
+
+.story-stage[data-scene="guacamayo-verde-mayor"] .scene-play-button {
+  top: 35%;
+  left: 51%;
+}
 
 .page-arrow {
   position: absolute;

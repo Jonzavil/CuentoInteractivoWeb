@@ -51,11 +51,14 @@ export function StoryStage({
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
   const [showCipherError, setShowCipherError] = useState(false);
   const [cipherAttempt, setCipherAttempt] = useState(0);
+  const [showGuacamayoAction, setShowGuacamayoAction] = useState(false);
 
   const isFirst = sceneIndex === 0;
   const isLast = sceneIndex === totalScenes - 1;
-  const waitsForAnimationEnd = scene.id === "la-biblioteca" || scene.id === "un-bosque-enorme";
-  const toneFinishesOnce = scene.id === "un-bosque-enorme";
+  const waitsForAnimationEnd = scene.id === "la-biblioteca"
+    || scene.id === "un-bosque-enorme"
+    || scene.id === "guacamayo-verde-mayor";
+  const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1" || scene.id === "mensaje-ayuda";
 
   useEffect(() => {
@@ -94,6 +97,14 @@ export function StoryStage({
 
   function collectPaper(index: number) {
     setPapers((current) => current.map((collected, itemIndex) => collected || itemIndex === index));
+  }
+
+  function handleNext() {
+    if (scene.id === "guacamayo-verde-mayor" && !showGuacamayoAction) {
+      setShowGuacamayoAction(true);
+      return;
+    }
+    onNext();
   }
 
   const allPapersCollected = papers.every(Boolean);
@@ -176,7 +187,7 @@ export function StoryStage({
 
       <h2 id="scene-title" className="visually-hidden">{scene.title}</h2>
       <div className="scene-copy-layer" aria-label="Narración de la escena">
-        {scene.copyBlocks.map((copy, index) => (
+        {(scene.id === "guacamayo-verde-mayor" && showGuacamayoAction ? [] : scene.copyBlocks).map((copy, index) => (
           <p
             key={`${scene.id}-copy-${index}`}
             className={`scene-copy scene-copy--${copy.tone} scene-copy--${copy.align}`}
@@ -251,7 +262,7 @@ export function StoryStage({
         </div>
       ) : null}
 
-      {interaction?.type === "character" ? (
+      {interaction?.type === "character" && (scene.id !== "guacamayo-verde-mayor" || showGuacamayoAction) ? (
         <div className="scene-actions">
           <button className="action-button action-button--blue" type="button" onClick={() => onOpenCharacter(interaction.characterId)}>
             {interaction.label}
@@ -351,7 +362,7 @@ export function StoryStage({
       <button
         className="page-arrow page-arrow--next"
         type="button"
-        onClick={onNext}
+        onClick={handleNext}
         aria-label={isLast ? "Volver al inicio" : "Siguiente escena"}
         title={isLast ? "Volver al inicio" : "Siguiente escena"}
       >
