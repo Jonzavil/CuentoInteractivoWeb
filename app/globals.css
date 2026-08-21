@@ -666,6 +666,7 @@ button:focus-visible, input:focus-visible {
 
 .story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__letters {
   gap: .8cqw;
+  transform: translateY(1.125cqw);
 }
 
 .story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__letters input {
