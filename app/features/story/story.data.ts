@@ -343,4 +343,18 @@ export const STORY_SCENES = [
       tone: "dark",
     }],
   },
+  {
+    id: "frutos-para-el-oso",
+    title: "El alimento del oso",
+    videoSrc: "/assets/ANIMACIONES/P19.mp4",
+    posterSrc: "/assets/POSTERS/P19.jpg",
+    copyBlocks: [],
+  },
+  {
+    id: "un-nuevo-amigo-en-la-sierra",
+    title: "Un nuevo amigo en la Sierra",
+    videoSrc: "/assets/ANIMACIONES/P20.mp4",
+    posterSrc: "/assets/POSTERS/P20.jpg",
+    copyBlocks: [],
+  },
 ] as const satisfies readonly StoryScene[];
