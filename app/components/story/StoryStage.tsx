@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import {
-  Check,
   Footprints,
   Sparkles,
   X,
@@ -46,7 +45,6 @@ export function StoryStage({
   const allowToneToFinishRef = useRef(false);
   const [videoReady, setVideoReady] = useState(false);
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
-  const [papers, setPapers] = useState([false, false, false]);
   const [, setBearSteps] = useState(0);
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
   const [showCipherError, setShowCipherError] = useState(false);
@@ -95,10 +93,6 @@ export function StoryStage({
     void video.play().catch(() => onPlayingChange(false));
   }
 
-  function collectPaper(index: number) {
-    setPapers((current) => current.map((collected, itemIndex) => collected || itemIndex === index));
-  }
-
   function handleNext() {
     if (scene.id === "guacamayo-verde-mayor" && !showGuacamayoAction) {
       setShowGuacamayoAction(true);
@@ -107,7 +101,6 @@ export function StoryStage({
     onNext();
   }
 
-  const allPapersCollected = papers.every(Boolean);
   const interaction = scene.interaction;
 
   return (
@@ -168,7 +161,7 @@ export function StoryStage({
         />
       ) : null}
 
-      {!autoPlays && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
+      {!autoPlays && scene.id !== "la-pequena-planta" && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button
           className="scene-play-button"
           type="button"
@@ -286,24 +279,11 @@ export function StoryStage({
         </div>
       ) : null}
 
-      {interaction?.type === "papers" ? (
+      {interaction?.type === "papers" && !isPlaying ? (
         <div className="paper-game" aria-label="Retira los tres papeles de la planta">
-          {papers.map((collected, index) =>
-            collected ? null : (
-              <button
-                key={index}
-                className={`paper-piece paper-piece--${index + 1}`}
-                type="button"
-                onClick={() => collectPaper(index)}
-                aria-label={`Retirar papel ${index + 1}`}
-              >
-                <span aria-hidden="true" />
-              </button>
-            ),
-          )}
-          <p className={allPapersCollected ? "paper-game__status is-complete" : "paper-game__status"} role="status">
-            {allPapersCollected ? <><Check aria-hidden="true" /> ¡La planta recibe la luz!</> : "Da click en los papeles para ayudarlos"}
-          </p>
+          <button className="paper-game__status" type="button" onClick={playFromStart}>
+            Da click en los papeles para ayudarlos
+          </button>
         </div>
       ) : null}
 

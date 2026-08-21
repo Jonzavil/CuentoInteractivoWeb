@@ -401,6 +401,23 @@ button:focus-visible, input:focus-visible {
   left: 80.6%;
 }
 
+.story-stage[data-scene="la-pequena-planta"] .scene-copy {
+  white-space: pre;
+}
+
+.story-stage[data-scene="la-pequena-planta"] .scene-copy:first-child {
+  left: var(--stage-edge-inset);
+  padding-left: 0;
+  text-align: left;
+}
+
+.story-stage[data-scene="la-pequena-planta"] .scene-copy:last-child {
+  right: var(--stage-edge-inset);
+  left: auto;
+  padding-right: 0;
+  text-align: right;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;
@@ -542,14 +559,8 @@ button:focus-visible, input:focus-visible {
 .scene-answer-feedback__close:hover { transform: translate(-50%, -50%) scale(1.04); }
 
 .paper-game { position: absolute; z-index: 5; inset: 0; pointer-events: none; }
-.paper-piece { position: absolute; width: 54px; height: 44px; border: 2px solid #d8d0b5; background: #fffdf4; cursor: pointer; pointer-events: auto; box-shadow: 0 3px 6px rgba(0,0,0,.25); }
-.paper-piece span { display: block; width: 70%; height: 2px; margin: 12px auto 0; background: #c5bda3; box-shadow: 0 8px 0 #c5bda3; }
-.paper-piece--1 { left: 44%; bottom: 15%; transform: rotate(17deg); }
-.paper-piece--2 { left: 53%; bottom: 12%; transform: rotate(-11deg); }
-.paper-piece--3 { left: 49%; bottom: 23%; transform: rotate(7deg); }
-.paper-game__status { position: absolute; left: 28%; bottom: 2.2%; width: 44%; margin: 0; padding: .65cqw 1cqw; border-radius: .55cqw; background: var(--green); color: #fff7e4; font-size: clamp(6px, 1.8cqw, 20px); font-weight: 800; text-align: center; text-transform: uppercase; white-space: nowrap; pointer-events: auto; }
-.paper-game__status.is-complete { display: flex; align-items: center; gap: 6px; background: var(--purple); }
-.paper-game__status svg { width: 18px; }
+.paper-game__status { position: absolute; left: 28%; bottom: var(--stage-edge-inset); width: 44%; margin: 0; border: 0; padding: .65cqw 1cqw; border-radius: .55cqw; background: var(--green); color: #fff7e4; font-size: clamp(6px, 1.8cqw, 20px); font-weight: 800; text-align: center; text-transform: uppercase; white-space: nowrap; cursor: pointer; pointer-events: auto; }
+.paper-game__status:hover { filter: brightness(1.06); }
 
 .bear-game { position: absolute; z-index: 6; right: auto; bottom: 2.3%; left: 50.6%; width: 37.7%; display: flex; }
 .bear-game .action-button { width: 100%; }
@@ -918,8 +929,6 @@ button:focus-visible, input:focus-visible {
   .action-button svg { width: 14px; height: 14px; }
   .page-arrow { width: 36px; height: 36px; }
   .character-overlay--red .character-overlay__close { width: 36px; height: 36px; }
-  .paper-piece { width: 36px; height: 29px; }
-  .paper-piece span { margin-top: 7px; box-shadow: 0 5px 0 #c5bda3; }
   .content-view, .gallery-view { width: calc(100% - 20px); margin-top: 8px; }
   .content-view { min-height: calc(100dvh - 155px); border-width: 3px; }
   .content-view--synopsis { aspect-ratio: auto; }

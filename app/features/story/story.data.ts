@@ -271,16 +271,16 @@ export const STORY_SCENES = [
     posterSrc: "/assets/POSTERS/P14.jpg",
     copyBlocks: [
       {
-        text: "Lola encontró una pequeña planta entre las ramas. Mario retiró con cuidado los papeles que la cubrían y juntos dejaron que recibiera la luz del sol.",
-        top: 7.3,
+        text: "Lola encontró una pequeña planta\nentre las ramas. Mario retiró con\ncuidado los papeles que la cubrían\ny juntos dejaron que recibiera la\nluz del sol.",
+        top: 5.3,
         left: 3.9,
         width: 29.1,
         align: "left",
         tone: "light",
       },
       {
-        text: "—Proteger el bosque también significa protegernos a nosotros —dijo el guacamayo.",
-        top: 7.3,
+        text: "—Proteger el bosque\ntambién significa\nprotegernos a nosotros\n—dijo el guacamayo.",
+        top: 5.3,
         left: 77.1,
         width: 20.6,
         align: "right",
