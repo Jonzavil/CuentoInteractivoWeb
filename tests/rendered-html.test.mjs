@@ -62,7 +62,7 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyData, /¿Dónde crees que están Lola y Mario\?/);
   assert.match(storyData, /options: \["Costa", "Sierra", "Amazonía", "Galápagos"\]/);
   assert.match(storyStyles, /\.scene-answer-feedback__panel/);
-  assert.match(storyData, /Cada oso de anteojos tiene marcas diferentes/);
+  assert.match(storyData, /Has llegado a la Sierra ecuatoriana/);
   assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
   assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);
   assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 19);

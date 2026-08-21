@@ -447,6 +447,15 @@ button:focus-visible, input:focus-visible {
   text-align: center;
 }
 
+.story-stage[data-scene="oso-de-anteojos"] .scene-copy {
+  white-space: pre;
+}
+
+.story-stage[data-scene="oso-de-anteojos"] .scene-play-button {
+  top: 68%;
+  left: 72.5%;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;

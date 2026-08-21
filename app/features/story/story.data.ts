@@ -329,13 +329,12 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P18.mp4",
     posterSrc: "/assets/POSTERS/P18.jpg",
     copyBlocks: [{
-      text: "Allí encontraron un oso con manchas claras alrededor de los ojos.\n—Cada oso de anteojos tiene marcas diferentes —les contó—. Son como nuestro propio rostro.",
-      top: 6.9,
-      left: 24.4,
-      width: 51.2,
+      text: "¡Lo descubriste! Has llegado a la Sierra ecuatoriana.\nEntre la neblina apareció un oso de anteojos, llamado\nasí por las manchas claras que rodean sus ojos.",
+      top: 5.9,
+      left: 10,
+      width: 62,
       align: "center",
       tone: "dark",
     }],
-    interaction: { type: "bear" },
   },
 ] as const satisfies readonly StoryScene[];
