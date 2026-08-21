@@ -270,6 +270,15 @@ button:focus-visible, input:focus-visible {
   text-align: center;
 }
 
+.story-stage[data-scene="calmate-mario"] .scene-copy {
+  text-align: center;
+}
+
+.story-stage[data-scene="calmate-mario"] .scene-play-button {
+  top: 87.5%;
+  left: 48.5%;
+}
+
 .story-stage[data-scene="el-pergamino"] .scene-actions {
   top: 21.8%;
   bottom: auto;

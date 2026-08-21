@@ -42,6 +42,7 @@ export function StoryStage({
 }: StoryStageProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const toneRef = useRef<HTMLAudioElement>(null);
+  const allowToneToFinishRef = useRef(false);
   const [videoReady, setVideoReady] = useState(false);
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const [papers, setPapers] = useState([false, false, false]);
@@ -50,7 +51,8 @@ export function StoryStage({
 
   const isFirst = sceneIndex === 0;
   const isLast = sceneIndex === totalScenes - 1;
-  const waitsForAnimationEnd = scene.id === "la-biblioteca";
+  const waitsForAnimationEnd = scene.id === "la-biblioteca" || scene.id === "un-bosque-enorme";
+  const toneFinishesOnce = scene.id === "un-bosque-enorme";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -62,9 +64,11 @@ export function StoryStage({
       void tone?.play().catch(() => undefined);
     } else {
       video.pause();
-      tone?.pause();
+      if (!(toneFinishesOnce && allowToneToFinishRef.current && !tone?.ended)) {
+        tone?.pause();
+      }
     }
-  }, [isPlaying, muted, onPlayingChange, scene.id]);
+  }, [isPlaying, muted, onPlayingChange, scene.id, toneFinishesOnce]);
 
   function playFromStart() {
     const video = videoRef.current;
@@ -105,11 +109,22 @@ export function StoryStage({
         loop={!reducedMotion && !waitsForAnimationEnd}
         onCanPlay={() => setVideoReady(true)}
         onPlay={() => {
+          allowToneToFinishRef.current = false;
           setHasAnimationEnded(false);
           onPlayingChange(true);
         }}
-        onPause={() => onPlayingChange(false)}
+        onPause={(event) => {
+          const video = event.currentTarget;
+          if (
+            toneFinishesOnce &&
+            (video.ended || (Number.isFinite(video.duration) && video.duration - video.currentTime < 0.15))
+          ) {
+            allowToneToFinishRef.current = true;
+          }
+          onPlayingChange(false);
+        }}
         onEnded={() => {
+          if (toneFinishesOnce) allowToneToFinishRef.current = true;
           if (waitsForAnimationEnd) setHasAnimationEnded(true);
           onPlayingChange(false);
         }}
@@ -122,7 +137,10 @@ export function StoryStage({
           ref={toneRef}
           src={scene.toneSrc}
           preload="auto"
-          loop
+          loop={!toneFinishesOnce}
+          onEnded={() => {
+            allowToneToFinishRef.current = false;
+          }}
           aria-hidden="true"
         />
       ) : null}

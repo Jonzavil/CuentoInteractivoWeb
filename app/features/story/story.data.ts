@@ -143,8 +143,8 @@ export const STORY_SCENES = [
     copyBlocks: [{
       text: "Mario comenzó a gritar como loco. Lola se rio al verlo y le dijo:\n—¡Cálmate, Mario! Primero debemos descubrir dónde estamos.",
       top: 8.9,
-      left: 21.6,
-      width: 56.8,
+      left: 15,
+      width: 70,
       align: "center",
       tone: "dark",
     }],
