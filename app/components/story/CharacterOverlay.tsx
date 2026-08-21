@@ -55,6 +55,11 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
                 <span className="character-overlay__title-line">Guacamayo</span>
                 <span className="character-overlay__title-line">verde mayor</span>
               </>
+            ) : characterId === "oso" ? (
+              <>
+                <span className="character-overlay__title-line">Hola, soy el</span>
+                <span className="character-overlay__title-line">Oso de anteojos</span>
+              </>
             ) : (
               <>
                 {characterId === "lola" || characterId === "mario" ? "Hola, soy" : "Hola, soy el"}{" "}
@@ -89,6 +94,14 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
                 <br />
                 y formar mi familia.
               </>
+            ) : characterId === "oso" ? (
+              <>
+                Soy tranquilo y curioso que
+                <br />
+                vive en los bosques andinos
+                <br />
+                del Ecuador.
+              </>
             ) : (
               character.description
             )}
@@ -103,7 +116,7 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
         aria-label="Cerrar ficha y volver al cuento"
         title="Cerrar"
       >
-        {characterId === "guacamayo" ? (
+        {characterId === "guacamayo" || characterId === "oso" ? (
           <Image
             src="/assets/Iconos/Recurso 2@450x.png"
             alt=""

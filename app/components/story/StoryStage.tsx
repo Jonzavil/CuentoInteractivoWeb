@@ -50,6 +50,7 @@ export function StoryStage({
   const [showCipherError, setShowCipherError] = useState(false);
   const [cipherAttempt, setCipherAttempt] = useState(0);
   const [showGuacamayoAction, setShowGuacamayoAction] = useState(false);
+  const [showBearAction, setShowBearAction] = useState(false);
   const [clickWordStep, setClickWordStep] = useState(0);
   const [clicksInWordStep, setClicksInWordStep] = useState(0);
 
@@ -104,6 +105,10 @@ export function StoryStage({
       setShowGuacamayoAction(true);
       return;
     }
+    if (scene.id === "oso-de-anteojos" && !showBearAction) {
+      setShowBearAction(true);
+      return;
+    }
     onNext();
   }
 
@@ -113,6 +118,13 @@ export function StoryStage({
   const revealedWord = clickWord ? clickWord.word.slice(0, revealedLetterCount) : "";
   const showsClickWordSuffix = Boolean(clickWord && clickWordStep > clickWord.word.length);
   const clickWordIsComplete = Boolean(clickWord && clickWordStep >= clickWord.clickGoals.length);
+  const characterActionIsReady = interaction?.type === "character" && (
+    scene.id === "guacamayo-verde-mayor"
+      ? showGuacamayoAction
+      : scene.id === "oso-de-anteojos"
+        ? showBearAction
+        : true
+  );
 
   function handleClickWordTarget() {
     if (!clickWord || clickWordIsComplete) return;
@@ -211,7 +223,10 @@ export function StoryStage({
 
       <h2 id="scene-title" className="visually-hidden">{scene.title}</h2>
       <div className="scene-copy-layer" aria-label="Narración de la escena">
-        {(scene.id === "guacamayo-verde-mayor" && showGuacamayoAction ? [] : scene.copyBlocks).map((copy, index) => (
+        {((scene.id === "guacamayo-verde-mayor" && showGuacamayoAction)
+          || (scene.id === "oso-de-anteojos" && showBearAction)
+          ? []
+          : scene.copyBlocks).map((copy, index) => (
           <p
             key={`${scene.id}-copy-${index}`}
             className={`scene-copy scene-copy--${copy.tone} scene-copy--${copy.align}`}
@@ -286,7 +301,7 @@ export function StoryStage({
         </div>
       ) : null}
 
-      {interaction?.type === "character" && (scene.id !== "guacamayo-verde-mayor" || showGuacamayoAction) ? (
+      {interaction?.type === "character" && characterActionIsReady ? (
         <div className="scene-actions">
           <button className="action-button action-button--blue" type="button" onClick={() => onOpenCharacter(interaction.characterId)}>
             {interaction.label}
