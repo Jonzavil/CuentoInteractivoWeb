@@ -374,6 +374,23 @@ button:focus-visible, input:focus-visible {
   left: 51%;
 }
 
+.story-stage[data-scene="el-hogar-del-guacamayo"] .scene-copy {
+  white-space: pre;
+}
+
+.story-stage[data-scene="el-hogar-del-guacamayo"] .scene-copy:first-child {
+  left: var(--stage-edge-inset);
+  padding-left: 0;
+  text-align: left;
+}
+
+.story-stage[data-scene="el-hogar-del-guacamayo"] .scene-copy:last-child {
+  right: var(--stage-edge-inset);
+  left: auto;
+  padding-right: 0;
+  text-align: right;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;
