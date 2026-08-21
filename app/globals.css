@@ -617,9 +617,10 @@ button:focus-visible, input:focus-visible {
 }
 
 .character-overlay--red .character-overlay__card {
-  top: 14%;
-  bottom: 12.3%;
-  left: 12.4%;
+  top: 13.15%;
+  right: 15.9%;
+  bottom: 13.15%;
+  left: 15.9%;
   border-radius: 1.5cqw;
   background: #e10d08;
 }
@@ -652,9 +653,10 @@ button:focus-visible, input:focus-visible {
 }
 
 .character-overlay--red .character-overlay__portrait {
-  top: -4%;
+  z-index: 1;
+  top: -2%;
   left: -14%;
-  width: 60%;
+  width: 63.52%;
   height: 76%;
   object-position: center;
   transform: rotate(-30deg) scaleX(-1);
@@ -731,32 +733,52 @@ button:focus-visible, input:focus-visible {
 
 .character-overlay--red .character-overlay__copy {
   position: relative;
+  z-index: 2;
   margin-left: 0;
   padding: 0;
 }
 
 .character-overlay--red .character-overlay__copy h2 {
   position: absolute;
-  top: 13%;
-  right: 4%;
-  width: 50%;
+  top: 15%;
+  right: 6%;
+  left: 46%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0;
   color: #fff;
-  font-size: clamp(13px, 3.85cqw, 42px);
+  font-size: clamp(18px, 4.81cqw, 53.9px);
+  font-family: Nunito, "Trebuchet MS", Arial, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.character-overlay--red .character-overlay__title-line {
+  display: block;
+  width: max-content;
+  text-align: center;
 }
 
 .character-overlay--red .character-overlay__copy p {
   position: absolute;
   right: 4%;
-  bottom: 7%;
+  bottom: 10%;
   left: 26%;
   color: #fff;
-  font-size: clamp(8.5px, 2cqw, 22px);
+  font-family: Nunito, "Trebuchet MS", Arial, sans-serif;
+  font-size: clamp(12px, 2.55cqw, 28.6px);
+  font-weight: 400;
+  white-space: nowrap;
 }
 
 .character-overlay--red .character-overlay__close {
   right: var(--stage-edge-inset);
   bottom: var(--stage-edge-inset);
+  width: 52px;
+  height: 52px;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -768,6 +790,8 @@ button:focus-visible, input:focus-visible {
   display: block;
   object-fit: contain;
 }
+
+.character-overlay ~ .page-arrow { visibility: hidden; }
 
 .character-overlay--brown .character-overlay__copy {
   margin-left: 20%;
@@ -866,6 +890,7 @@ button:focus-visible, input:focus-visible {
   .action-button { min-height: 32px; padding: 5px 8px; border-radius: 5px; font-size: 9px; gap: 4px; box-shadow: 0 2px 0 rgba(31,42,35,.23); }
   .action-button svg { width: 14px; height: 14px; }
   .page-arrow { width: 36px; height: 36px; }
+  .character-overlay--red .character-overlay__close { width: 36px; height: 36px; }
   .paper-piece { width: 36px; height: 29px; }
   .paper-piece span { margin-top: 7px; box-shadow: 0 5px 0 #c5bda3; }
   .content-view, .gallery-view { width: calc(100% - 20px); margin-top: 8px; }

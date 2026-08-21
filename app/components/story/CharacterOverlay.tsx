@@ -51,11 +51,9 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
           <h2 id={titleId}>
             {characterId === "guacamayo" ? (
               <>
-                Hola, soy el
-                <br />
-                Guacamayo
-                <br />
-                verde mayor
+                <span className="character-overlay__title-line">Hola, soy el</span>
+                <span className="character-overlay__title-line">Guacamayo</span>
+                <span className="character-overlay__title-line">verde mayor</span>
               </>
             ) : (
               <>
