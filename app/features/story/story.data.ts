@@ -167,14 +167,13 @@ export const STORY_SCENES = [
     toneSrc: "/assets/tonos/p8.mp3",
     posterSrc: "/assets/ESCENAS/P8.jpg",
     copyBlocks: [{
-      text: "Lola tomó el antiguo pergamino y lo abrió. En su interior descubrió un extraño abecedario formado por símbolos.",
+      text: "¡Vamos a descubrirlo! Lola tomó\nel antiguo pergamino y lo abrió.\nEn su interior descubrió un\nextraño abecedario formado por\nsímbolos.",
       top: 6.6,
       left: 4.8,
       width: 34.7,
       align: "left",
       tone: "dark",
     }],
-    interaction: { type: "reveal", label: "Da click para descubrir qué guarda el pergamino" },
   },
   {
     id: "mensaje-ayuda",

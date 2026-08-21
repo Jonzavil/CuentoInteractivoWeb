@@ -336,12 +336,17 @@ button:focus-visible, input:focus-visible {
   left: 48.5%;
 }
 
-.story-stage[data-scene="el-pergamino"] .scene-actions {
-  top: 21.8%;
-  bottom: auto;
-  left: 6.7%;
-  width: 27.8%;
-  transform: none;
+.story-stage[data-scene="el-pergamino"] .scene-play-button {
+  top: 53%;
+  left: 52.5%;
+}
+
+.story-stage[data-scene="el-pergamino"] .scene-copy {
+  top: var(--stage-edge-inset);
+  left: var(--stage-edge-inset);
+  padding-top: 0;
+  padding-left: 0;
+  text-align: left;
 }
 
 .story-stage[data-scene="guacamayo-verde-mayor"] .scene-actions {
@@ -352,7 +357,6 @@ button:focus-visible, input:focus-visible {
   transform: none;
 }
 
-.story-stage[data-scene="el-pergamino"] .scene-actions .action-button,
 .story-stage[data-scene="guacamayo-verde-mayor"] .scene-actions .action-button { width: 100%; }
 
 .page-arrow {
