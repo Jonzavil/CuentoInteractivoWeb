@@ -50,6 +50,8 @@ export function StoryStage({
   const [showCipherError, setShowCipherError] = useState(false);
   const [cipherAttempt, setCipherAttempt] = useState(0);
   const [showGuacamayoAction, setShowGuacamayoAction] = useState(false);
+  const [clickWordStep, setClickWordStep] = useState(0);
+  const [clicksInWordStep, setClicksInWordStep] = useState(0);
 
   const isFirst = sceneIndex === 0;
   const isLast = sceneIndex === totalScenes - 1;
@@ -59,14 +61,16 @@ export function StoryStage({
     || scene.id === "remolino-hacia-la-sierra"
     || scene.id === "bosque-de-neblina";
   const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
-  const autoPlays = scene.id === "fondo-1" || scene.id === "mensaje-ayuda";
+  const autoPlays = scene.id === "fondo-1"
+    || scene.id === "mensaje-ayuda"
+    || scene.id === "bosque-de-neblina";
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     const tone = toneRef.current;
     video.muted = autoPlays || muted;
-    if (isPlaying || autoPlays) {
+    if (isPlaying || (autoPlays && !hasAnimationEnded && !video.ended)) {
       void video.play().catch(() => onPlayingChange(false));
       void tone?.play().catch(() => undefined);
     } else {
@@ -75,7 +79,7 @@ export function StoryStage({
         tone?.pause();
       }
     }
-  }, [autoPlays, isPlaying, muted, onPlayingChange, scene.id, toneFinishesOnce]);
+  }, [autoPlays, hasAnimationEnded, isPlaying, muted, onPlayingChange, scene.id, toneFinishesOnce]);
 
   function playFromStart() {
     const video = videoRef.current;
@@ -104,6 +108,25 @@ export function StoryStage({
   }
 
   const interaction = scene.interaction;
+  const clickWord = interaction?.type === "click-word" ? interaction : null;
+  const revealedLetterCount = clickWord ? Math.min(clickWordStep, clickWord.word.length) : 0;
+  const revealedWord = clickWord ? clickWord.word.slice(0, revealedLetterCount) : "";
+  const showsClickWordSuffix = Boolean(clickWord && clickWordStep > clickWord.word.length);
+  const clickWordIsComplete = Boolean(clickWord && clickWordStep >= clickWord.clickGoals.length);
+
+  function handleClickWordTarget() {
+    if (!clickWord || clickWordIsComplete) return;
+    const requiredClicks = clickWord.clickGoals[clickWordStep];
+
+    setClicksInWordStep((current) => {
+      const next = current + 1;
+      if (next >= requiredClicks) {
+        setClickWordStep((step) => step + 1);
+        return 0;
+      }
+      return next;
+    });
+  }
 
   return (
     <section className="story-stage" data-scene={scene.id} aria-labelledby="scene-title">
@@ -133,11 +156,16 @@ export function StoryStage({
         }}
         onPause={(event) => {
           const video = event.currentTarget;
+          const reachedFinalFrame = video.ended
+            || (Number.isFinite(video.duration) && video.duration - video.currentTime < 0.15);
           if (
             toneFinishesOnce &&
-            (video.ended || (Number.isFinite(video.duration) && video.duration - video.currentTime < 0.15))
+            reachedFinalFrame
           ) {
             allowToneToFinishRef.current = true;
+          }
+          if (waitsForAnimationEnd && reachedFinalFrame) {
+            setHasAnimationEnded(true);
           }
           onPlayingChange(false);
         }}
@@ -277,6 +305,70 @@ export function StoryStage({
                 {option}
               </button>
             ))}
+          </div>
+        </div>
+      ) : null}
+
+      {clickWord ? (
+        <div className="click-word-game" aria-label="Descubre la palabra con los círculos blancos">
+          <div className="click-word-game__answer">
+            <div className="click-word-game__word">
+              {clickWord.word.split("").map((letter, index) => (
+                <span className="click-word-game__letter" key={`${letter}-${index}`}>
+                  <span
+                    className={`click-word-game__letter-value${index < revealedLetterCount ? " is-revealed" : ""}`}
+                    aria-hidden="true"
+                  >
+                    {letter}
+                  </span>
+                  {!clickWordIsComplete && clickWordStep === index ? (
+                    <button
+                      className="click-word-game__target"
+                      type="button"
+                      onClick={handleClickWordTarget}
+                      aria-label={`Haz clic en el círculo blanco. ${clicksInWordStep + 1} de ${clickWord.clickGoals[clickWordStep]} para descubrir la letra ${letter}.`}
+                    >
+                      <Image
+                        src="/assets/Iconos/Recurso 3@450x.png"
+                        alt=""
+                        width={100}
+                        height={100}
+                      />
+                    </button>
+                  ) : null}
+                </span>
+              ))}
+            </div>
+
+            <div className="click-word-game__suffix-slot">
+              <span
+                className={`click-word-game__suffix${showsClickWordSuffix ? " is-revealed" : ""}`}
+                aria-hidden="true"
+              >
+                {clickWord.suffix}
+              </span>
+              {!clickWordIsComplete && clickWordStep === clickWord.word.length ? (
+                <button
+                  className="click-word-game__target"
+                  type="button"
+                  onClick={handleClickWordTarget}
+                  aria-label={`Haz clic en el círculo blanco. ${clicksInWordStep + 1} de ${clickWord.clickGoals[clickWordStep]} para descubrir ${clickWord.suffix}.`}
+                >
+                  <Image
+                    src="/assets/Iconos/Recurso 3@450x.png"
+                    alt=""
+                    width={100}
+                    height={100}
+                  />
+                </button>
+              ) : null}
+            </div>
+
+            <span className="visually-hidden" aria-live="polite">
+              {clickWordIsComplete
+                ? `${clickWord.word} ${clickWord.suffix}`
+                : revealedWord || "Comienza a descubrir la palabra"}
+            </span>
           </div>
         </div>
       ) : null}

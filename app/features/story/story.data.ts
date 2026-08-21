@@ -322,6 +322,12 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P17.mp4",
     posterSrc: "/assets/POSTERS/P17.jpg",
     copyBlocks: [],
+    interaction: {
+      type: "click-word",
+      word: "SIERRA",
+      suffix: "ECUATORIANA",
+      clickGoals: [1, 2, 3, 4, 5, 6, 5],
+    },
   },
   {
     id: "oso-de-anteojos",

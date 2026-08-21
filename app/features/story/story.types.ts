@@ -12,6 +12,12 @@ export type StoryInteraction =
   | { type: "papers" }
   | { type: "bear" }
   | { type: "choice"; prompt: string; options: readonly string[] }
+  | {
+      type: "click-word";
+      word: "SIERRA";
+      suffix: "ECUATORIANA";
+      clickGoals: readonly [1, 2, 3, 4, 5, 6, 5];
+    }
   | { type: "ending"; word: "SIERRA" };
 
 export interface StoryCopyBlock {
