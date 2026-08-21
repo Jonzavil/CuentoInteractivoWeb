@@ -11,6 +11,7 @@ export type StoryInteraction =
   | { type: "character"; characterId: CharacterId; label: string }
   | { type: "papers" }
   | { type: "bear" }
+  | { type: "choice"; prompt: string; options: readonly string[] }
   | { type: "ending"; word: "SIERRA" };
 
 export interface StoryCopyBlock {
@@ -27,7 +28,7 @@ export interface StoryScene {
   title: string;
   videoSrc: string;
   toneSrc?: string;
-  posterSrc: string;
+  posterSrc?: string;
   copyBlocks: readonly StoryCopyBlock[];
   interaction?: StoryInteraction;
 }

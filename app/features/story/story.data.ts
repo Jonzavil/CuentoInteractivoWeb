@@ -150,6 +150,17 @@ export const STORY_SCENES = [
     }],
   },
   {
+    id: "fondo-1",
+    title: "La aventura continúa",
+    videoSrc: "/assets/ANIMACIONES/FONDO1.mp4",
+    copyBlocks: [],
+    interaction: {
+      type: "choice",
+      prompt: "¿Dónde crees que están Lola y Mario?",
+      options: ["Costa", "Sierra", "Amazonía", "Galápagos"],
+    },
+  },
+  {
     id: "el-pergamino",
     title: "El antiguo pergamino",
     videoSrc: "/assets/ANIMACIONES/P8.mp4",

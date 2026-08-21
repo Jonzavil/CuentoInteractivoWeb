@@ -235,6 +235,63 @@ button:focus-visible, input:focus-visible {
 .action-button--brown { background: var(--brown); }
 .action-button--hint { min-height: 36px; padding: 6px 11px; background: var(--green-dark); font-size: 12px; }
 
+.scene-choice-game {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+}
+
+.scene-choice-game__prompt {
+  position: absolute;
+  top: 25%;
+  left: 18%;
+  width: 64%;
+  margin: 0;
+  border-radius: 1.2cqw;
+  padding: 1.15cqw 1.6cqw;
+  background: var(--purple);
+  color: #fff;
+  font-family: Nunito, "Trebuchet MS", Arial, sans-serif;
+  font-size: clamp(14px, 2.7cqw, 30px);
+  font-weight: 800;
+  line-height: 1.05;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.scene-choice-game__options {
+  position: absolute;
+  top: 42%;
+  left: 12.8%;
+  width: 74.4%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3.7cqw 3.3cqw;
+}
+
+.scene-choice-game__options button {
+  min-height: clamp(44px, 7.4cqw, 82px);
+  border: 0;
+  border-radius: 1.2cqw;
+  padding: .8cqw 1.4cqw;
+  background: var(--lime);
+  color: #fff;
+  font-family: Nunito, "Trebuchet MS", Arial, sans-serif;
+  font-size: clamp(16px, 3.4cqw, 38px);
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.scene-choice-game__options button:hover {
+  filter: brightness(1.06);
+  transform: scale(1.015);
+}
+
+.scene-choice-game__options button:active { transform: scale(.985); }
+
 .story-stage .action-button {
   min-height: clamp(28px, 5cqw, 54px);
   padding: .65cqw 1.15cqw;

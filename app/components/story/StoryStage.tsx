@@ -53,13 +53,14 @@ export function StoryStage({
   const isLast = sceneIndex === totalScenes - 1;
   const waitsForAnimationEnd = scene.id === "la-biblioteca" || scene.id === "un-bosque-enorme";
   const toneFinishesOnce = scene.id === "un-bosque-enorme";
+  const autoPlays = scene.id === "fondo-1";
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     const tone = toneRef.current;
-    video.muted = muted;
-    if (isPlaying) {
+    video.muted = autoPlays || muted;
+    if (isPlaying || autoPlays) {
       void video.play().catch(() => onPlayingChange(false));
       void tone?.play().catch(() => undefined);
     } else {
@@ -68,7 +69,7 @@ export function StoryStage({
         tone?.pause();
       }
     }
-  }, [isPlaying, muted, onPlayingChange, scene.id, toneFinishesOnce]);
+  }, [autoPlays, isPlaying, muted, onPlayingChange, scene.id, toneFinishesOnce]);
 
   function playFromStart() {
     const video = videoRef.current;
@@ -105,7 +106,8 @@ export function StoryStage({
         poster={scene.posterSrc}
         playsInline
         preload="metadata"
-        muted={muted}
+        autoPlay={autoPlays}
+        muted={autoPlays || muted}
         loop={!reducedMotion && !waitsForAnimationEnd}
         onCanPlay={() => setVideoReady(true)}
         onPlay={() => {
@@ -145,7 +147,7 @@ export function StoryStage({
         />
       ) : null}
 
-      {!isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
+      {!autoPlays && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button
           className="scene-play-button"
           type="button"
@@ -214,6 +216,21 @@ export function StoryStage({
           <button className="action-button action-button--blue" type="button" onClick={() => onOpenCharacter(interaction.characterId)}>
             {interaction.label}
           </button>
+        </div>
+      ) : null}
+
+      {interaction?.type === "choice" ? (
+        <div className="scene-choice-game" aria-labelledby="scene-choice-prompt">
+          <p id="scene-choice-prompt" className="scene-choice-game__prompt">
+            {interaction.prompt}
+          </p>
+          <div className="scene-choice-game__options">
+            {interaction.options.map((option) => (
+              <button key={option} type="button" onClick={onNext}>
+                {option}
+              </button>
+            ))}
+          </div>
         </div>
       ) : null}
 

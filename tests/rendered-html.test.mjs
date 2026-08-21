@@ -53,15 +53,17 @@ test("keeps the story content aligned with the delivered media", async () => {
     readdir(new URL("../public/assets/ANIMACIONES/", import.meta.url)),
   ]);
 
-  assert.equal(storyData.match(/videoSrc:/g)?.length, 17);
+  assert.equal(storyData.match(/videoSrc:/g)?.length, 18);
   assert.equal(storyData.match(/posterSrc:/g)?.length, 17);
-  assert.equal(storyData.match(/copyBlocks:/g)?.length, 17);
+  assert.equal(storyData.match(/copyBlocks:/g)?.length, 18);
   assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
   assert.match(storyData, /Lola y Mario entraron a la biblioteca\\nen busca de una nueva historia/);
+  assert.match(storyData, /¿Dónde crees que están Lola y Mario\?/);
+  assert.match(storyData, /options: \["Costa", "Sierra", "Amazonía", "Galápagos"\]/);
   assert.match(storyData, /Así ayudamos a que nuevas plantas crezcan en distintos lugares/);
   assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
   assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);
-  assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 17);
+  assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 18);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind|open-sans/i);
 
   await Promise.all(
@@ -73,5 +75,9 @@ test("keeps the story content aligned with the delivered media", async () => {
         ),
       ),
     ),
+  );
+
+  await access(
+    new URL("../public/assets/ANIMACIONES/FONDO1.mp4", import.meta.url),
   );
 });
