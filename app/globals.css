@@ -391,6 +391,16 @@ button:focus-visible, input:focus-visible {
   text-align: right;
 }
 
+.story-stage[data-scene="el-bosque-en-silencio"] .scene-copy {
+  text-align: center;
+  white-space: pre;
+}
+
+.story-stage[data-scene="el-bosque-en-silencio"] .scene-play-button {
+  top: 51.8%;
+  left: 80.6%;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;
