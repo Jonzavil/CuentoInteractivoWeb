@@ -425,6 +425,18 @@ button:focus-visible, input:focus-visible {
   white-space: pre;
 }
 
+.story-stage[data-scene="remolino-hacia-la-sierra"] .scene-copy {
+  left: var(--stage-edge-inset);
+  padding-left: 0;
+  text-align: left;
+  white-space: pre;
+}
+
+.story-stage[data-scene="remolino-hacia-la-sierra"] .scene-play-button {
+  top: 55.5%;
+  left: 69.4%;
+}
+
 .story-stage[data-scene="bosque-de-neblina"] .scene-copy,
 .story-stage[data-scene="oso-de-anteojos"] .scene-copy {
   text-align: center;
