@@ -497,6 +497,29 @@ button:focus-visible, input:focus-visible {
   left: 34%;
 }
 
+.story-stage[data-scene="insignia-sierra"] .scene-copy {
+  top: auto;
+  right: var(--stage-edge-inset);
+  bottom: calc(var(--stage-edge-inset) + 7.2cqw);
+  left: auto;
+  padding: 0;
+  text-align: right;
+  white-space: pre;
+}
+
+.story-stage[data-scene="insignia-sierra"] .scene-play-button {
+  top: 65%;
+  left: 51%;
+}
+
+.story-stage[data-scene="remolino-nuevo-destino"] .scene-copy {
+  right: var(--stage-edge-inset);
+  left: auto;
+  padding: 0;
+  text-align: right;
+  white-space: pre;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;
