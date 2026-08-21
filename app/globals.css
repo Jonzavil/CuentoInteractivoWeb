@@ -418,6 +418,18 @@ button:focus-visible, input:focus-visible {
   text-align: right;
 }
 
+.story-stage[data-scene="insignia-costa"] .scene-copy {
+  left: var(--stage-edge-inset);
+  padding-left: 0;
+  text-align: left;
+  white-space: pre;
+}
+
+.story-stage[data-scene="bosque-de-neblina"] .scene-copy,
+.story-stage[data-scene="oso-de-anteojos"] .scene-copy {
+  text-align: center;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;

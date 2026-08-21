@@ -55,7 +55,9 @@ export function StoryStage({
   const isLast = sceneIndex === totalScenes - 1;
   const waitsForAnimationEnd = scene.id === "la-biblioteca"
     || scene.id === "un-bosque-enorme"
-    || scene.id === "guacamayo-verde-mayor";
+    || scene.id === "guacamayo-verde-mayor"
+    || scene.id === "remolino-hacia-la-sierra"
+    || scene.id === "bosque-de-neblina";
   const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1" || scene.id === "mensaje-ayuda";
 
