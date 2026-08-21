@@ -4,19 +4,21 @@ import { Lightbulb } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 interface CipherPuzzleProps {
-  word: "AYUDA" | "COSTA" | "SIERRA";
+  word: "AYUDA" | "COSTA" | "SIERRA" | "AMAZONIA";
   variant?: "default" | "message";
+  prompt?: string;
   onSolved?: () => void;
   onIncorrect?: () => void;
 }
 
-export function CipherPuzzle({ word, variant = "default", onSolved, onIncorrect }: CipherPuzzleProps) {
+export function CipherPuzzle({ word, variant = "default", prompt: customPrompt, onSolved, onIncorrect }: CipherPuzzleProps) {
   const [letters, setLetters] = useState(() => word.split("").map(() => ""));
   const inputs = useRef<Array<HTMLInputElement | null>>([]);
   const reportedResult = useRef(false);
   const complete = letters.every(Boolean);
   const solved = letters.join("") === word;
-  const prompt = variant === "message" ? "¡Ayúdala a descifrarlo!" : "Completa los cuadros amarillos";
+  const prompt = customPrompt
+    ?? (variant === "message" ? "¡Ayúdala a descifrarlo!" : "Completa los cuadros amarillos");
 
   useEffect(() => {
     if (!complete || reportedResult.current) return;

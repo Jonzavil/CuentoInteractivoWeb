@@ -7,7 +7,7 @@ export type CharacterId = "lola" | "mario" | "guacamayo" | "oso";
 export type StoryInteraction =
   | { type: "characters" }
   | { type: "reveal"; label: string }
-  | { type: "cipher"; word: "AYUDA" | "COSTA" | "SIERRA" }
+  | { type: "cipher"; word: "AYUDA" | "COSTA" | "SIERRA" | "AMAZONIA" }
   | { type: "character"; characterId: CharacterId; label: string }
   | { type: "papers" }
   | { type: "bear" }

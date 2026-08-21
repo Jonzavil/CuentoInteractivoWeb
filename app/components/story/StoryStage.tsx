@@ -64,7 +64,8 @@ export function StoryStage({
   const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "mensaje-ayuda"
-    || scene.id === "bosque-de-neblina";
+    || scene.id === "bosque-de-neblina"
+    || scene.id === "nuevo-mensaje-cifrado";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -125,6 +126,7 @@ export function StoryStage({
         ? showBearAction
         : true
   );
+  const usesMessageCipher = scene.id === "mensaje-ayuda" || scene.id === "nuevo-mensaje-cifrado";
 
   function handleClickWordTarget() {
     if (!clickWord || clickWordIsComplete) return;
@@ -269,9 +271,10 @@ export function StoryStage({
           <CipherPuzzle
             key={`${scene.id}-${cipherAttempt}`}
             word={interaction.word}
-            variant={scene.id === "mensaje-ayuda" ? "message" : "default"}
-            onSolved={scene.id === "mensaje-ayuda" ? onNext : undefined}
-            onIncorrect={scene.id === "mensaje-ayuda" ? () => setShowCipherError(true) : undefined}
+            variant={usesMessageCipher ? "message" : "default"}
+            prompt={scene.id === "nuevo-mensaje-cifrado" ? "¡Ayúdalo a descifrarlo!" : undefined}
+            onSolved={usesMessageCipher ? onNext : undefined}
+            onIncorrect={usesMessageCipher ? () => setShowCipherError(true) : undefined}
           />
         </div>
       ) : null}

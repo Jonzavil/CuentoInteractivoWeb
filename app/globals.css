@@ -658,6 +658,34 @@ button:focus-visible, input:focus-visible {
   text-align: center;
 }
 
+.story-stage[data-scene="nuevo-mensaje-cifrado"] .scene-interaction--cipher {
+  top: 48%;
+  left: 8.5%;
+  width: 45%;
+}
+
+.story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__letters {
+  gap: .8cqw;
+}
+
+.story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__letters input {
+  width: clamp(22px, 4.8cqw, 53px);
+  height: clamp(22px, 4.8cqw, 53px);
+}
+
+.story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__prompt {
+  margin-top: 4cqw;
+  background: var(--green);
+}
+
+.story-stage[data-scene="nuevo-mensaje-cifrado"] .scene-copy {
+  left: 8.5%;
+  width: 45%;
+  padding: 0;
+  text-align: center;
+  white-space: pre;
+}
+
 .story-stage[data-scene="una-sombra-enorme"] .scene-copy {
   top: var(--stage-edge-inset);
   right: var(--stage-edge-inset);
