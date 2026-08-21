@@ -397,4 +397,11 @@ export const STORY_SCENES = [
     posterSrc: "/assets/POSTERS/P23.jpg",
     copyBlocks: [],
   },
+  {
+    id: "nuevo-mensaje-cifrado",
+    title: "Un nuevo mensaje",
+    videoSrc: "/assets/ANIMACIONES/P24.mp4",
+    posterSrc: "/assets/POSTERS/P24.jpg",
+    copyBlocks: [],
+  },
 ] as const satisfies readonly StoryScene[];

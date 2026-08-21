@@ -54,9 +54,9 @@ test("keeps the story content aligned with the delivered media", async () => {
     readdir(new URL("../public/assets/POSTERS/", import.meta.url)),
   ]);
 
-  assert.equal(storyData.match(/videoSrc:/g)?.length, 24);
-  assert.equal(storyData.match(/posterSrc:/g)?.length, 24);
-  assert.equal(storyData.match(/copyBlocks:/g)?.length, 24);
+  assert.equal(storyData.match(/videoSrc:/g)?.length, 25);
+  assert.equal(storyData.match(/posterSrc:/g)?.length, 25);
+  assert.equal(storyData.match(/copyBlocks:/g)?.length, 25);
   assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
   assert.match(storyData, /Lola y Mario entraron a la biblioteca\\nen busca de una nueva historia/);
   assert.match(storyData, /¿Dónde crees que están Lola y Mario\?/);
@@ -65,12 +65,12 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyData, /Has llegado a la Sierra ecuatoriana/);
   assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
   assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);
-  assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 24);
-  assert.equal(posterFiles.filter((file) => file.endsWith(".jpg")).length, 24);
+  assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 25);
+  assert.equal(posterFiles.filter((file) => file.endsWith(".jpg")).length, 25);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind|open-sans/i);
 
   await Promise.all(
-    Array.from({ length: 23 }, (_, index) =>
+    Array.from({ length: 24 }, (_, index) =>
       access(
         new URL(
           `../public/assets/ANIMACIONES/P${index + 1}.mp4`,
