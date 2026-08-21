@@ -163,7 +163,7 @@ export function StoryStage({
         />
       ) : null}
 
-      {!autoPlays && scene.id !== "la-pequena-planta" && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
+      {!autoPlays && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button
           className="scene-play-button"
           type="button"

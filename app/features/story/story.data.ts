@@ -287,7 +287,6 @@ export const STORY_SCENES = [
         tone: "light",
       },
     ],
-    interaction: { type: "papers" },
   },
   {
     id: "insignia-costa",

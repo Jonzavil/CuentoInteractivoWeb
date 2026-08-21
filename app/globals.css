@@ -418,6 +418,11 @@ button:focus-visible, input:focus-visible {
   text-align: right;
 }
 
+.story-stage[data-scene="la-pequena-planta"] .scene-play-button {
+  top: 79%;
+  left: 50%;
+}
+
 .story-stage[data-scene="insignia-costa"] .scene-copy {
   left: var(--stage-edge-inset);
   padding-left: 0;
