@@ -117,6 +117,7 @@ export function StoryStage({
         ref={videoRef}
         className={videoReady ? "story-video is-ready" : "story-video"}
         src={scene.videoSrc}
+        poster={scene.posterSrc}
         playsInline
         preload="auto"
         autoPlay={autoPlays}

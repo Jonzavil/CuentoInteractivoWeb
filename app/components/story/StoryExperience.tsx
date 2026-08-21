@@ -32,6 +32,13 @@ export function StoryExperience() {
   const scene = STORY_SCENES[state.currentSceneIndex];
   const progress = ((state.currentSceneIndex + 1) / STORY_SCENES.length) * 100;
 
+  useEffect(() => {
+    const nextPoster = STORY_SCENES[state.currentSceneIndex + 1]?.posterSrc;
+    if (!nextPoster) return;
+    const image = new window.Image();
+    image.src = nextPoster;
+  }, [state.currentSceneIndex]);
+
   const setPlaying = useCallback(
     (playing: boolean) => dispatch({ type: "SET_PLAYING", payload: playing }),
     [dispatch],

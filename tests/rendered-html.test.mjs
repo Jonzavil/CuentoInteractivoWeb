@@ -46,15 +46,16 @@ test("server-renders the interactive story shell", async () => {
 });
 
 test("keeps the story content aligned with the delivered media", async () => {
-  const [storyData, storyStyles, packageJson, animationFiles] = await Promise.all([
+  const [storyData, storyStyles, packageJson, animationFiles, posterFiles] = await Promise.all([
     readFile(new URL("../app/features/story/story.data.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readdir(new URL("../public/assets/ANIMACIONES/", import.meta.url)),
+    readdir(new URL("../public/assets/POSTERS/", import.meta.url)),
   ]);
 
   assert.equal(storyData.match(/videoSrc:/g)?.length, 18);
-  assert.equal(storyData.match(/posterSrc:/g)?.length, 17);
+  assert.equal(storyData.match(/posterSrc:/g)?.length, 18);
   assert.equal(storyData.match(/copyBlocks:/g)?.length, 18);
   assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
   assert.match(storyData, /Lola y Mario entraron a la biblioteca\\nen busca de una nueva historia/);
@@ -65,6 +66,7 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
   assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);
   assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 18);
+  assert.equal(posterFiles.filter((file) => file.endsWith(".jpg")).length, 18);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind|open-sans/i);
 
   await Promise.all(

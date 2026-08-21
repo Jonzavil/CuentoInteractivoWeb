@@ -48,7 +48,7 @@ export const STORY_SCENES = [
     title: "Una tarde especial",
     videoSrc: "/assets/ANIMACIONES/P1.mp4",
     toneSrc: "/assets/tonos/p1.mp3",
-    posterSrc: "/assets/ESCENAS/P1.jpg",
+    posterSrc: "/assets/POSTERS/P1.jpg",
     copyBlocks: [{
       text: "En una tarde, mientras el sol se escondía entre colores brillantes, una gran aventura estaba a punto de comenzar.",
       top: 2.5,
@@ -63,7 +63,7 @@ export const STORY_SCENES = [
     title: "En la biblioteca",
     videoSrc: "/assets/ANIMACIONES/P2.mp4",
     toneSrc: "/assets/tonos/p2.mp3",
-    posterSrc: "/assets/ESCENAS/P2.jpg",
+    posterSrc: "/assets/POSTERS/P2.jpg",
     copyBlocks: [{
       text: "Lola y Mario entraron a la biblioteca\nen busca de una nueva historia.\nRevisaron cada estante, pero ningún\nlibro logró llamar su atención.",
       top: 74,
@@ -79,7 +79,7 @@ export const STORY_SCENES = [
     title: "El libro misterioso",
     videoSrc: "/assets/ANIMACIONES/P3.mp4",
     toneSrc: "/assets/tonos/p3.mp3",
-    posterSrc: "/assets/ESCENAS/P3.jpg",
+    posterSrc: "/assets/POSTERS/P3.jpg",
     copyBlocks: [{
       text: "De pronto, un extraño libro\ncon misteriosos símbolos en\nsus bordes comenzó a brillar.",
       top: 20,
@@ -94,7 +94,7 @@ export const STORY_SCENES = [
     title: "Una luz mágica",
     videoSrc: "/assets/ANIMACIONES/P4.mp4",
     toneSrc: "/assets/tonos/p4.mp3",
-    posterSrc: "/assets/ESCENAS/P4.jpg",
+    posterSrc: "/assets/POSTERS/P4.jpg",
     copyBlocks: [{
       text: "Un libro volando del\nestante se abrió en el\naire, liberando una luz\nmágica de sus páginas.",
       top: 7.6,
@@ -109,7 +109,7 @@ export const STORY_SCENES = [
     title: "Todo comenzó a girar",
     videoSrc: "/assets/ANIMACIONES/P5.mp4",
     toneSrc: "/assets/tonos/p5.mp3",
-    posterSrc: "/assets/ESCENAS/P5.jpg",
+    posterSrc: "/assets/POSTERS/P5.jpg",
     copyBlocks: [{
       text: "De repente, todo\ncomenzó a dar vueltas.\nLibros, palmeras y un\nantiguo pergamino\nvolaron por el aire.",
       top: 60,
@@ -124,7 +124,7 @@ export const STORY_SCENES = [
     title: "¿Dónde estamos?",
     videoSrc: "/assets/ANIMACIONES/P6.mp4",
     toneSrc: "/assets/tonos/p6.mp3",
-    posterSrc: "/assets/ESCENAS/P6.jpg",
+    posterSrc: "/assets/POSTERS/P6.jpg",
     copyBlocks: [{
       text: "Cuando todo se detuvo, Lola y Mario abrieron\nlos ojos con asombro. La biblioteca había\ndesaparecido y ahora estaban rodeados de\nenormes árboles y hojas verdes.",
       top: 7.8,
@@ -139,7 +139,7 @@ export const STORY_SCENES = [
     title: "Primero debemos observar",
     videoSrc: "/assets/ANIMACIONES/P7.mp4",
     toneSrc: "/assets/tonos/p7.mp3",
-    posterSrc: "/assets/ESCENAS/P7.jpg",
+    posterSrc: "/assets/POSTERS/P7.jpg",
     copyBlocks: [{
       text: "Mario comenzó a gritar como loco. Lola se rio al verlo y le dijo:\n—¡Cálmate, Mario! Primero debemos descubrir dónde estamos.",
       top: 8.9,
@@ -153,6 +153,7 @@ export const STORY_SCENES = [
     id: "fondo-1",
     title: "La aventura continúa",
     videoSrc: "/assets/ANIMACIONES/FONDO1.mp4",
+    posterSrc: "/assets/POSTERS/FONDO1.jpg",
     copyBlocks: [],
     interaction: {
       type: "choice",
@@ -165,7 +166,7 @@ export const STORY_SCENES = [
     title: "El antiguo pergamino",
     videoSrc: "/assets/ANIMACIONES/P8.mp4",
     toneSrc: "/assets/tonos/p8.mp3",
-    posterSrc: "/assets/ESCENAS/P8.jpg",
+    posterSrc: "/assets/POSTERS/P8.jpg",
     copyBlocks: [{
       text: "¡Vamos a descubrirlo! Lola tomó\nel antiguo pergamino y lo abrió.\nEn su interior descubrió un\nextraño abecedario formado por\nsímbolos.",
       top: 6.6,
@@ -180,7 +181,7 @@ export const STORY_SCENES = [
     title: "El primer mensaje",
     videoSrc: "/assets/ANIMACIONES/P9.mp4",
     toneSrc: "/assets/tonos/p9.mp3",
-    posterSrc: "/assets/ESCENAS/P9.jpg",
+    posterSrc: "/assets/POSTERS/P9.jpg",
     copyBlocks: [{
       text: "Observa el abecedario y escribe las letras\ncorrectas en los recuadros amarillos.",
       top: 75,
@@ -196,7 +197,7 @@ export const STORY_SCENES = [
     title: "Una enorme sombra",
     videoSrc: "/assets/ANIMACIONES/P10.mp4",
     toneSrc: "/assets/tonos/p10.mp3",
-    posterSrc: "/assets/ESCENAS/P10.jpg",
+    posterSrc: "/assets/POSTERS/P10.jpg",
     copyBlocks: [{
       text: "¡Lo has descubierto!\nLola y Mario estaban en\nla Costa ecuatoriana.\nPero, de pronto, una\nenorme sombra pasó\nsobre ellos.",
       top: 5.3,
@@ -211,7 +212,7 @@ export const STORY_SCENES = [
     title: "El guacamayo verde mayor",
     videoSrc: "/assets/ANIMACIONES/P11.mp4",
     toneSrc: "/assets/tonos/p11.mp3",
-    posterSrc: "/assets/ESCENAS/P11.jpg",
+    posterSrc: "/assets/POSTERS/P11.jpg",
     copyBlocks: [{
       text: "Un fuerte aleteo sacudió\nlas hojas y un guacamayo\nverde mayor descendió\nfrente a ellos.\n—No tengan miedo —dijo\n—. Este bosque también\nforma parte de su hogar.",
       top: 39,
@@ -227,7 +228,7 @@ export const STORY_SCENES = [
     title: "Un hogar entre los árboles",
     videoSrc: "/assets/ANIMACIONES/P12.mp4",
     toneSrc: "/assets/tonos/p12.mp3",
-    posterSrc: "/assets/ESCENAS/P12.jpg",
+    posterSrc: "/assets/POSTERS/P12.jpg",
     copyBlocks: [
       {
         text: "El guacamayo les mostró los frutos\ndel almendro de montaña, su\nalimento favorito, y los grandes\ntroncos donde encontraba refugio.",
@@ -252,7 +253,7 @@ export const STORY_SCENES = [
     title: "El canto del bosque se apagó",
     videoSrc: "/assets/ANIMACIONES/P13.mp4",
     toneSrc: "/assets/tonos/p13.mp3",
-    posterSrc: "/assets/ESCENAS/P13.jpg",
+    posterSrc: "/assets/POSTERS/P13.jpg",
     copyBlocks: [{
       text: "De pronto, el canto del bosque se apagó. Frente a ellos apareció un espacio vacío, lleno de ramas cortadas y troncos caídos.\n—Cada vez que desaparece un árbol, nuestro hogar se hace más pequeño —explicó el guacamayo.",
       top: 28.1,
@@ -267,7 +268,7 @@ export const STORY_SCENES = [
     title: "Proteger también es ayudar",
     videoSrc: "/assets/ANIMACIONES/P14.mp4",
     toneSrc: "/assets/tonos/p14.mp3",
-    posterSrc: "/assets/ESCENAS/P14.jpg",
+    posterSrc: "/assets/POSTERS/P14.jpg",
     copyBlocks: [
       {
         text: "Lola encontró una pequeña planta entre las ramas. Mario retiró con cuidado los papeles que la cubrían y juntos dejaron que recibiera la luz del sol.",
@@ -292,7 +293,7 @@ export const STORY_SCENES = [
     id: "insignia-costa",
     title: "La primera insignia",
     videoSrc: "/assets/ANIMACIONES/P15.mp4",
-    posterSrc: "/assets/ESCENAS/P15.jpg",
+    posterSrc: "/assets/POSTERS/P15.jpg",
     copyBlocks: [{
       text: "Al proteger la pequeña planta, Lola y Mario descubrieron que el pergamino mostraba una nueva palabra: “COSTA”, la primera insignia que habían obtenido en su aventura.",
       top: 71.8,
@@ -307,7 +308,7 @@ export const STORY_SCENES = [
     id: "oso-de-anteojos",
     title: "Entre montañas y neblina",
     videoSrc: "/assets/ANIMACIONES/P16.mp4",
-    posterSrc: "/assets/ESCENAS/P16.jpg",
+    posterSrc: "/assets/POSTERS/P16.jpg",
     copyBlocks: [{
       text: "El bosque se cubrió de neblina y, en un instante, Lola y Mario aparecieron entre montañas y árboles húmedos. Allí encontraron un oso con manchas claras alrededor de los ojos.\n—Cada oso de anteojos tiene marcas diferentes —les contó—. Son como nuestro propio rostro.",
       top: 6.9,
@@ -322,7 +323,7 @@ export const STORY_SCENES = [
     id: "semillas-en-el-camino",
     title: "Semillas para nuevos bosques",
     videoSrc: "/assets/ANIMACIONES/P17.mp4",
-    posterSrc: "/assets/ESCENAS/P17.jpg",
+    posterSrc: "/assets/POSTERS/P17.jpg",
     copyBlocks: [{
       text: "Mientras caminaba buscando frutos, el oso dejaba caer semillas sobre la tierra.\n—Así ayudamos a que nuevas plantas crezcan en distintos lugares.",
       top: 6.6,
