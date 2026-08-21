@@ -182,14 +182,14 @@ export const STORY_SCENES = [
     toneSrc: "/assets/tonos/p9.mp3",
     posterSrc: "/assets/ESCENAS/P9.jpg",
     copyBlocks: [{
-      text: "Al abrirlo, descubrió un extraño abecedario formado por símbolos. Debajo de ellos aparecía un mensaje que debían descifrar.",
-      top: 71.8,
-      left: 52.6,
-      width: 37.7,
+      text: "Observa el abecedario y escribe las letras\ncorrectas en los recuadros amarillos.",
+      top: 75,
+      left: 50,
+      width: 41.8,
       align: "center",
       tone: "dark",
     }],
-    interaction: { type: "cipher", word: "AYUDA" },
+    interaction: { type: "cipher", word: "COSTA" },
   },
   {
     id: "una-sombra-enorme",
@@ -198,7 +198,7 @@ export const STORY_SCENES = [
     toneSrc: "/assets/tonos/p10.mp3",
     posterSrc: "/assets/ESCENAS/P10.jpg",
     copyBlocks: [{
-      text: "De pronto, una enorme sombra cubrió a Lola y Mario. Al mirar hacia arriba, distinguieron unas grandes alas extendidas sobre ellos, pero no lograron descubrir a quién pertenecían.",
+      text: "¡Lo has descubierto!\nLola y Mario estaban en\nla Costa ecuatoriana.\nPero, de pronto, una\nenorme sombra pasó\nsobre ellos.",
       top: 5.3,
       left: 71.3,
       width: 26.4,

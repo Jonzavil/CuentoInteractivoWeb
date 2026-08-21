@@ -5,6 +5,7 @@ import {
   Check,
   Footprints,
   Sparkles,
+  X,
 } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { CharacterId, StoryScene } from "@/app/features/story/story.types";
@@ -48,12 +49,14 @@ export function StoryStage({
   const [papers, setPapers] = useState([false, false, false]);
   const [, setBearSteps] = useState(0);
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
+  const [showCipherError, setShowCipherError] = useState(false);
+  const [cipherAttempt, setCipherAttempt] = useState(0);
 
   const isFirst = sceneIndex === 0;
   const isLast = sceneIndex === totalScenes - 1;
   const waitsForAnimationEnd = scene.id === "la-biblioteca" || scene.id === "un-bosque-enorme";
   const toneFinishesOnce = scene.id === "un-bosque-enorme";
-  const autoPlays = scene.id === "fondo-1";
+  const autoPlays = scene.id === "fondo-1" || scene.id === "mensaje-ayuda";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -213,7 +216,38 @@ export function StoryStage({
 
       {interaction?.type === "cipher" ? (
         <div className="scene-interaction scene-interaction--cipher">
-          <CipherPuzzle word={interaction.word} />
+          <CipherPuzzle
+            key={`${scene.id}-${cipherAttempt}`}
+            word={interaction.word}
+            variant={scene.id === "mensaje-ayuda" ? "message" : "default"}
+            onSolved={scene.id === "mensaje-ayuda" ? onNext : undefined}
+            onIncorrect={scene.id === "mensaje-ayuda" ? () => setShowCipherError(true) : undefined}
+          />
+        </div>
+      ) : null}
+
+      {showCipherError ? (
+        <div className="scene-answer-feedback" role="dialog" aria-modal="true" aria-labelledby="incorrect-answer-title">
+          <div className="scene-answer-feedback__panel">
+            <p>
+              <strong id="incorrect-answer-title">¡Ups! Ese no es el mensaje</strong>
+              {"\n"}Mira nuevamente
+              {"\n"}los símbolos e
+              {"\n"}inténtalo otra vez.
+            </p>
+          </div>
+          <button
+            className="scene-answer-feedback__close"
+            type="button"
+            autoFocus
+            aria-label="Cerrar e intentar nuevamente"
+            onClick={() => {
+              setShowCipherError(false);
+              setCipherAttempt((attempt) => attempt + 1);
+            }}
+          >
+            <X aria-hidden="true" />
+          </button>
         </div>
       ) : null}
 

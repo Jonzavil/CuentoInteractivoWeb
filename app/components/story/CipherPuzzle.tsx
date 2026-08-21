@@ -5,17 +5,25 @@ import { useEffect, useRef, useState } from "react";
 
 interface CipherPuzzleProps {
   word: "AYUDA" | "COSTA" | "SIERRA";
+  variant?: "default" | "message";
   onSolved?: () => void;
+  onIncorrect?: () => void;
 }
 
-export function CipherPuzzle({ word, onSolved }: CipherPuzzleProps) {
+export function CipherPuzzle({ word, variant = "default", onSolved, onIncorrect }: CipherPuzzleProps) {
   const [letters, setLetters] = useState(() => word.split("").map(() => ""));
   const inputs = useRef<Array<HTMLInputElement | null>>([]);
+  const reportedResult = useRef(false);
+  const complete = letters.every(Boolean);
   const solved = letters.join("") === word;
+  const prompt = variant === "message" ? "¡Ayúdala a descifrarlo!" : "Completa los cuadros amarillos";
 
   useEffect(() => {
+    if (!complete || reportedResult.current) return;
+    reportedResult.current = true;
     if (solved) onSolved?.();
-  }, [onSolved, solved]);
+    else onIncorrect?.();
+  }, [complete, onIncorrect, onSolved, solved]);
 
   function updateLetter(index: number, value: string) {
     const letter = value.toUpperCase().replace(/[^A-ZÑ]/g, "").slice(-1);
@@ -37,8 +45,8 @@ export function CipherPuzzle({ word, onSolved }: CipherPuzzleProps) {
   }
 
   return (
-    <div className={`cipher cipher--${word.toLowerCase()}`} aria-label={`Descifra una palabra de ${word.length} letras`}>
-      <p className="cipher__prompt">Completa los cuadros amarillos</p>
+    <div className={`cipher cipher--${word.toLowerCase()} cipher--${variant}`} aria-label={`Descifra una palabra de ${word.length} letras`}>
+      <p className="cipher__prompt">{prompt}</p>
       <div className="cipher__letters">
         {word.split("").map((expectedLetter, index) => (
           <input
@@ -50,7 +58,7 @@ export function CipherPuzzle({ word, onSolved }: CipherPuzzleProps) {
             maxLength={1}
             inputMode="text"
             aria-label={`Letra ${index + 1} de ${word.length}`}
-            className={letters[index] && letters[index] !== expectedLetter ? "is-wrong" : ""}
+            className={variant !== "message" && letters[index] && letters[index] !== expectedLetter ? "is-wrong" : ""}
             onChange={(event) => updateLetter(index, event.target.value)}
             onKeyDown={(event) => {
               if (event.key === "Backspace" && !letters[index] && index > 0) {

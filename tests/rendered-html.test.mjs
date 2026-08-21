@@ -60,6 +60,7 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyData, /Lola y Mario entraron a la biblioteca\\nen busca de una nueva historia/);
   assert.match(storyData, /¿Dónde crees que están Lola y Mario\?/);
   assert.match(storyData, /options: \["Costa", "Sierra", "Amazonía", "Galápagos"\]/);
+  assert.match(storyStyles, /\.scene-answer-feedback__panel/);
   assert.match(storyData, /Así ayudamos a que nuevas plantas crezcan en distintos lugares/);
   assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
   assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);
