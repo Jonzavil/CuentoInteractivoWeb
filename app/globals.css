@@ -332,8 +332,8 @@ button:focus-visible, input:focus-visible {
 }
 
 .story-stage[data-scene="calmate-mario"] .scene-play-button {
-  top: 87.5%;
-  left: 48.5%;
+  top: 84%;
+  left: 23.3%;
 }
 
 .story-stage[data-scene="el-pergamino"] .scene-play-button {

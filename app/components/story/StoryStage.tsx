@@ -103,12 +103,18 @@ export function StoryStage({
         ref={videoRef}
         className={videoReady ? "story-video is-ready" : "story-video"}
         src={scene.videoSrc}
-        poster={scene.posterSrc}
         playsInline
-        preload="metadata"
+        preload="auto"
         autoPlay={autoPlays}
         muted={autoPlays || muted}
         loop={!reducedMotion && !waitsForAnimationEnd}
+        onLoadedData={(event) => {
+          const video = event.currentTarget;
+          if (!autoPlays && !isPlaying && video.currentTime === 0 && Number.isFinite(video.duration)) {
+            video.pause();
+            video.currentTime = Math.min(0.001, video.duration);
+          }
+        }}
         onCanPlay={() => setVideoReady(true)}
         onPlay={() => {
           allowToneToFinishRef.current = false;
