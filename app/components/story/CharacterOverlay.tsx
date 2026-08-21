@@ -49,8 +49,20 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
         />
         <div className="character-overlay__copy">
           <h2 id={titleId}>
-            {characterId === "lola" || characterId === "mario" ? "Hola, soy" : "Hola, soy el"}{" "}
-            {character.name}
+            {characterId === "guacamayo" ? (
+              <>
+                Hola, soy el
+                <br />
+                Guacamayo
+                <br />
+                verde mayor
+              </>
+            ) : (
+              <>
+                {characterId === "lola" || characterId === "mario" ? "Hola, soy" : "Hola, soy el"}{" "}
+                {character.name}
+              </>
+            )}
           </h2>
           <p>
             {characterId === "lola" ? (
@@ -69,6 +81,16 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
                 <br />
                 nuevas aventuras.
               </>
+            ) : characterId === "guacamayo" ? (
+              <>
+                Vivo en los bosques de la Costa
+                <br />
+                ecuatoriana y necesito grandes
+                <br />
+                árboles para alimentarme, refugiarme
+                <br />
+                y formar mi familia.
+              </>
             ) : (
               character.description
             )}
@@ -83,7 +105,16 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
         aria-label="Cerrar ficha y volver al cuento"
         title="Cerrar"
       >
-        <X aria-hidden="true" />
+        {characterId === "guacamayo" ? (
+          <Image
+            src="/assets/Iconos/Recurso 2@450x.png"
+            alt=""
+            width={64}
+            height={64}
+          />
+        ) : (
+          <X aria-hidden="true" />
+        )}
       </button>
     </section>
   );
