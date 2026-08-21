@@ -466,10 +466,35 @@ button:focus-visible, input:focus-visible {
   white-space: pre;
 }
 
+.story-stage[data-scene="frutos-para-el-oso"] .scene-play-button {
+  top: 68%;
+  left: 72%;
+}
+
 .story-stage[data-scene="un-nuevo-amigo-en-la-sierra"] .scene-copy {
-  padding: 0;
+  border-radius: .8cqw;
+  padding: .65cqw 1cqw;
+  background: rgba(255, 248, 232, .18);
   text-align: center;
   white-space: pre;
+}
+
+.story-stage[data-scene="un-nuevo-amigo-en-la-sierra"] .scene-play-button {
+  top: 65%;
+  left: 70%;
+}
+
+.story-stage[data-scene="semillas-en-el-camino"] .scene-copy {
+  border-radius: .8cqw;
+  padding: .65cqw 1cqw;
+  background: rgba(255, 248, 232, .18);
+  text-align: center;
+  white-space: pre;
+}
+
+.story-stage[data-scene="semillas-en-el-camino"] .scene-play-button {
+  top: 84%;
+  left: 34%;
 }
 
 .page-arrow {

@@ -381,7 +381,14 @@ export const STORY_SCENES = [
     title: "Semillas para el bosque",
     videoSrc: "/assets/ANIMACIONES/P21.mp4",
     posterSrc: "/assets/POSTERS/P21.jpg",
-    copyBlocks: [],
+    copyBlocks: [{
+      text: "Lola y Mario decidieron ayudar al oso a recuperar su hogar.\nToca las semillas para plantarlas y ganar la insignia.",
+      top: 7,
+      left: 20,
+      width: 60,
+      align: "center",
+      tone: "dark",
+    }],
   },
   {
     id: "insignia-sierra",
