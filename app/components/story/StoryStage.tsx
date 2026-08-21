@@ -41,6 +41,7 @@ export function StoryStage({
   onCloseCharacter,
 }: StoryStageProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const toneRef = useRef<HTMLAudioElement>(null);
   const [videoReady, setVideoReady] = useState(false);
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const [papers, setPapers] = useState([false, false, false]);
@@ -54,11 +55,14 @@ export function StoryStage({
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    const tone = toneRef.current;
     video.muted = muted;
     if (isPlaying) {
       void video.play().catch(() => onPlayingChange(false));
+      void tone?.play().catch(() => undefined);
     } else {
       video.pause();
+      tone?.pause();
     }
   }, [isPlaying, muted, onPlayingChange, scene.id]);
 
@@ -66,12 +70,17 @@ export function StoryStage({
     const video = videoRef.current;
     if (!video) return;
     video.currentTime = 0;
+    if (toneRef.current) {
+      toneRef.current.currentTime = 0;
+      void toneRef.current.play().catch(() => undefined);
+    }
     void video.play().then(() => onPlayingChange(true)).catch(() => onPlayingChange(false));
   }
 
   function startPlayback() {
     const video = videoRef.current;
     if (!video) return;
+    void toneRef.current?.play().catch(() => undefined);
     void video.play().catch(() => onPlayingChange(false));
   }
 
@@ -106,6 +115,17 @@ export function StoryStage({
         }}
         aria-hidden="true"
       />
+
+      {scene.toneSrc ? (
+        <audio
+          key={scene.toneSrc}
+          ref={toneRef}
+          src={scene.toneSrc}
+          preload="auto"
+          loop
+          aria-hidden="true"
+        />
+      ) : null}
 
       {!isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button

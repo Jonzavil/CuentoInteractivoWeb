@@ -26,6 +26,7 @@ export interface StoryScene {
   id: string;
   title: string;
   videoSrc: string;
+  toneSrc?: string;
   posterSrc: string;
   copyBlocks: readonly StoryCopyBlock[];
   interaction?: StoryInteraction;

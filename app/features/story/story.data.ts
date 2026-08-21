@@ -47,6 +47,7 @@ export const STORY_SCENES = [
     id: "una-tarde-especial",
     title: "Una tarde especial",
     videoSrc: "/assets/ANIMACIONES/P1.mp4",
+    toneSrc: "/assets/tonos/p1.mp3",
     posterSrc: "/assets/ESCENAS/P1.jpg",
     copyBlocks: [{
       text: "En una tarde, mientras el sol se escondía entre colores brillantes, una gran aventura estaba a punto de comenzar.",
@@ -61,6 +62,7 @@ export const STORY_SCENES = [
     id: "la-biblioteca",
     title: "En la biblioteca",
     videoSrc: "/assets/ANIMACIONES/P2.mp4",
+    toneSrc: "/assets/tonos/p2.mp3",
     posterSrc: "/assets/ESCENAS/P2.jpg",
     copyBlocks: [{
       text: "Lola y Mario entraron a la biblioteca\nen busca de una nueva historia.\nRevisaron cada estante, pero ningún\nlibro logró llamar su atención.",
@@ -76,6 +78,7 @@ export const STORY_SCENES = [
     id: "el-libro-misterioso",
     title: "El libro misterioso",
     videoSrc: "/assets/ANIMACIONES/P3.mp4",
+    toneSrc: "/assets/tonos/p3.mp3",
     posterSrc: "/assets/ESCENAS/P3.jpg",
     copyBlocks: [{
       text: "De pronto, un extraño libro\ncon misteriosos símbolos en\nsus bordes comenzó a brillar.",
@@ -90,6 +93,7 @@ export const STORY_SCENES = [
     id: "la-luz-magica",
     title: "Una luz mágica",
     videoSrc: "/assets/ANIMACIONES/P4.mp4",
+    toneSrc: "/assets/tonos/p4.mp3",
     posterSrc: "/assets/ESCENAS/P4.jpg",
     copyBlocks: [{
       text: "Un libro volando del\nestante se abrió en el\naire, liberando una luz\nmágica de sus páginas.",
@@ -104,6 +108,7 @@ export const STORY_SCENES = [
     id: "el-remolino",
     title: "Todo comenzó a girar",
     videoSrc: "/assets/ANIMACIONES/P5.mp4",
+    toneSrc: "/assets/tonos/p5.mp3",
     posterSrc: "/assets/ESCENAS/P5.jpg",
     copyBlocks: [{
       text: "De repente, todo\ncomenzó a dar vueltas.\nLibros, palmeras y un\nantiguo pergamino\nvolaron por el aire.",
@@ -118,6 +123,7 @@ export const STORY_SCENES = [
     id: "un-bosque-enorme",
     title: "¿Dónde estamos?",
     videoSrc: "/assets/ANIMACIONES/P6.mp4",
+    toneSrc: "/assets/tonos/p6.mp3",
     posterSrc: "/assets/ESCENAS/P6.jpg",
     copyBlocks: [{
       text: "Cuando todo se detuvo, Lola y Mario abrieron\nlos ojos con asombro. La biblioteca había\ndesaparecido y ahora estaban rodeados de\nenormes árboles y hojas verdes.",
@@ -132,6 +138,7 @@ export const STORY_SCENES = [
     id: "calmate-mario",
     title: "Primero debemos observar",
     videoSrc: "/assets/ANIMACIONES/P7.mp4",
+    toneSrc: "/assets/tonos/p7.mp3",
     posterSrc: "/assets/ESCENAS/P7.jpg",
     copyBlocks: [{
       text: "Mario comenzó a gritar como loco. Lola se rio al verlo y le dijo:\n—¡Cálmate, Mario! Primero debemos descubrir dónde estamos.",
@@ -146,6 +153,7 @@ export const STORY_SCENES = [
     id: "el-pergamino",
     title: "El antiguo pergamino",
     videoSrc: "/assets/ANIMACIONES/P8.mp4",
+    toneSrc: "/assets/tonos/p8.mp3",
     posterSrc: "/assets/ESCENAS/P8.jpg",
     copyBlocks: [{
       text: "Lola tomó el antiguo pergamino y lo abrió. En su interior descubrió un extraño abecedario formado por símbolos.",
@@ -161,6 +169,7 @@ export const STORY_SCENES = [
     id: "mensaje-ayuda",
     title: "El primer mensaje",
     videoSrc: "/assets/ANIMACIONES/P9.mp4",
+    toneSrc: "/assets/tonos/p9.mp3",
     posterSrc: "/assets/ESCENAS/P9.jpg",
     copyBlocks: [{
       text: "Al abrirlo, descubrió un extraño abecedario formado por símbolos. Debajo de ellos aparecía un mensaje que debían descifrar.",
@@ -176,6 +185,7 @@ export const STORY_SCENES = [
     id: "una-sombra-enorme",
     title: "Una enorme sombra",
     videoSrc: "/assets/ANIMACIONES/P10.mp4",
+    toneSrc: "/assets/tonos/p10.mp3",
     posterSrc: "/assets/ESCENAS/P10.jpg",
     copyBlocks: [{
       text: "De pronto, una enorme sombra cubrió a Lola y Mario. Al mirar hacia arriba, distinguieron unas grandes alas extendidas sobre ellos, pero no lograron descubrir a quién pertenecían.",
@@ -190,6 +200,7 @@ export const STORY_SCENES = [
     id: "guacamayo-verde-mayor",
     title: "El guacamayo verde mayor",
     videoSrc: "/assets/ANIMACIONES/P11.mp4",
+    toneSrc: "/assets/tonos/p11.mp3",
     posterSrc: "/assets/ESCENAS/P11.jpg",
     copyBlocks: [{
       text: "Un fuerte aleteo sacudió las hojas y un guacamayo verde mayor descendió frente a ellos. Sus plumas verdes brillaban entre pequeños destellos rojos y azules.\n—No tengan miedo —dijo—. Este bosque también forma parte de su hogar.",
@@ -205,6 +216,7 @@ export const STORY_SCENES = [
     id: "el-hogar-del-guacamayo",
     title: "Un hogar entre los árboles",
     videoSrc: "/assets/ANIMACIONES/P12.mp4",
+    toneSrc: "/assets/tonos/p12.mp3",
     posterSrc: "/assets/ESCENAS/P12.jpg",
     copyBlocks: [
       {
@@ -229,6 +241,7 @@ export const STORY_SCENES = [
     id: "el-bosque-en-silencio",
     title: "El canto del bosque se apagó",
     videoSrc: "/assets/ANIMACIONES/P13.mp4",
+    toneSrc: "/assets/tonos/p13.mp3",
     posterSrc: "/assets/ESCENAS/P13.jpg",
     copyBlocks: [{
       text: "De pronto, el canto del bosque se apagó. Frente a ellos apareció un espacio vacío, lleno de ramas cortadas y troncos caídos.\n—Cada vez que desaparece un árbol, nuestro hogar se hace más pequeño —explicó el guacamayo.",
@@ -243,6 +256,7 @@ export const STORY_SCENES = [
     id: "la-pequena-planta",
     title: "Proteger también es ayudar",
     videoSrc: "/assets/ANIMACIONES/P14.mp4",
+    toneSrc: "/assets/tonos/p14.mp3",
     posterSrc: "/assets/ESCENAS/P14.jpg",
     copyBlocks: [
       {
