@@ -59,7 +59,8 @@ export function StoryStage({
   const waitsForAnimationEnd = scene.id === "la-biblioteca"
     || scene.id === "un-bosque-enorme"
     || scene.id === "guacamayo-verde-mayor"
-    || scene.id === "remolino-hacia-la-sierra";
+    || scene.id === "remolino-hacia-la-sierra"
+    || scene.id === "semillas-en-el-camino";
   const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
