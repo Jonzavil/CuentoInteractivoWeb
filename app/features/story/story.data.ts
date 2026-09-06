@@ -306,6 +306,7 @@ export const STORY_SCENES = [
     id: "insignia-costa",
     title: "La primera insignia",
     videoSrc: "/assets/ANIMACIONES/P15.mp4",
+    toneSrc: "/assets/tonos/insignias.mp3",
     posterSrc: "/assets/POSTERS/P15.jpg",
     copyBlocks: [{
       text: "Lola y Mario habían obtenido\nsu primera insignia. Su forma\nrepresentaba el pico del\nguacamayo verde mayor.",
@@ -408,6 +409,7 @@ export const STORY_SCENES = [
     id: "insignia-sierra",
     title: "La insignia de la Sierra",
     videoSrc: "/assets/ANIMACIONES/P22.mp4",
+    toneSrc: "/assets/tonos/insignias.mp3",
     posterSrc: "/assets/POSTERS/P22.jpg",
     copyBlocks: [{
       text: "¡Lo lograron! Al plantar\nlas semillas, Lola y Mario\nobtuvieron la insignia de\nla Sierra.",
