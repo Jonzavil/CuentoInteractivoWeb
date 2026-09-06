@@ -349,6 +349,19 @@ button:focus-visible, input:focus-visible {
   text-align: left;
 }
 
+.story-stage[data-scene="es-hora-de-descubrirlo"] .scene-copy {
+  height: 40.2%;
+  display: grid;
+  place-content: center;
+  border-radius: 1.2cqw;
+  padding: 2cqw;
+  background: var(--purple);
+  font-size: 5.3cqw;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
 .story-stage[data-scene="guacamayo-verde-mayor"] .scene-actions {
   top: 72%;
   bottom: auto;
@@ -781,6 +794,18 @@ button:focus-visible, input:focus-visible {
 }
 
 .scene-answer-feedback__close:hover { transform: translate(-50%, -50%) scale(1.04); }
+
+.scene-answer-feedback--success .scene-answer-feedback__panel {
+  background: var(--purple);
+}
+
+.scene-answer-feedback--success .scene-answer-feedback__panel p {
+  font-size: 2.8cqw;
+}
+
+.scene-answer-feedback--success .scene-answer-feedback__close {
+  background: var(--lime);
+}
 
 .paper-game { position: absolute; z-index: 5; inset: 0; pointer-events: none; }
 .paper-game__status { position: absolute; left: 28%; bottom: var(--stage-edge-inset); width: 44%; margin: 0; border: 0; padding: .65cqw 1cqw; border-radius: .55cqw; background: var(--green); color: #fff7e4; font-size: clamp(6px, 1.8cqw, 20px); font-weight: 800; text-align: center; text-transform: uppercase; white-space: nowrap; cursor: pointer; pointer-events: auto; }

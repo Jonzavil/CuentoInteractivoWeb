@@ -162,13 +162,27 @@ export const STORY_SCENES = [
     },
   },
   {
+    id: "es-hora-de-descubrirlo",
+    title: "¡Es hora de descubrirlo!",
+    videoSrc: "/assets/ANIMACIONES/FONDO1.mp4",
+    posterSrc: "/assets/POSTERS/FONDO1.jpg",
+    copyBlocks: [{
+      text: "¡ES HORA DE\nDESCUBRIRLO!",
+      top: 24.7,
+      left: 25.65,
+      width: 48.7,
+      align: "center",
+      tone: "light",
+    }],
+  },
+  {
     id: "el-pergamino",
     title: "El antiguo pergamino",
     videoSrc: "/assets/ANIMACIONES/P8.mp4",
     toneSrc: "/assets/tonos/p8.mp3",
     posterSrc: "/assets/POSTERS/P8.jpg",
     copyBlocks: [{
-      text: "¡Vamos a descubrirlo! Lola tomó\nel antiguo pergamino y lo abrió.\nEn su interior descubrió un\nextraño abecedario formado por\nsímbolos.",
+      text: "Lola tomó el antiguo pergamino\ny lo abrió.\nEn su interior descubrió un\nextraño abecedario formado por\nsímbolos.",
       top: 6.6,
       left: 4.8,
       width: 34.7,
@@ -199,7 +213,7 @@ export const STORY_SCENES = [
     toneSrc: "/assets/tonos/p10.mp3",
     posterSrc: "/assets/POSTERS/P10.jpg",
     copyBlocks: [{
-      text: "¡Lo has descubierto!\nLola y Mario estaban en\nla Costa ecuatoriana.\nPero, de pronto, una\nenorme sombra pasó\nsobre ellos.",
+      text: "El mensaje reveló que\nestaban en la Costa\necuatoriana. De pronto,\nuna enorme sombra pasó\nsobre ellos.",
       top: 5.3,
       left: 71.3,
       width: 26.4,
@@ -221,7 +235,7 @@ export const STORY_SCENES = [
       align: "left",
       tone: "light",
     }],
-    interaction: { type: "character", characterId: "guacamayo", label: "Descubre quién\nes el guacamayo\nverde mayor" },
+    interaction: { type: "character", characterId: "guacamayo", label: "Descubre al guacamayo" },
   },
   {
     id: "el-hogar-del-guacamayo",

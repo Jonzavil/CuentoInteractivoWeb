@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import {
+  Check,
   Footprints,
   Sparkles,
   X,
@@ -47,7 +48,7 @@ export function StoryStage({
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const [, setBearSteps] = useState(0);
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
-  const [showCipherError, setShowCipherError] = useState(false);
+  const [cipherFeedback, setCipherFeedback] = useState<"error" | "success" | null>(null);
   const [cipherAttempt, setCipherAttempt] = useState(0);
   const [showGuacamayoAction, setShowGuacamayoAction] = useState(false);
   const [showBearAction, setShowBearAction] = useState(false);
@@ -63,6 +64,7 @@ export function StoryStage({
     || scene.id === "bosque-de-neblina";
   const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1"
+    || scene.id === "es-hora-de-descubrirlo"
     || scene.id === "mensaje-ayuda"
     || scene.id === "bosque-de-neblina"
     || scene.id === "nuevo-mensaje-cifrado";
@@ -127,6 +129,9 @@ export function StoryStage({
         : true
   );
   const usesMessageCipher = scene.id === "mensaje-ayuda" || scene.id === "nuevo-mensaje-cifrado";
+  const cipherRegion = interaction?.type === "cipher"
+    ? { AYUDA: "Ayuda", COSTA: "Costa", SIERRA: "Sierra", AMAZONIA: "Amazonía" }[interaction.word]
+    : "";
 
   function handleClickWordTarget() {
     if (!clickWord || clickWordIsComplete) return;
@@ -273,33 +278,51 @@ export function StoryStage({
             word={interaction.word}
             variant={usesMessageCipher ? "message" : "default"}
             prompt={scene.id === "nuevo-mensaje-cifrado" ? "¡Ayúdalo a descifrarlo!" : undefined}
-            onSolved={usesMessageCipher ? onNext : undefined}
-            onIncorrect={usesMessageCipher ? () => setShowCipherError(true) : undefined}
+            onSolved={usesMessageCipher ? () => setCipherFeedback("success") : undefined}
+            onIncorrect={usesMessageCipher ? () => setCipherFeedback("error") : undefined}
           />
         </div>
       ) : null}
 
-      {showCipherError ? (
-        <div className="scene-answer-feedback" role="dialog" aria-modal="true" aria-labelledby="incorrect-answer-title">
+      {cipherFeedback ? (
+        <div
+          className={`scene-answer-feedback${cipherFeedback === "success" ? " scene-answer-feedback--success" : ""}`}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="cipher-feedback-title"
+          aria-describedby="cipher-feedback-description"
+          onKeyDown={(event) => {
+            event.stopPropagation();
+            if (event.key === "Tab") event.preventDefault();
+          }}
+        >
           <div className="scene-answer-feedback__panel">
             <p>
-              <strong id="incorrect-answer-title">¡Ups! Ese no es el mensaje</strong>
-              {"\n"}Mira nuevamente
-              {"\n"}los símbolos e
-              {"\n"}inténtalo otra vez.
+              <strong id="cipher-feedback-title">
+                {cipherFeedback === "success" ? "¡Lo descubriste!" : "¡Ups! Ese no es el mensaje"}
+              </strong>
+              <span id="cipher-feedback-description">
+                {cipherFeedback === "success"
+                  ? `\n\nEl mensaje dice ${cipherRegion}.\n¡Lola y Mario están en la región ${cipherRegion} del Ecuador!`
+                  : "\nMira nuevamente\nlos símbolos e\ninténtalo otra vez."}
+              </span>
             </p>
           </div>
           <button
             className="scene-answer-feedback__close"
             type="button"
             autoFocus
-            aria-label="Cerrar e intentar nuevamente"
+            aria-label={cipherFeedback === "success" ? "Continuar a la siguiente escena" : "Cerrar e intentar nuevamente"}
             onClick={() => {
-              setShowCipherError(false);
-              setCipherAttempt((attempt) => attempt + 1);
+              if (cipherFeedback === "success") {
+                onNext();
+              } else {
+                setCipherFeedback(null);
+                setCipherAttempt((attempt) => attempt + 1);
+              }
             }}
           >
-            <X aria-hidden="true" />
+            {cipherFeedback === "success" ? <Check aria-hidden="true" /> : <X aria-hidden="true" />}
           </button>
         </div>
       ) : null}
