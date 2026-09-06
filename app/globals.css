@@ -161,8 +161,10 @@ button:focus-visible, input:focus-visible {
   left: var(--copy-left);
   width: var(--copy-width);
   margin: 0;
-  border-radius: .45cqw;
-  padding: .35cqw .55cqw;
+  border-radius: 1.4cqw;
+  padding: .7cqw 1.2cqw;
+  background: rgba(48, 34, 50, .36);
+  color: #fff;
   font-size: clamp(10px, 1.99cqw, 22.3px);
   font-family: Nunito, "Trebuchet MS", Arial, sans-serif;
   font-weight: 400;
@@ -170,22 +172,12 @@ button:focus-visible, input:focus-visible {
   white-space: pre-line;
 }
 
-.scene-copy--dark { background: transparent; color: #323232; }
-.scene-copy--light { background: transparent; color: #fff7e4; }
 .scene-copy--left { text-align: left; }
 .scene-copy--center, .scene-copy--right { text-align: left; }
 
-.story-stage[data-scene="una-tarde-especial"] .scene-copy {
-  padding: 0;
-  color: #fff;
-}
 .story-stage[data-scene="la-biblioteca"] .scene-copy {
   top: auto;
   bottom: var(--stage-edge-inset);
-  border-radius: 1.4cqw;
-  padding: .7cqw 1.2cqw;
-  background: rgba(48, 34, 50, .36);
-  color: #fff;
   text-align: center;
 }
 .story-stage[data-scene="la-biblioteca"] .scene-play-button { left: 54%; }
@@ -307,7 +299,6 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="la-luz-magica"] .scene-copy {
   right: var(--stage-edge-inset);
   left: auto;
-  padding-right: 0;
   text-align: right;
 }
 
@@ -319,7 +310,6 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="el-remolino"] .scene-copy {
   right: var(--stage-edge-inset);
   left: auto;
-  padding-right: 0;
   text-align: right;
 }
 
@@ -344,8 +334,6 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="el-pergamino"] .scene-copy {
   top: var(--stage-edge-inset);
   left: var(--stage-edge-inset);
-  padding-top: 0;
-  padding-left: 0;
   text-align: left;
 }
 
@@ -378,7 +366,6 @@ button:focus-visible, input:focus-visible {
 
 .story-stage[data-scene="guacamayo-verde-mayor"] .scene-copy {
   left: var(--stage-edge-inset);
-  padding-left: 0;
   text-align: left;
 }
 
@@ -387,26 +374,19 @@ button:focus-visible, input:focus-visible {
   left: 51%;
 }
 
-.story-stage[data-scene="el-hogar-del-guacamayo"] .scene-copy {
-  white-space: pre;
-}
-
 .story-stage[data-scene="el-hogar-del-guacamayo"] .scene-copy:first-child {
   left: var(--stage-edge-inset);
-  padding-left: 0;
   text-align: left;
 }
 
 .story-stage[data-scene="el-hogar-del-guacamayo"] .scene-copy:last-child {
   right: var(--stage-edge-inset);
   left: auto;
-  padding-right: 0;
   text-align: right;
 }
 
 .story-stage[data-scene="el-bosque-en-silencio"] .scene-copy {
   text-align: center;
-  white-space: pre;
 }
 
 .story-stage[data-scene="el-bosque-en-silencio"] .scene-play-button {
@@ -414,20 +394,14 @@ button:focus-visible, input:focus-visible {
   left: 80.6%;
 }
 
-.story-stage[data-scene="la-pequena-planta"] .scene-copy {
-  white-space: pre;
-}
-
 .story-stage[data-scene="la-pequena-planta"] .scene-copy:first-child {
   left: var(--stage-edge-inset);
-  padding-left: 0;
   text-align: left;
 }
 
 .story-stage[data-scene="la-pequena-planta"] .scene-copy:last-child {
   right: var(--stage-edge-inset);
   left: auto;
-  padding-right: 0;
   text-align: right;
 }
 
@@ -438,16 +412,12 @@ button:focus-visible, input:focus-visible {
 
 .story-stage[data-scene="insignia-costa"] .scene-copy {
   left: var(--stage-edge-inset);
-  padding-left: 0;
   text-align: left;
-  white-space: pre;
 }
 
 .story-stage[data-scene="remolino-hacia-la-sierra"] .scene-copy {
   left: var(--stage-edge-inset);
-  padding-left: 0;
   text-align: left;
-  white-space: pre;
 }
 
 .story-stage[data-scene="remolino-hacia-la-sierra"] .scene-play-button {
@@ -460,10 +430,6 @@ button:focus-visible, input:focus-visible {
   text-align: center;
 }
 
-.story-stage[data-scene="oso-de-anteojos"] .scene-copy {
-  white-space: pre;
-}
-
 .story-stage[data-scene="oso-de-anteojos"] .scene-play-button {
   top: 68%;
   left: 72.5%;
@@ -474,9 +440,7 @@ button:focus-visible, input:focus-visible {
 }
 
 .story-stage[data-scene="frutos-para-el-oso"] .scene-copy {
-  padding: 0;
   text-align: center;
-  white-space: pre;
 }
 
 .story-stage[data-scene="frutos-para-el-oso"] .scene-play-button {
@@ -485,11 +449,7 @@ button:focus-visible, input:focus-visible {
 }
 
 .story-stage[data-scene="un-nuevo-amigo-en-la-sierra"] .scene-copy {
-  border-radius: .8cqw;
-  padding: .65cqw 1cqw;
-  background: rgba(255, 248, 232, .18);
   text-align: center;
-  white-space: pre;
 }
 
 .story-stage[data-scene="un-nuevo-amigo-en-la-sierra"] .scene-play-button {
@@ -498,11 +458,7 @@ button:focus-visible, input:focus-visible {
 }
 
 .story-stage[data-scene="semillas-en-el-camino"] .scene-copy {
-  border-radius: .8cqw;
-  padding: .65cqw 1cqw;
-  background: rgba(255, 248, 232, .18);
   text-align: center;
-  white-space: pre;
 }
 
 .story-stage[data-scene="semillas-en-el-camino"] .scene-play-button {
@@ -515,9 +471,7 @@ button:focus-visible, input:focus-visible {
   right: var(--stage-edge-inset);
   bottom: calc(var(--stage-edge-inset) + 7.2cqw);
   left: auto;
-  padding: 0;
   text-align: right;
-  white-space: pre;
 }
 
 .story-stage[data-scene="insignia-sierra"] .scene-play-button {
@@ -528,9 +482,7 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="remolino-nuevo-destino"] .scene-copy {
   right: var(--stage-edge-inset);
   left: auto;
-  padding: 0;
   text-align: right;
-  white-space: pre;
 }
 
 .page-arrow {
@@ -667,7 +619,6 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="mensaje-ayuda"] .scene-copy {
   left: 50%;
   width: 41.8%;
-  padding: 0;
   text-align: center;
 }
 
@@ -695,17 +646,13 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="nuevo-mensaje-cifrado"] .scene-copy {
   left: 8.5%;
   width: 45%;
-  padding: 0;
   text-align: center;
-  white-space: pre;
 }
 
 .story-stage[data-scene="una-sombra-enorme"] .scene-copy {
   top: var(--stage-edge-inset);
   right: var(--stage-edge-inset);
   left: auto;
-  padding-top: 0;
-  padding-right: 0;
   text-align: right;
 }
 

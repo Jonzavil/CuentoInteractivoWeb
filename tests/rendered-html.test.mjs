@@ -63,8 +63,8 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyData, /options: \["Costa", "Sierra", "Amazonía", "Galápagos"\]/);
   assert.match(storyStyles, /\.scene-answer-feedback__panel/);
   assert.match(storyData, /Has llegado a la Sierra ecuatoriana/);
-  assert.match(storyStyles, /\.scene-copy--dark \{ background: transparent/);
-  assert.match(storyStyles, /\.scene-copy--light \{ background: transparent/);
+  assert.match(storyStyles, /\.scene-copy \{[^}]*background: rgba\(48, 34, 50, \.36\)/);
+  assert.match(storyStyles, /\.scene-copy \{[^}]*color: #fff;/);
   assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 25);
   assert.equal(posterFiles.filter((file) => file.endsWith(".jpg")).length, 25);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind|open-sans/i);
