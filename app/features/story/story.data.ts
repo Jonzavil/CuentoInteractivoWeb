@@ -354,7 +354,7 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P18.mp4",
     posterSrc: "/assets/POSTERS/P18.jpg",
     copyBlocks: [{
-      text: "¡Lo descubriste! Has llegado a la Sierra ecuatoriana.\nEntre la neblina apareció un oso de anteojos, llamado\nasí por las manchas claras que rodean sus ojos.",
+      text: "Entre la neblina apareció un oso de anteojos, llamado\nasí por las manchas claras que rodean sus ojos.",
       top: 5.9,
       left: 10,
       width: 62,
@@ -364,7 +364,7 @@ export const STORY_SCENES = [
     interaction: {
       type: "character",
       characterId: "oso",
-      label: "Descubre quién\nes el oso de\nanteojos",
+      label: "Descubre al oso",
     },
   },
   {
