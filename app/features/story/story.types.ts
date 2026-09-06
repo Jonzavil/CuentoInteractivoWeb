@@ -15,8 +15,7 @@ export type StoryInteraction =
   | {
       type: "click-word";
       word: "SIERRA";
-      suffix: "ECUATORIANA";
-      clickGoals: readonly [1, 2, 3, 4, 5, 6, 5];
+      clickGoals: readonly [1, 2, 3, 4, 5, 6];
     }
   | { type: "ending"; word: "SIERRA" };
 

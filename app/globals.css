@@ -515,9 +515,40 @@ button:focus-visible, input:focus-visible {
   pointer-events: none;
 }
 
+.click-word-game__instructions {
+  position: absolute;
+  top: 8%;
+  left: 7.5%;
+  width: 85%;
+  display: grid;
+  justify-items: center;
+  gap: 1cqw;
+  color: #fff;
+  text-align: center;
+}
+
+.click-word-game__title {
+  margin: 0;
+  border-radius: 1.2cqw;
+  padding: 1.2cqw 4cqw;
+  background: var(--purple);
+  font-size: 2.6cqw;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.click-word-game__instruction {
+  margin: 0;
+  border-radius: 1.4cqw;
+  padding: .7cqw 1.2cqw;
+  background: rgba(48, 34, 50, .36);
+  font-size: 2.8cqw;
+  line-height: 1.2;
+}
+
 .click-word-game__answer {
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: 50%;
   display: flex;
   width: 96%;
@@ -538,7 +569,7 @@ button:focus-visible, input:focus-visible {
   min-height: 1em;
   justify-content: center;
   align-items: center;
-  font-size: clamp(96px, 18cqw, 208px);
+  font-size: 18cqw;
   letter-spacing: -.035em;
 }
 
@@ -548,29 +579,14 @@ button:focus-visible, input:focus-visible {
   place-items: center;
 }
 
-.click-word-game__letter-value,
-.click-word-game__suffix {
+.click-word-game__letter-value {
   color: transparent;
   text-shadow: none;
 }
 
-.click-word-game__letter-value.is-revealed,
-.click-word-game__suffix.is-revealed {
+.click-word-game__letter-value.is-revealed {
   color: #fff;
   text-shadow: 0 .18cqw .45cqw rgba(20, 34, 40, .48);
-}
-
-.click-word-game__suffix-slot {
-  position: relative;
-  display: grid;
-  min-height: 1em;
-  margin-top: .8cqw;
-  place-items: center;
-  font-size: clamp(54px, 9.8cqw, 116px);
-}
-
-.click-word-game__suffix {
-  letter-spacing: .035em;
 }
 
 .click-word-game__target {

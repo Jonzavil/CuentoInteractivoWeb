@@ -2,6 +2,9 @@ import type { CharacterId, StoryScene } from "./story.types";
 
 export const STORY_TITLE = "Lola y Mario: Guardianes del bosque";
 
+// Usar este tono también en las futuras escenas de remolinos.
+const WHIRLWIND_TONE_SRC = "/assets/tonos/p5.mp3";
+
 export const STORY_SYNOPSIS =
   "Lola y Mario encuentran un libro misterioso que los transporta a los bosques del Ecuador. Para volver a casa deberán observar, ayudar a sus nuevos amigos y descifrar las palabras que guarda un antiguo pergamino.";
 
@@ -108,7 +111,7 @@ export const STORY_SCENES = [
     id: "el-remolino",
     title: "Todo comenzó a girar",
     videoSrc: "/assets/ANIMACIONES/P5.mp4",
-    toneSrc: "/assets/tonos/p5.mp3",
+    toneSrc: WHIRLWIND_TONE_SRC,
     posterSrc: "/assets/POSTERS/P5.jpg",
     copyBlocks: [{
       text: "De repente, todo\ncomenzó a dar vueltas.\nLibros, palmeras y un\nantiguo pergamino\nvolaron por el aire.",
@@ -321,6 +324,7 @@ export const STORY_SCENES = [
     id: "remolino-hacia-la-sierra",
     title: "Un nuevo destino",
     videoSrc: "/assets/ANIMACIONES/P16.mp4",
+    toneSrc: WHIRLWIND_TONE_SRC,
     posterSrc: "/assets/POSTERS/P16.jpg",
     copyBlocks: [{
       text: "El bosque se cubrió de\nneblina y, en un instante,\nLola y Mario aparecieron\nentre montañas y árboles\nhúmedos.",
@@ -340,8 +344,7 @@ export const STORY_SCENES = [
     interaction: {
       type: "click-word",
       word: "SIERRA",
-      suffix: "ECUATORIANA",
-      clickGoals: [1, 2, 3, 4, 5, 6, 5],
+      clickGoals: [1, 2, 3, 4, 5, 6],
     },
   },
   {

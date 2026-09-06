@@ -52,8 +52,7 @@ export function StoryStage({
   const [cipherAttempt, setCipherAttempt] = useState(0);
   const [showGuacamayoAction, setShowGuacamayoAction] = useState(false);
   const [showBearAction, setShowBearAction] = useState(false);
-  const [clickWordStep, setClickWordStep] = useState(0);
-  const [clicksInWordStep, setClicksInWordStep] = useState(0);
+  const [{ step: clickWordStep, clicks: clicksInWordStep }, setClickWordProgress] = useState({ step: 0, clicks: 0 });
 
   const isFirst = sceneIndex === 0;
   const isLast = sceneIndex === totalScenes - 1;
@@ -119,8 +118,14 @@ export function StoryStage({
   const clickWord = interaction?.type === "click-word" ? interaction : null;
   const revealedLetterCount = clickWord ? Math.min(clickWordStep, clickWord.word.length) : 0;
   const revealedWord = clickWord ? clickWord.word.slice(0, revealedLetterCount) : "";
-  const showsClickWordSuffix = Boolean(clickWord && clickWordStep > clickWord.word.length);
   const clickWordIsComplete = Boolean(clickWord && clickWordStep >= clickWord.clickGoals.length);
+  const requiredWordClicks = clickWord?.clickGoals[clickWordStep] ?? 0;
+  const remainingWordClicks = requiredWordClicks - clicksInWordStep;
+  const clickWordInstruction = clickWordStep === 0
+    ? "Haz clic una vez para ver la primera letra."
+    : clicksInWordStep === 0
+      ? `Ahora suma 1 clic más: haz ${requiredWordClicks} clics para descubrir la siguiente letra.`
+      : `Te ${remainingWordClicks === 1 ? "falta 1 clic" : `faltan ${remainingWordClicks} clics`} para descubrir la siguiente letra.`;
   const characterActionIsReady = interaction?.type === "character" && (
     scene.id === "guacamayo-verde-mayor"
       ? showGuacamayoAction
@@ -135,15 +140,12 @@ export function StoryStage({
 
   function handleClickWordTarget() {
     if (!clickWord || clickWordIsComplete) return;
-    const requiredClicks = clickWord.clickGoals[clickWordStep];
-
-    setClicksInWordStep((current) => {
-      const next = current + 1;
-      if (next >= requiredClicks) {
-        setClickWordStep((step) => step + 1);
-        return 0;
-      }
-      return next;
+    setClickWordProgress((current) => {
+      if (current.step >= clickWord.clickGoals.length) return current;
+      const nextClicks = current.clicks + 1;
+      return nextClicks >= clickWord.clickGoals[current.step]
+        ? { step: current.step + 1, clicks: 0 }
+        : { ...current, clicks: nextClicks };
     });
   }
 
@@ -352,6 +354,14 @@ export function StoryStage({
 
       {clickWord ? (
         <div className="click-word-game" aria-label="Descubre la palabra con los círculos blancos">
+          {!clickWordIsComplete ? (
+            <div className="click-word-game__instructions">
+              <p className="click-word-game__title">¡DESCUBRE LA PALABRA SECRETA!</p>
+              <p className="click-word-game__instruction" aria-live="polite" aria-atomic="true">
+                {clickWordInstruction}
+              </p>
+            </div>
+          ) : null}
           <div className="click-word-game__answer">
             <div className="click-word-game__word">
               {clickWord.word.split("").map((letter, index) => (
@@ -381,33 +391,9 @@ export function StoryStage({
               ))}
             </div>
 
-            <div className="click-word-game__suffix-slot">
-              <span
-                className={`click-word-game__suffix${showsClickWordSuffix ? " is-revealed" : ""}`}
-                aria-hidden="true"
-              >
-                {clickWord.suffix}
-              </span>
-              {!clickWordIsComplete && clickWordStep === clickWord.word.length ? (
-                <button
-                  className="click-word-game__target"
-                  type="button"
-                  onClick={handleClickWordTarget}
-                  aria-label={`Haz clic en el círculo blanco. ${clicksInWordStep + 1} de ${clickWord.clickGoals[clickWordStep]} para descubrir ${clickWord.suffix}.`}
-                >
-                  <Image
-                    src="/assets/Iconos/Recurso 3@450x.png"
-                    alt=""
-                    width={100}
-                    height={100}
-                  />
-                </button>
-              ) : null}
-            </div>
-
             <span className="visually-hidden" aria-live="polite">
               {clickWordIsComplete
-                ? `${clickWord.word} ${clickWord.suffix}`
+                ? `¡Descubriste ${clickWord.word}!`
                 : revealedWord || "Comienza a descubrir la palabra"}
             </span>
           </div>
