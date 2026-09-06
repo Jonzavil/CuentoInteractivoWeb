@@ -451,7 +451,7 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P23.mp4",
     posterSrc: "/assets/POSTERS/P23.jpg",
     copyBlocks: [{
-      text: "Una corriente de agua\nllevó a los niños hasta un\nenorme río.",
+      text: "De pronto, un remolino rosado envolvió a Lola y Mario y los llevó hacia un enorme río.",
       top: 10.5,
       left: 73,
       width: 24.5,
