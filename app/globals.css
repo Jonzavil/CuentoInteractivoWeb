@@ -448,8 +448,16 @@ button:focus-visible, input:focus-visible {
   left: 72%;
 }
 
-.story-stage[data-scene="un-nuevo-amigo-en-la-sierra"] .scene-copy {
+.story-stage[data-scene="el-oso-trepa-arboles"] .scene-copy {
+  font-size: 1.99cqw;
   text-align: center;
+  white-space: pre;
+}
+
+.story-stage[data-scene="un-nuevo-amigo-en-la-sierra"] .scene-copy {
+  font-size: 1.99cqw;
+  text-align: center;
+  white-space: pre;
 }
 
 .story-stage[data-scene="un-nuevo-amigo-en-la-sierra"] .scene-play-button {
