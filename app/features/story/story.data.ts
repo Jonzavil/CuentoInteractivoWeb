@@ -415,12 +415,19 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/P21.mp4",
     posterSrc: "/assets/POSTERS/P21.jpg",
     copyBlocks: [{
-      text: "Lola y Mario decidieron ayudar al oso a recuperar su hogar.\nToca las semillas para plantarlas y ganar la insignia.",
-      top: 7,
-      left: 20,
-      width: 60,
+      text: "Lola y Mario decidieron ayudar al oso a recuperar su hogar.",
+      top: 9,
+      left: 40,
+      width: 55,
       align: "center",
       tone: "dark",
+    }, {
+      text: "TOCA LAS SEMILLAS PARA\nPLANTARLAS Y GANAR LA INSIGNIA.",
+      top: 17,
+      left: 40,
+      width: 55,
+      align: "center",
+      tone: "light",
     }],
   },
   {

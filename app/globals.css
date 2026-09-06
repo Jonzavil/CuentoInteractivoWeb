@@ -469,6 +469,24 @@ button:focus-visible, input:focus-visible {
   text-align: center;
 }
 
+.story-stage[data-scene="semillas-en-el-camino"] .scene-copy:first-child {
+  font-size: 1.7cqw;
+  white-space: nowrap;
+}
+
+.story-stage[data-scene="semillas-en-el-camino"] .scene-copy:last-child {
+  display: grid;
+  place-content: center;
+  min-height: 15.5%;
+  border-radius: 1.2cqw;
+  padding: 1cqw 1.5cqw;
+  background: var(--purple);
+  font-size: 2.6cqw;
+  font-weight: 900;
+  line-height: 1.2;
+  white-space: pre;
+}
+
 .story-stage[data-scene="semillas-en-el-camino"] .scene-play-button {
   top: 84%;
   left: 34%;
