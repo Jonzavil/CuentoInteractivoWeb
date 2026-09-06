@@ -170,7 +170,7 @@ export const STORY_SCENES = [
     videoSrc: "/assets/ANIMACIONES/FONDO1.mp4",
     posterSrc: "/assets/POSTERS/FONDO1.jpg",
     copyBlocks: [{
-      text: "¡ES HORA DE\nDESCUBRIRLO!",
+      text: "¡ES HORA\nDE DESCUBRIRLO!",
       top: 24.7,
       left: 25.65,
       width: 48.7,
@@ -185,7 +185,7 @@ export const STORY_SCENES = [
     toneSrc: "/assets/tonos/p8.mp3",
     posterSrc: "/assets/POSTERS/P8.jpg",
     copyBlocks: [{
-      text: "Lola tomó el antiguo pergamino\ny lo abrió.\nEn su interior descubrió un\nextraño abecedario formado por\nsímbolos.",
+      text: "Lola tomó el antiguo pergamino y lo abrió. En su interior descubrió un extraño abecedario formado por símbolos.",
       top: 6.6,
       left: 4.8,
       width: 34.7,
@@ -256,7 +256,7 @@ export const STORY_SCENES = [
         tone: "light",
       },
       {
-        text: "—Los árboles nos dan\nalimento, protección y un\nhogar.— explicó el\nguacamayo.”",
+        text: "—Los árboles nos dan alimento, protección y un hogar.— explicó el guacamayo.”",
         top: 53.3,
         left: 75,
         width: 22.5,
@@ -327,7 +327,7 @@ export const STORY_SCENES = [
     toneSrc: WHIRLWIND_TONE_SRC,
     posterSrc: "/assets/POSTERS/P16.jpg",
     copyBlocks: [{
-      text: "El bosque se cubrió de\nneblina y, en un instante,\nLola y Mario aparecieron\nentre montañas y árboles\nhúmedos.",
+      text: "El bosque se cubrió de neblina y, en un instante, Lola y Mario aparecieron entre montañas y árboles húmedos.",
       top: 9.4,
       left: 2.5,
       width: 28,

@@ -245,7 +245,7 @@ export function StoryStage({
               "--copy-width": `${copy.width}%`,
             } as CSSProperties}
           >
-            {copy.text}
+            {copy.text.replace(/(\S+)\s+(\S+)\s*$/, "$1\u00a0$2")}
           </p>
         ))}
       </div>
