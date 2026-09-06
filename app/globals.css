@@ -115,6 +115,7 @@ button:focus-visible, input:focus-visible {
 }
 
 .story-video {
+  pointer-events: none;
   position: absolute;
   z-index: 0;
   inset: 0;

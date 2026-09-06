@@ -159,6 +159,8 @@ export function StoryStage({
         src={scene.videoSrc}
         poster={scene.posterSrc}
         playsInline
+        controls={false}
+        disablePictureInPicture
         preload="auto"
         autoPlay={autoPlays}
         muted={autoPlays || muted}
