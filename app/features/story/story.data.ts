@@ -467,4 +467,18 @@ export const STORY_SCENES = [
     copyBlocks: [],
     interaction: { type: "letter-order", word: "AMAZONIA" },
   },
+  {
+    id: "delfin-rosado",
+    title: "El delfín rosado",
+    videoSrc: "/assets/ANIMACIONES/P25.mp4",
+    posterSrc: "/assets/POSTERS/P25.jpg",
+    copyBlocks: [{
+      text: "De pronto, un delfín rosado saltó y los salpicó.\n—¡Bienvenidos! El río y el bosque forman un solo hogar.",
+      top: 5,
+      left: 4,
+      width: 52,
+      align: "left",
+      tone: "dark",
+    }],
+  },
 ] as const satisfies readonly StoryScene[];
