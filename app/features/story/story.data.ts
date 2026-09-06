@@ -437,7 +437,7 @@ export const STORY_SCENES = [
     toneSrc: "/assets/tonos/insignias.mp3",
     posterSrc: "/assets/POSTERS/P22.jpg",
     copyBlocks: [{
-      text: "¡Lo lograron! Al plantar\nlas semillas, Lola y Mario\nobtuvieron la insignia de\nla Sierra.",
+      text: "Lola y Mario habían obtenido su segunda insignia. Su forma representaba la huella del oso de anteojos.",
       top: 73,
       left: 75,
       width: 22.5,
