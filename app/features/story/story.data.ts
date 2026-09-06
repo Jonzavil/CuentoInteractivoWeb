@@ -339,6 +339,7 @@ export const STORY_SCENES = [
     id: "bosque-de-neblina",
     title: "Entre montañas y neblina",
     videoSrc: "/assets/ANIMACIONES/P17.mp4",
+    toneSrc: "/assets/tonos/p9.mp3",
     posterSrc: "/assets/POSTERS/P17.jpg",
     copyBlocks: [],
     interaction: {

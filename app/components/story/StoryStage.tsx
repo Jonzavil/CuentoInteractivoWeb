@@ -59,8 +59,7 @@ export function StoryStage({
   const waitsForAnimationEnd = scene.id === "la-biblioteca"
     || scene.id === "un-bosque-enorme"
     || scene.id === "guacamayo-verde-mayor"
-    || scene.id === "remolino-hacia-la-sierra"
-    || scene.id === "bosque-de-neblina";
+    || scene.id === "remolino-hacia-la-sierra";
   const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
@@ -134,7 +133,8 @@ export function StoryStage({
         : true
   );
   const usesMessageCipher = scene.id === "mensaje-ayuda" || scene.id === "nuevo-mensaje-cifrado";
-  const cipherRegion = interaction?.type === "cipher"
+  const answerFeedback = clickWordIsComplete ? "success" : cipherFeedback;
+  const answerRegion = interaction?.type === "cipher" || interaction?.type === "click-word"
     ? { AYUDA: "Ayuda", COSTA: "Costa", SIERRA: "Sierra", AMAZONIA: "Amazonía" }[interaction.word]
     : "";
 
@@ -286,9 +286,9 @@ export function StoryStage({
         </div>
       ) : null}
 
-      {cipherFeedback ? (
+      {answerFeedback ? (
         <div
-          className={`scene-answer-feedback${cipherFeedback === "success" ? " scene-answer-feedback--success" : ""}`}
+          className={`scene-answer-feedback${answerFeedback === "success" ? " scene-answer-feedback--success" : ""}`}
           role="dialog"
           aria-modal="true"
           aria-labelledby="cipher-feedback-title"
@@ -301,11 +301,11 @@ export function StoryStage({
           <div className="scene-answer-feedback__panel">
             <p>
               <strong id="cipher-feedback-title">
-                {cipherFeedback === "success" ? "¡Lo descubriste!" : "¡Ups! Ese no es el mensaje"}
+                {answerFeedback === "success" ? "¡Lo descubriste!" : "¡Ups! Ese no es el mensaje"}
               </strong>
               <span id="cipher-feedback-description">
-                {cipherFeedback === "success"
-                  ? `\n\nEl mensaje dice ${cipherRegion}.\n¡Lola y Mario están en la región ${cipherRegion} del Ecuador!`
+                {answerFeedback === "success"
+                  ? `\n\nEl mensaje dice ${answerRegion}.\n¡Lola y Mario están en la región ${answerRegion} del Ecuador!`
                   : "\nMira nuevamente\nlos símbolos e\ninténtalo otra vez."}
               </span>
             </p>
@@ -314,9 +314,9 @@ export function StoryStage({
             className="scene-answer-feedback__close"
             type="button"
             autoFocus
-            aria-label={cipherFeedback === "success" ? "Continuar a la siguiente escena" : "Cerrar e intentar nuevamente"}
+            aria-label={answerFeedback === "success" ? "Continuar a la siguiente escena" : "Cerrar e intentar nuevamente"}
             onClick={() => {
-              if (cipherFeedback === "success") {
+              if (answerFeedback === "success") {
                 onNext();
               } else {
                 setCipherFeedback(null);
@@ -324,7 +324,7 @@ export function StoryStage({
               }
             }}
           >
-            {cipherFeedback === "success" ? <Check aria-hidden="true" /> : <X aria-hidden="true" />}
+            {answerFeedback === "success" ? <Check aria-hidden="true" /> : <X aria-hidden="true" />}
           </button>
         </div>
       ) : null}
