@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
+import { placeSecretLetter, SECRET_LETTERS, secretLetterResult } from "../app/features/story/letter-order.ts";
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -65,8 +66,12 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyData, /Entre la neblina apareció un oso de anteojos/);
   assert.match(storyStyles, /\.scene-copy \{[^}]*background: rgba\(48, 34, 50, \.36\)/);
   assert.match(storyStyles, /\.scene-copy \{[^}]*color: #fff;/);
-  assert.equal(animationFiles.filter((file) => file.endsWith(".mp4")).length, 27);
-  assert.equal(posterFiles.filter((file) => file.endsWith(".jpg")).length, 27);
+  for (const [, video] of storyData.matchAll(/videoSrc: "\/assets\/ANIMACIONES\/([^"]+)"/g)) {
+    assert.ok(animationFiles.includes(video), `Missing animation: ${video}`);
+  }
+  for (const [, poster] of storyData.matchAll(/posterSrc: "\/assets\/POSTERS\/([^"]+)"/g)) {
+    assert.ok(posterFiles.includes(poster), `Missing poster: ${poster}`);
+  }
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle|tailwind|open-sans/i);
 
   await Promise.all(
@@ -83,4 +88,30 @@ test("keeps the story content aligned with the delivered media", async () => {
   await access(
     new URL("../public/assets/ANIMACIONES/FONDO1.mp4", import.meta.url),
   );
+});
+
+test("moves letters freely between chosen slots and validates the complete message", () => {
+  let selected = Array(8).fill(null);
+  const solution = [0, 1, 3, 6, 2, 7, 4, 5];
+  for (const slot of [7, 2, 5, 0, 3, 6, 1, 4]) {
+    assert.equal(secretLetterResult(selected), null);
+    selected = placeSecretLetter(selected, solution[slot], slot);
+  }
+  assert.equal(selected.map((tile) => SECRET_LETTERS[tile]).join(""), "AMAZONÍA");
+  assert.equal(secretLetterResult(selected), "success");
+  const removed = placeSecretLetter(selected, 5, null);
+  assert.equal(removed[7], null);
+  assert.equal(secretLetterResult(removed), null);
+  assert.equal(secretLetterResult(placeSecretLetter(removed, 5, 7)), "success");
+  const moved = placeSecretLetter(selected, 0, 3);
+  assert.equal(moved[0], null);
+  assert.equal(moved[3], 0);
+  assert.equal(moved.includes(6), false);
+  assert.equal(moved.filter((tile) => tile === 0).length, 1);
+  assert.equal(secretLetterResult(moved), null);
+  assert.equal(secretLetterResult([0, 1, 2, 3, 4, 5, 6, 7]), "error");
+  assert.equal(secretLetterResult([0, 1, 0, 6, 2, 7, 4, 5]), "error");
+  assert.equal(placeSecretLetter(selected, -1, 0), selected);
+  assert.equal(placeSecretLetter(selected, 8, 0), selected);
+  assert.equal(placeSecretLetter(selected, 0, 8), selected);
 });

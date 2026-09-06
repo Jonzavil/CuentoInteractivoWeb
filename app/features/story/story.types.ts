@@ -8,6 +8,7 @@ export type StoryInteraction =
   | { type: "characters" }
   | { type: "reveal"; label: string }
   | { type: "cipher"; word: "AYUDA" | "COSTA" | "SIERRA" | "AMAZONIA" }
+  | { type: "letter-order"; word: "AMAZONIA" }
   | { type: "character"; characterId: CharacterId; label: string }
   | { type: "papers" }
   | { type: "bear" }

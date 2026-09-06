@@ -11,6 +11,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { CharacterId, StoryScene } from "@/app/features/story/story.types";
 import { CharacterOverlay } from "./CharacterOverlay";
 import { CipherPuzzle } from "./CipherPuzzle";
+import { LetterOrderPuzzle } from "./LetterOrderPuzzle";
 
 interface StoryStageProps {
   scene: StoryScene;
@@ -133,9 +134,9 @@ export function StoryStage({
         ? showBearAction
         : true
   );
-  const usesMessageCipher = scene.id === "mensaje-ayuda" || scene.id === "nuevo-mensaje-cifrado";
+  const usesMessageCipher = scene.id === "mensaje-ayuda";
   const answerFeedback = clickWordIsComplete ? "success" : cipherFeedback;
-  const answerRegion = interaction?.type === "cipher" || interaction?.type === "click-word"
+  const answerRegion = interaction?.type === "cipher" || interaction?.type === "click-word" || interaction?.type === "letter-order"
     ? { AYUDA: "Ayuda", COSTA: "Costa", SIERRA: "Sierra", AMAZONIA: "Amazonía" }[interaction.word]
     : "";
 
@@ -282,11 +283,18 @@ export function StoryStage({
             key={`${scene.id}-${cipherAttempt}`}
             word={interaction.word}
             variant={usesMessageCipher ? "message" : "default"}
-            prompt={scene.id === "nuevo-mensaje-cifrado" ? "¡Ayúdalo a descifrarlo!" : undefined}
             onSolved={usesMessageCipher ? () => setCipherFeedback("success") : undefined}
             onIncorrect={usesMessageCipher ? () => setCipherFeedback("error") : undefined}
           />
         </div>
+      ) : null}
+
+      {interaction?.type === "letter-order" ? (
+        <LetterOrderPuzzle
+          key={`${scene.id}-${cipherAttempt}`}
+          onSolved={() => setCipherFeedback("success")}
+          onIncorrect={() => setCipherFeedback("error")}
+        />
       ) : null}
 
       {answerFeedback ? (
@@ -309,7 +317,9 @@ export function StoryStage({
               <span id="cipher-feedback-description">
                 {answerFeedback === "success"
                   ? `\n\nEl mensaje dice ${answerRegion}.\n¡Lola y Mario están en la región ${answerRegion} del Ecuador!`
-                  : "\nMira nuevamente\nlos símbolos e\ninténtalo otra vez."}
+                  : interaction?.type === "letter-order"
+                    ? "\nMira nuevamente\nlas letras e\ninténtalo otra vez."
+                    : "\nMira nuevamente\nlos símbolos e\ninténtalo otra vez."}
               </span>
             </p>
           </div>

@@ -462,16 +462,9 @@ export const STORY_SCENES = [
   {
     id: "nuevo-mensaje-cifrado",
     title: "Un nuevo mensaje",
-    videoSrc: "/assets/ANIMACIONES/P24.mp4",
-    posterSrc: "/assets/POSTERS/P24.jpg",
-    copyBlocks: [{
-      text: "Observa el abecedario y escribe las letras\ncorrectas en los recuadros amarillos.",
-      top: 79,
-      left: 8.5,
-      width: 45,
-      align: "center",
-      tone: "dark",
-    }],
-    interaction: { type: "cipher", word: "AMAZONIA" },
+    videoSrc: "/assets/ANIMACIONES/FONDO.mp4",
+    posterSrc: "/assets/POSTERS/FONDO.jpg",
+    copyBlocks: [],
+    interaction: { type: "letter-order", word: "AMAZONIA" },
   },
 ] as const satisfies readonly StoryScene[];

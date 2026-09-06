@@ -668,32 +668,85 @@ button:focus-visible, input:focus-visible {
   text-align: center;
 }
 
-.story-stage[data-scene="nuevo-mensaje-cifrado"] .scene-interaction--cipher {
-  top: 48%;
-  left: 8.5%;
-  width: 45%;
+.letter-order-game {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  pointer-events: none;
+  color: #fff7e4;
 }
 
-.story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__letters {
-  gap: .8cqw;
-  transform: translateY(1.125cqw);
-}
-
-.story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__letters input {
-  width: clamp(22px, 4.8cqw, 53px);
-  height: clamp(22px, 4.8cqw, 53px);
-}
-
-.story-stage[data-scene="nuevo-mensaje-cifrado"] .cipher__prompt {
-  margin-top: 4cqw;
-  background: var(--green);
-}
-
-.story-stage[data-scene="nuevo-mensaje-cifrado"] .scene-copy {
-  left: 8.5%;
-  width: 45%;
+.letter-order-game__prompt {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  margin: 0;
+  padding: 1.3cqw 1.8cqw;
+  border-radius: 1.2cqw;
+  background: var(--lime);
+  font-size: 2.4cqw;
+  font-weight: 800;
+  line-height: 1.2;
   text-align: center;
+  text-wrap: pretty;
 }
+
+.letter-order-game__slots {
+  position: absolute;
+  top: 29%;
+  left: 6%;
+  width: 88%;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 1.2cqw;
+}
+
+.letter-order-game__slot {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 1.2cqw;
+  padding: .8cqw;
+  background: var(--purple);
+  color: inherit;
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.letter-order-game__tiles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.letter-order-game__tile {
+  position: absolute;
+  width: 6.7cqw;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: .8cqw;
+  padding: 0;
+  background: var(--green);
+  color: inherit;
+  font-size: 5cqw;
+  font-weight: 800;
+  line-height: 1;
+  transform: translate(-50%, -50%) rotate(var(--tile-angle));
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.letter-order-game__tile { touch-action: none; user-select: none; cursor: grab; }
+.letter-order-game__tile.is-selected { z-index: 2; box-shadow: 0 0 0 .25cqw var(--yellow); }
+.letter-order-game__tile.is-dragging { z-index: 3; cursor: grabbing; }
+.letter-order-game__tile:hover { filter: brightness(1.12); }
+.letter-order-game__tile:focus-visible,
+.letter-order-game__slot:focus-visible { outline: .35cqw solid var(--yellow); outline-offset: .35cqw; }
 
 .story-stage[data-scene="una-sombra-enorme"] .scene-copy {
   top: var(--stage-edge-inset);
