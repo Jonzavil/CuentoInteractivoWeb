@@ -279,10 +279,10 @@ export const STORY_SCENES = [
     toneSrc: "/assets/tonos/p13.mp3",
     posterSrc: "/assets/POSTERS/P13.jpg",
     copyBlocks: [{
-      text: "De pronto, el canto del bosque se apagó.\nFrente a ellos apareció un espacio vacío.\nLleno de ramas cortadas y troncos caídos.\n—Cada vez que desaparece un árbol,\nnuestro hogar se hace más pequeño —\nexplicó el guacamayo.",
+      text: "De pronto, el canto del bosque se apagó.\nFrente a ellos apareció un espacio vacío,\nlleno de ramas cortadas y troncos caídos.\n—Cada vez que desaparece un árbol,\nnuestro hogar se hace más pequeño —\nexplicó el guacamayo.",
       top: 26.1,
-      left: 32.7,
-      width: 34.4,
+      left: 22.5,
+      width: 55,
       align: "center",
       tone: "light",
     }],

@@ -394,6 +394,7 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="el-bosque-en-silencio"] .scene-copy {
   top: var(--stage-edge-inset);
   text-align: center;
+  white-space: pre;
 }
 
 .story-stage[data-scene="el-bosque-en-silencio"] .scene-play-button {
