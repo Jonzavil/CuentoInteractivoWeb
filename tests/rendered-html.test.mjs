@@ -56,7 +56,7 @@ test("keeps the story content aligned with the delivered media", async () => {
   ]);
 
   assert.equal(storyData.match(/videoSrc:/g)?.length, 31);
-  assert.equal(storyData.match(/posterSrc:/g)?.length, 28);
+  assert.equal(storyData.match(/posterSrc:/g)?.length, 29);
   assert.equal(storyData.match(/copyBlocks:/g)?.length, 31);
   assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
   assert.match(storyData, /Lola y Mario entraron a la biblioteca\\nen busca de una nueva historia/);
@@ -73,6 +73,9 @@ test("keeps the story content aligned with the delivered media", async () => {
   }
   for (const [, video] of storyData.matchAll(/completedVideoSrc: "\/assets\/ANIMACIONES\/([^"]+)"/g)) {
     assert.ok(animationFiles.includes(video), `Missing completed animation: ${video}`);
+  }
+  for (const [, poster] of storyData.matchAll(/completedPosterSrc: "\/assets\/POSTERS\/([^"]+)"/g)) {
+    assert.ok(posterFiles.includes(poster), `Missing completed poster: ${poster}`);
   }
   for (const [, poster] of storyData.matchAll(/posterSrc: "\/assets\/POSTERS\/([^"]+)"/g)) {
     assert.ok(posterFiles.includes(poster), `Missing poster: ${poster}`);

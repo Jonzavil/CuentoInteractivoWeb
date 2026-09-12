@@ -82,7 +82,10 @@ export function StoryStage({
   const activeVideoSrc = trashCleanupStarted && trashCleanup
     ? trashCleanup.completedVideoSrc
     : scene.videoSrc;
-  const videoIsReady = Boolean(scene.posterSrc) || readyVideoSrc === activeVideoSrc;
+  const activePosterSrc = trashCleanupStarted && trashCleanup
+    ? trashCleanup.completedPosterSrc
+    : scene.posterSrc;
+  const videoIsReady = Boolean(activePosterSrc) || readyVideoSrc === activeVideoSrc;
   const videoLoops = !reducedMotion && (!waitsForAnimationEnd || trashCleanupStarted);
 
   useEffect(() => {
@@ -108,6 +111,12 @@ export function StoryStage({
     video.currentTime = 0;
     void video.play().then(() => onPlayingChange(true)).catch(() => onPlayingChange(false));
   }, [trashCleanupStarted, onPlayingChange]);
+
+  useEffect(() => {
+    if (!trashCleanup?.completedPosterSrc) return;
+    const poster = new window.Image();
+    poster.src = trashCleanup.completedPosterSrc;
+  }, [trashCleanup?.completedPosterSrc]);
 
   function playFromStart() {
     const video = videoRef.current;
@@ -188,7 +197,7 @@ export function StoryStage({
         ref={videoRef}
         className={videoIsReady ? "story-video is-ready" : "story-video"}
         src={activeVideoSrc}
-        poster={scene.posterSrc}
+        poster={activePosterSrc}
         playsInline
         controls={false}
         disablePictureInPicture

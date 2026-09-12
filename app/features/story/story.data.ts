@@ -519,6 +519,7 @@ export const STORY_SCENES = [
     id: "limpiemos-el-rio",
     title: "Limpiemos el río",
     videoSrc: "/assets/ANIMACIONES/PF4.mp4",
+    posterSrc: "/assets/POSTERS/PF4.jpg",
     copyBlocks: [{
       text: "Lola y Mario trabajaron juntos para\nrecoger los residuos que contaminaban\nel río y los colocaron en bolsas.",
       top: 8,
@@ -530,6 +531,7 @@ export const STORY_SCENES = [
     interaction: {
       type: "trash-cleanup",
       completedVideoSrc: "/assets/ANIMACIONES/PF5.mp4",
+      completedPosterSrc: "/assets/POSTERS/PF5.jpg",
       label: "¡Toca las bolsas para eliminar la basura!",
     },
   },
