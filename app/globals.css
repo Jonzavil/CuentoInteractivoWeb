@@ -109,7 +109,7 @@ button:focus-visible, input:focus-visible {
   overflow: hidden;
   border: 5px solid var(--green-dark);
   border-radius: 8px;
-  background: #d7ddc8;
+  background: #2d6885;
   box-shadow: 0 14px 34px rgba(55, 65, 48, 0.18);
   isolation: isolate;
 }
@@ -122,7 +122,8 @@ button:focus-visible, input:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.94;
+  background: #2d6885;
+  opacity: 0;
 }
 .story-video.is-ready { opacity: 1; }
 
@@ -858,6 +859,61 @@ button:focus-visible, input:focus-visible {
 .paper-game__status { position: absolute; left: 28%; bottom: var(--stage-edge-inset); width: 44%; margin: 0; border: 0; padding: .65cqw 1cqw; border-radius: .55cqw; background: var(--green); color: #fff7e4; font-size: clamp(6px, 1.8cqw, 20px); font-weight: 800; text-align: center; text-transform: uppercase; white-space: nowrap; cursor: pointer; pointer-events: auto; }
 .paper-game__status:hover { filter: brightness(1.06); }
 
+.trash-cleanup-game {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  pointer-events: none;
+}
+
+.trash-cleanup-game__instruction {
+  position: absolute;
+  top: 24%;
+  left: 7%;
+  width: 31%;
+  margin: 0;
+  border-radius: .75cqw;
+  padding: 1.1cqw 1.3cqw;
+  background: var(--lime);
+  color: #fff;
+  font-size: clamp(9px, 2.1cqw, 23px);
+  font-weight: 900;
+  line-height: 1.12;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.trash-cleanup-game__target {
+  position: absolute;
+  top: 79.5%;
+  left: 50%;
+  width: clamp(54px, 7.4cqw, 84px);
+  aspect-ratio: 1;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  filter: drop-shadow(0 .3cqw .4cqw rgba(21, 35, 44, .32));
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  animation: trash-cleanup-target-pulse 1s ease-in-out infinite;
+}
+
+.trash-cleanup-game__target img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.trash-cleanup-game__target:hover { filter: brightness(1.12); }
+.trash-cleanup-game__target:focus-visible { outline: .35cqw solid var(--yellow); outline-offset: .35cqw; }
+
+@keyframes trash-cleanup-target-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(.88); }
+}
+
 .bear-game { position: absolute; z-index: 6; right: auto; bottom: 2.3%; left: 50.6%; width: 37.7%; display: flex; }
 .bear-game .action-button { width: 100%; }
 
@@ -886,12 +942,14 @@ button:focus-visible, input:focus-visible {
 .character-card { min-width: 0; overflow: hidden; border: 5px solid var(--green); border-radius: 8px; padding: 0; background: #fff; color: var(--ink); cursor: pointer; }
 .character-card img { width: 100%; height: 280px; display: block; object-fit: contain; padding: 18px 10px 0; background: #f7d85c; }
 .character-card span { min-height: 78px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 12px 15px; text-align: left; }
+.character-card .character-card__placeholder { height: 280px; align-items: center; padding: 18px; background: #f6c9df; color: #74405d; font-weight: 900; text-align: center; }
 .character-card strong { font-size: 17px; line-height: 1.15; }
 .character-card small { margin-top: 4px; color: var(--green); font-weight: 900; }
 .character-card--purple { border-color: var(--purple); }
 .character-card--lime { border-color: var(--lime); }
 .character-card--red { border-color: var(--red); }
 .character-card--brown { border-color: var(--brown); }
+.character-card--pink { border-color: #dc76aa; }
 .character-card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 rgba(36,84,59,.16); }
 
 .gallery-view { position: relative; }
@@ -910,6 +968,7 @@ button:focus-visible, input:focus-visible {
 .character-overlay--lime { background: rgba(129, 155, 30, .68); }
 .character-overlay--red { background: rgba(119, 139, 33, .62); }
 .character-overlay--brown { background: rgba(191, 143, 86, .64); }
+.character-overlay--pink { background: rgba(214, 116, 166, .48); }
 
 .character-overlay--purple {
   --lola-card-top: 19.5%;
@@ -966,6 +1025,68 @@ button:focus-visible, input:focus-visible {
   left: 23.4%;
   border-radius: 1.5cqw;
   background: transparent;
+}
+
+.character-overlay--pink .character-overlay__card {
+  top: 15%;
+  right: 20%;
+  bottom: 15%;
+  left: 20%;
+  border: max(1px, .12cqw) solid rgba(116, 64, 93, .7);
+  border-radius: 1.5cqw;
+  background: #f5b9dd;
+}
+
+.character-overlay--pink .character-overlay__copy {
+  margin-left: 36%;
+  padding: 6% 4% 6% 2%;
+}
+
+.character-overlay--pink .character-overlay__copy h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.2cqw;
+  color: #26322c;
+  font-size: clamp(18px, 4.2cqw, 47px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.character-overlay--pink .character-overlay__title-line { display: block; }
+
+.character-overlay--pink .character-overlay__copy p {
+  color: #26322c;
+  font-size: clamp(11px, 2.45cqw, 27px);
+  font-weight: 500;
+  line-height: 1.28;
+  white-space: nowrap;
+}
+
+.character-overlay--pink .character-overlay__portrait {
+  top: 4%;
+  left: 2%;
+  width: 34%;
+  height: 92%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.character-overlay--pink .character-overlay__close {
+  right: var(--stage-edge-inset);
+  bottom: var(--stage-edge-inset);
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.character-overlay--pink .character-overlay__close img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
 }
 
 .character-overlay--brown .character-overlay__card::before {
@@ -1264,6 +1385,10 @@ button:focus-visible, input:focus-visible {
 
 .gallery-view > .character-overlay--brown {
   background-image: linear-gradient(rgba(191, 143, 86, .64), rgba(191, 143, 86, .64)), url("/assets/ESCENAS/P2.jpg");
+}
+
+.gallery-view > .character-overlay--pink {
+  background-image: linear-gradient(rgba(214, 116, 166, .48), rgba(214, 116, 166, .48)), url("/assets/POSTERS/PF1.jpg");
 }
 
 @media (prefers-reduced-motion: reduce) {

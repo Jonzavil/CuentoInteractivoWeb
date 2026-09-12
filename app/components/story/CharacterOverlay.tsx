@@ -39,14 +39,16 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
       aria-labelledby={titleId}
     >
       <div className="character-overlay__card">
-        <Image
-          className="character-overlay__portrait"
-          src={character.imageSrc}
-          alt={`Ilustración de ${character.name}`}
-          width={520}
-          height={560}
-          priority
-        />
+        {character.imageSrc ? (
+          <Image
+            className="character-overlay__portrait"
+            src={character.imageSrc}
+            alt={`Ilustración de ${character.name}`}
+            width={520}
+            height={560}
+            priority
+          />
+        ) : null}
         <div className="character-overlay__copy">
           <h2 id={titleId}>
             {characterId === "guacamayo" ? (
@@ -59,6 +61,11 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
               <>
                 <span className="character-overlay__title-line">Hola, soy el</span>
                 <span className="character-overlay__title-line">Oso de anteojos</span>
+              </>
+            ) : characterId === "delfin" ? (
+              <>
+                <span className="character-overlay__title-line">Hola, soy el</span>
+                <span className="character-overlay__title-line">Delfín rosado</span>
               </>
             ) : (
               <>
@@ -102,6 +109,18 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
                 <br />
                 del Ecuador.
               </>
+            ) : characterId === "delfin" ? (
+              <>
+                Vivo en los ríos de la Amazonía
+                <br />
+                ecuatoriana y me alimento de
+                <br />
+                peces. Necesito aguas limpias y
+                <br />
+                libres de basura para nadar,
+                <br />
+                alimentarme y vivir.
+              </>
             ) : (
               character.description
             )}
@@ -116,7 +135,7 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
         aria-label="Cerrar ficha y volver al cuento"
         title="Cerrar"
       >
-        {characterId === "guacamayo" || characterId === "oso" ? (
+        {characterId === "guacamayo" || characterId === "oso" || characterId === "delfin" ? (
           <Image
             src="/assets/Iconos/Recurso 2@450x.png"
             alt=""

@@ -45,7 +45,7 @@ export function StoryStage({
   const videoRef = useRef<HTMLVideoElement>(null);
   const toneRef = useRef<HTMLAudioElement>(null);
   const allowToneToFinishRef = useRef(false);
-  const [videoReady, setVideoReady] = useState(false);
+  const [readyVideoSrc, setReadyVideoSrc] = useState<string | null>(null);
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const [, setBearSteps] = useState(0);
   const [showEndingPuzzle, setShowEndingPuzzle] = useState(false);
@@ -53,6 +53,8 @@ export function StoryStage({
   const [cipherAttempt, setCipherAttempt] = useState(0);
   const [showGuacamayoAction, setShowGuacamayoAction] = useState(false);
   const [showBearAction, setShowBearAction] = useState(false);
+  const [showDolphinAction, setShowDolphinAction] = useState(false);
+  const [trashCleanupStarted, setTrashCleanupStarted] = useState(false);
   const [{ step: clickWordStep, clicks: clicksInWordStep }, setClickWordProgress] = useState({ step: 0, clicks: 0 });
 
   const isFirst = sceneIndex === 0;
@@ -61,13 +63,20 @@ export function StoryStage({
     || scene.id === "un-bosque-enorme"
     || scene.id === "guacamayo-verde-mayor"
     || scene.id === "remolino-hacia-la-sierra"
-    || scene.id === "semillas-en-el-camino";
+    || scene.id === "semillas-en-el-camino"
+    || scene.id === "limpiemos-el-rio";
   const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
     || scene.id === "mensaje-ayuda"
     || scene.id === "bosque-de-neblina"
     || scene.id === "nuevo-mensaje-cifrado";
+  const trashCleanup = scene.interaction?.type === "trash-cleanup" ? scene.interaction : null;
+  const activeVideoSrc = trashCleanupStarted && trashCleanup
+    ? trashCleanup.completedVideoSrc
+    : scene.videoSrc;
+  const videoIsReady = Boolean(scene.posterSrc) || readyVideoSrc === activeVideoSrc;
+  const videoLoops = !reducedMotion && (!waitsForAnimationEnd || trashCleanupStarted);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -84,6 +93,14 @@ export function StoryStage({
       }
     }
   }, [autoPlays, hasAnimationEnded, isPlaying, muted, onPlayingChange, scene.id, toneFinishesOnce]);
+
+  useEffect(() => {
+    if (!trashCleanupStarted) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.currentTime = 0;
+    void video.play().then(() => onPlayingChange(true)).catch(() => onPlayingChange(false));
+  }, [trashCleanupStarted, onPlayingChange]);
 
   function playFromStart() {
     const video = videoRef.current;
@@ -112,6 +129,10 @@ export function StoryStage({
       setShowBearAction(true);
       return;
     }
+    if (scene.id === "delfin-rosado" && !showDolphinAction) {
+      setShowDolphinAction(true);
+      return;
+    }
     onNext();
   }
 
@@ -132,6 +153,8 @@ export function StoryStage({
       ? showGuacamayoAction
       : scene.id === "oso-de-anteojos"
         ? showBearAction
+        : scene.id === "delfin-rosado"
+          ? showDolphinAction
         : true
   );
   const usesMessageCipher = scene.id === "mensaje-ayuda";
@@ -154,10 +177,10 @@ export function StoryStage({
   return (
     <section className="story-stage" data-scene={scene.id} aria-labelledby="scene-title">
       <video
-        key={scene.id}
+        key={`${scene.id}-${activeVideoSrc}`}
         ref={videoRef}
-        className={videoReady ? "story-video is-ready" : "story-video"}
-        src={scene.videoSrc}
+        className={videoIsReady ? "story-video is-ready" : "story-video"}
+        src={activeVideoSrc}
         poster={scene.posterSrc}
         playsInline
         controls={false}
@@ -165,7 +188,7 @@ export function StoryStage({
         preload="auto"
         autoPlay={autoPlays}
         muted={autoPlays || muted}
-        loop={!reducedMotion && !waitsForAnimationEnd}
+        loop={videoLoops}
         onLoadedData={(event) => {
           const video = event.currentTarget;
           if (!autoPlays && !isPlaying && video.currentTime === 0 && Number.isFinite(video.duration)) {
@@ -173,7 +196,7 @@ export function StoryStage({
             video.currentTime = Math.min(0.001, video.duration);
           }
         }}
-        onCanPlay={() => setVideoReady(true)}
+        onCanPlay={() => setReadyVideoSrc(activeVideoSrc)}
         onPlay={() => {
           allowToneToFinishRef.current = false;
           setHasAnimationEnded(false);
@@ -216,7 +239,7 @@ export function StoryStage({
         />
       ) : null}
 
-      {!autoPlays && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
+      {!autoPlays && !trashCleanup && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button
           className="scene-play-button"
           type="button"
@@ -238,6 +261,7 @@ export function StoryStage({
       <div className="scene-copy-layer" aria-label="Narración de la escena">
         {((scene.id === "guacamayo-verde-mayor" && showGuacamayoAction)
           || (scene.id === "oso-de-anteojos" && showBearAction)
+          || (scene.id === "delfin-rosado" && showDolphinAction)
           ? []
           : scene.copyBlocks).map((copy, index) => (
           <p
@@ -346,6 +370,25 @@ export function StoryStage({
         <div className="scene-actions">
           <button className="action-button action-button--blue" type="button" onClick={() => onOpenCharacter(interaction.characterId)}>
             {interaction.label}
+          </button>
+        </div>
+      ) : null}
+
+      {interaction?.type === "trash-cleanup" && !trashCleanupStarted ? (
+        <div className="trash-cleanup-game" aria-label="Elimina las bolsas de basura del río">
+          <p className="trash-cleanup-game__instruction">{interaction.label}</p>
+          <button
+            className="trash-cleanup-game__target"
+            type="button"
+            onClick={() => setTrashCleanupStarted(true)}
+            aria-label="Tocar las bolsas para recoger la basura"
+          >
+            <Image
+              src="/assets/Iconos/Recurso 3@450x.png"
+              alt=""
+              width={100}
+              height={100}
+            />
           </button>
         </div>
       ) : null}

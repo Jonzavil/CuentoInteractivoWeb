@@ -33,7 +33,8 @@ export function StoryExperience() {
   const progress = ((state.currentSceneIndex + 1) / STORY_SCENES.length) * 100;
 
   useEffect(() => {
-    const nextPoster = STORY_SCENES[state.currentSceneIndex + 1]?.posterSrc;
+    const nextScene = STORY_SCENES[state.currentSceneIndex + 1];
+    const nextPoster = nextScene && "posterSrc" in nextScene ? nextScene.posterSrc : undefined;
     if (!nextPoster) return;
     const image = new window.Image();
     image.src = nextPoster;
@@ -154,8 +155,8 @@ export function StoryExperience() {
       {state.currentView === "creditos" ? (
         <section className="content-view content-view--credits" aria-labelledby="credits-title">
           <div className="credits-art" aria-hidden="true">
-            <Image src={CHARACTERS.lola.imageSrc} alt="" width={260} height={360} />
-            <Image src={CHARACTERS.mario.imageSrc} alt="" width={260} height={360} />
+            <Image src={CHARACTERS.lola.imageSrc!} alt="" width={260} height={360} />
+            <Image src={CHARACTERS.mario.imageSrc!} alt="" width={260} height={360} />
           </div>
           <div className="credits-copy">
             <p className="content-view__eyebrow">Detrás de la aventura</p>
@@ -180,7 +181,11 @@ export function StoryExperience() {
               const item = CHARACTERS[characterId];
               return (
                 <button key={characterId} className={`character-card character-card--${item.accent}`} type="button" onClick={() => openCharacter(characterId)}>
-                  <Image src={item.imageSrc} alt="" width={240} height={300} />
+                  {item.imageSrc ? (
+                    <Image src={item.imageSrc} alt="" width={240} height={300} />
+                  ) : (
+                    <span className="character-card__placeholder" aria-hidden="true">Imagen próximamente</span>
+                  )}
                   <span><strong>{item.name}</strong><small>Ver ficha</small></span>
                 </button>
               );

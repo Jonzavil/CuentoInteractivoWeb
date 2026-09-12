@@ -2,7 +2,7 @@ export type TextScale = "normal" | "large";
 
 export type StoryView = "cuento" | "sinopsis" | "creditos" | "galeria";
 
-export type CharacterId = "lola" | "mario" | "guacamayo" | "oso";
+export type CharacterId = "lola" | "mario" | "guacamayo" | "oso" | "delfin";
 
 export type StoryInteraction =
   | { type: "characters" }
@@ -10,6 +10,7 @@ export type StoryInteraction =
   | { type: "cipher"; word: "AYUDA" | "COSTA" | "SIERRA" | "AMAZONIA" }
   | { type: "letter-order"; word: "AMAZONIA" }
   | { type: "character"; characterId: CharacterId; label: string }
+  | { type: "trash-cleanup"; completedVideoSrc: string; label: string }
   | { type: "papers" }
   | { type: "bear" }
   | { type: "choice"; prompt: string; options: readonly string[] }

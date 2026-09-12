@@ -12,8 +12,8 @@ export const CHARACTERS: Record<CharacterId, {
   name: string;
   shortName: string;
   description: string;
-  imageSrc: string;
-  accent: "purple" | "lime" | "red" | "brown";
+  imageSrc: string | null;
+  accent: "purple" | "lime" | "red" | "brown" | "pink";
 }> = {
   lola: {
     name: "Lola",
@@ -42,6 +42,13 @@ export const CHARACTERS: Record<CharacterId, {
     description: "Soy tranquilo y curioso, y vivo en los bosques andinos del Ecuador.",
     imageSrc: "/assets/PERSONAJES/OSO DE ANTEOJOS.png",
     accent: "brown",
+  },
+  delfin: {
+    name: "Delfín rosado",
+    shortName: "Delfín",
+    description: "Vivo en los ríos de la Amazonía ecuatoriana y me alimento de peces. Necesito aguas limpias y libres de basura para nadar, alimentarme y vivir.",
+    imageSrc: null,
+    accent: "pink",
   },
 };
 
@@ -470,8 +477,8 @@ export const STORY_SCENES = [
   {
     id: "delfin-rosado",
     title: "El delfín rosado",
-    videoSrc: "/assets/ANIMACIONES/P25.mp4",
-    posterSrc: "/assets/POSTERS/P25.jpg",
+    videoSrc: "/assets/ANIMACIONES/PF1.MP4",
+    posterSrc: "/assets/POSTERS/PF1.jpg",
     copyBlocks: [{
       text: "De pronto, un delfín rosado saltó y los salpicó.\n—¡Bienvenidos! El río y el bosque forman un solo hogar.",
       top: 5,
@@ -480,5 +487,50 @@ export const STORY_SCENES = [
       align: "left",
       tone: "dark",
     }],
+    interaction: { type: "character", characterId: "delfin", label: "Descubre al delfín" },
+  },
+  {
+    id: "el-hogar-del-delfin",
+    title: "El hogar del delfín",
+    videoSrc: "/assets/ANIMACIONES/PF2.mp4",
+    copyBlocks: [{
+      text: "Lola y Mario observaron al delfín rosado nadar\nágilmente entre los peces del enorme río.\n—Me alimento de peces y necesito que el agua\nesté limpia para vivir —les explicó.",
+      top: 8,
+      left: 53,
+      width: 43,
+      align: "center",
+      tone: "dark",
+    }],
+  },
+  {
+    id: "peligros-en-el-rio",
+    title: "Peligros en el río",
+    videoSrc: "/assets/ANIMACIONES/PF3.mp4",
+    copyBlocks: [{
+      text: "Más adelante, el delfín encontró una red abandonada y muchos residuos flotando en el río.\n—La contaminación y las redes pueden atraparnos, enfermarnos y destruir nuestro hogar\n—explicó con tristeza.",
+      top: 6,
+      left: 10,
+      width: 80,
+      align: "center",
+      tone: "dark",
+    }],
+  },
+  {
+    id: "limpiemos-el-rio",
+    title: "Limpiemos el río",
+    videoSrc: "/assets/ANIMACIONES/PF4.mp4",
+    copyBlocks: [{
+      text: "Lola y Mario trabajaron juntos para\nrecoger los residuos que contaminaban\nel río y los colocaron en bolsas.",
+      top: 8,
+      left: 7,
+      width: 39,
+      align: "left",
+      tone: "dark",
+    }],
+    interaction: {
+      type: "trash-cleanup",
+      completedVideoSrc: "/assets/ANIMACIONES/PF5.mp4",
+      label: "¡Toca las bolsas para eliminar la basura!",
+    },
   },
 ] as const satisfies readonly StoryScene[];
