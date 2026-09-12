@@ -509,8 +509,8 @@ export const STORY_SCENES = [
     copyBlocks: [{
       text: "Más adelante, el delfín encontró una red abandonada y muchos residuos flotando en el río.\n—La contaminación y las redes pueden atraparnos, enfermarnos y destruir nuestro hogar\n—explicó con tristeza.",
       top: 6,
-      left: 10,
-      width: 80,
+      left: 2.5,
+      width: 95,
       align: "center",
       tone: "dark",
     }],
