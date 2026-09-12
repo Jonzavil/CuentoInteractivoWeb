@@ -66,6 +66,8 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyData, /Entre la neblina apareció un oso de anteojos/);
   assert.match(storyStyles, /\.scene-copy \{[^}]*background: rgba\(48, 34, 50, \.36\)/);
   assert.match(storyStyles, /\.scene-copy \{[^}]*color: #fff;/);
+  assert.match(storyStyles, /\.scene-copy \{[^}]*white-space: pre-line;/);
+  assert.match(storyData, /dijo:\\n—¡Cálmate, Mario!/);
   for (const [, video] of storyData.matchAll(/videoSrc: "\/assets\/ANIMACIONES\/([^"]+)"/g)) {
     assert.ok(animationFiles.includes(video), `Missing animation: ${video}`);
   }

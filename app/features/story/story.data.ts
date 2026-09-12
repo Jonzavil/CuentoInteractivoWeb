@@ -241,7 +241,7 @@ export const STORY_SCENES = [
       text: "Un fuerte aleteo sacudió\nlas hojas y un guacamayo\nverde mayor descendió\nfrente a ellos.\n—No tengan miedo —dijo\n—. Este bosque también\nforma parte de su hogar.",
       top: 39,
       left: 2.5,
-      width: 24,
+      width: 30,
       align: "left",
       tone: "light",
     }],
@@ -263,7 +263,7 @@ export const STORY_SCENES = [
         tone: "light",
       },
       {
-        text: "—Los árboles nos dan alimento, protección y un hogar.— explicó el guacamayo.”",
+        text: "—Los árboles nos dan alimento, protección y un hogar —explicó el guacamayo.",
         top: 53.3,
         left: 75,
         width: 22.5,

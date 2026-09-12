@@ -28,6 +28,13 @@ interface StoryStageProps {
   onCloseCharacter: () => void;
 }
 
+function formatStoryCopy(text: string) {
+  return text
+    .split("\n")
+    .map((line) => line.replace(/(\S+)\s+(\S+)\s*$/, "$1\u00a0$2"))
+    .join("\n");
+}
+
 export function StoryStage({
   scene,
   sceneIndex,
@@ -273,7 +280,7 @@ export function StoryStage({
               "--copy-width": `${copy.width}%`,
             } as CSSProperties}
           >
-            {copy.text.replace(/(\S+)\s+(\S+)\s*$/, "$1\u00a0$2")}
+            {formatStoryCopy(copy.text)}
           </p>
         ))}
       </div>
