@@ -322,7 +322,7 @@ export const STORY_SCENES = [
       text: "Lola y Mario habían obtenido\nsu primera insignia. Su forma\nrepresentaba el pico del\nguacamayo verde mayor.",
       top: 9.4,
       left: 2.5,
-      width: 27,
+      width: 34.5,
       align: "left",
       tone: "dark",
     }],

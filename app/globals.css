@@ -423,6 +423,7 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="insignia-costa"] .scene-copy {
   left: var(--stage-edge-inset);
   text-align: left;
+  white-space: pre;
 }
 
 .story-stage[data-scene="remolino-hacia-la-sierra"] .scene-copy {
