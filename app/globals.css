@@ -523,6 +523,13 @@ button:focus-visible, input:focus-visible {
   text-align: right;
 }
 
+.story-stage[data-scene="el-hogar-del-delfin"] .scene-copy {
+  right: var(--stage-edge-inset);
+  left: auto;
+  text-align: center;
+  white-space: pre;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;

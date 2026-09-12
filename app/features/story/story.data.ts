@@ -496,8 +496,8 @@ export const STORY_SCENES = [
     copyBlocks: [{
       text: "Lola y Mario observaron al delfín rosado nadar\nágilmente entre los peces del enorme río.\n—Me alimento de peces y necesito que el agua\nesté limpia para vivir —les explicó.",
       top: 8,
-      left: 53,
-      width: 43,
+      left: 45,
+      width: 51,
       align: "center",
       tone: "dark",
     }],
