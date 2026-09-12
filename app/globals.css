@@ -405,12 +405,14 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="la-pequena-planta"] .scene-copy:first-child {
   left: var(--stage-edge-inset);
   text-align: left;
+  white-space: pre;
 }
 
 .story-stage[data-scene="la-pequena-planta"] .scene-copy:last-child {
   right: var(--stage-edge-inset);
   left: auto;
   text-align: right;
+  white-space: pre;
 }
 
 .story-stage[data-scene="la-pequena-planta"] .scene-play-button {
