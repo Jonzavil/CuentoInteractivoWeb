@@ -382,8 +382,8 @@ export const STORY_SCENES = [
     copyBlocks: [{
       text: "Mientras caminaba buscando frutos, el oso dejaba caer semillas sobre la tierra.\n—Así ayudamos a que nuevas plantas crezcan en distintos lugares.",
       top: 6.5,
-      left: 17,
-      width: 66,
+      left: 5,
+      width: 90,
       align: "center",
       tone: "dark",
     }],

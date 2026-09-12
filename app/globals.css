@@ -452,6 +452,7 @@ button:focus-visible, input:focus-visible {
 
 .story-stage[data-scene="frutos-para-el-oso"] .scene-copy {
   text-align: center;
+  white-space: pre;
 }
 
 .story-stage[data-scene="frutos-para-el-oso"] .scene-play-button {
