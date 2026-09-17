@@ -331,7 +331,7 @@ export function StoryStage({
 
       {interaction?.type === "letter-order" ? (
         <LetterOrderPuzzle
-          key={`${scene.id}-${cipherAttempt}`}
+          key={scene.id}
           onSolved={() => setCipherFeedback("success")}
           onIncorrect={() => setCipherFeedback("error")}
         />

@@ -741,6 +741,11 @@ button:focus-visible, input:focus-visible {
   pointer-events: auto;
 }
 
+.letter-order-game__slot.is-correct {
+  background: var(--green);
+  cursor: default;
+}
+
 .letter-order-game__tiles {
   position: absolute;
   inset: 0;
@@ -769,6 +774,12 @@ button:focus-visible, input:focus-visible {
 .letter-order-game__tile { touch-action: none; user-select: none; cursor: grab; }
 .letter-order-game__tile.is-selected { z-index: 2; box-shadow: 0 0 0 .25cqw var(--yellow); }
 .letter-order-game__tile.is-dragging { z-index: 3; cursor: grabbing; }
+.letter-order-game__tile.is-fixed {
+  background: var(--green);
+  cursor: default;
+  opacity: 1;
+  box-shadow: inset 0 0 0 .22cqw rgba(255, 255, 255, .55);
+}
 .letter-order-game__tile:hover { filter: brightness(1.12); }
 .letter-order-game__tile:focus-visible,
 .letter-order-game__slot:focus-visible { outline: .35cqw solid var(--yellow); outline-offset: .35cqw; }

@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
-import { placeSecretLetter, SECRET_LETTERS, secretLetterResult } from "@/app/features/story/letter-order";
+import {
+  isSecretLetterCorrect,
+  keepCorrectSecretLetters,
+  placeSecretLetter,
+  SECRET_LETTERS,
+  secretLetterResult,
+} from "@/app/features/story/letter-order";
 
 const TILE_POSITIONS = [
   [28.4, 54.84, -8], [42, 52.92, -12], [57.2, 58.36, 30], [71.6, 55.16, 180],
@@ -34,6 +40,12 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
   const slotsRef = useRef<Array<HTMLButtonElement | null>>([]);
   const dragRef = useRef<Drag | null>(null);
   const reported = useRef(false);
+  const fixedSlots = selected.map((_, slot) => isSecretLetterCorrect(selected, slot));
+
+  function tileIsFixed(tile: number) {
+    const slot = selected.indexOf(tile);
+    return slot !== -1 && fixedSlots[slot];
+  }
 
   useEffect(() => {
     if (draggedTile !== null) return;
@@ -41,12 +53,25 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
     if (!result) { reported.current = false; return; }
     if (reported.current) return;
     reported.current = true;
-    if (result === "success") onSolved();
-    else onIncorrect();
+    if (result === "success") {
+      onSolved();
+    } else {
+      const incorrectTiles = selected.flatMap((tile, slot) => (
+        tile !== null && !isSecretLetterCorrect(selected, slot) ? [tile] : []
+      ));
+      setSelected(keepCorrectSecretLetters(selected));
+      setPositions((current) => current.map((position, tile) => {
+        if (!incorrectTiles.includes(tile)) return position;
+        const [x, y, angle] = TILE_POSITIONS[tile];
+        return { x, y, angle };
+      }));
+      setActiveTile(null);
+      onIncorrect();
+    }
   }, [selected, draggedTile, onSolved, onIncorrect]);
 
   function startDrag(event: PointerEvent<HTMLButtonElement>, tile: number) {
-    if (event.button !== 0 || dragRef.current || !gameRef.current) return;
+    if (event.button !== 0 || dragRef.current || !gameRef.current || tileIsFixed(tile)) return;
     event.preventDefault();
     event.currentTarget.focus();
     const area = gameRef.current.getBoundingClientRect();
@@ -94,6 +119,14 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
   }
 
   function placeTile(tile: number, slot: number | null) {
+    if (tileIsFixed(tile)) return;
+    if (slot !== null && fixedSlots[slot]) {
+      if (selected.indexOf(tile) === -1) {
+        const [x, y, angle] = TILE_POSITIONS[tile];
+        setPositions((current) => current.map((position, index) => index === tile ? { x, y, angle } : position));
+      }
+      return;
+    }
     const displaced = slot === null ? null : selected[slot];
     if (displaced !== null && displaced !== tile) {
       const [x, y] = TILE_POSITIONS[displaced];
@@ -114,8 +147,11 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
             key={index}
             ref={(element) => { slotsRef.current[index] = element; }}
             type="button"
-            className="letter-order-game__slot"
-            aria-label={`Cuadro ${index + 1}${selected[index] === null ? " vacío" : `: ${SECRET_LETTERS[selected[index]!]}`}. Selecciona una letra y toca aquí para colocarla.`}
+            className={`letter-order-game__slot${fixedSlots[index] ? " is-correct" : ""}`}
+            aria-label={fixedSlots[index]
+              ? `Cuadro ${index + 1}: ${SECRET_LETTERS[selected[index]!]}. Letra correcta y fija.`
+              : `Cuadro ${index + 1}${selected[index] === null ? " vacío" : `: ${SECRET_LETTERS[selected[index]!]}`}. Selecciona una letra y toca aquí para colocarla.`}
+            disabled={fixedSlots[index]}
             onClick={() => {
               if (activeTile === null) return;
               placeTile(activeTile, index);
@@ -128,15 +164,17 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
         {SECRET_LETTERS.map((letter, tile) => {
           const slot = selected.indexOf(tile);
           const snapped = slot !== -1 && draggedTile !== tile;
+          const fixed = tileIsFixed(tile);
           // Centers of the eight equal slots (88% width, 1.2cqw gaps, 16:9 stage).
           const position = snapped ? { x: 10.975 + slot * 11.15, y: 37.844, angle: 0 } : positions[tile];
           return (
             <button
               key={tile}
-              className={`letter-order-game__tile${draggedTile === tile ? " is-dragging" : ""}${activeTile === tile ? " is-selected" : ""}`}
+              className={`letter-order-game__tile${draggedTile === tile ? " is-dragging" : ""}${activeTile === tile ? " is-selected" : ""}${fixed ? " is-fixed" : ""}`}
               type="button"
-              aria-label={`Mover letra ${letter}${slot !== -1 ? ` del cuadro ${slot + 1}` : ""}`}
+              aria-label={fixed ? `Letra ${letter} correcta y fija en el cuadro ${slot + 1}` : `Mover letra ${letter}${slot !== -1 ? ` del cuadro ${slot + 1}` : ""}`}
               aria-pressed={activeTile === tile}
+              disabled={fixed}
               style={{ left: `${position.x}%`, top: `${position.y}%`, "--tile-angle": `${position.angle}deg` } as CSSProperties}
               onPointerDown={(event) => startDrag(event, tile)}
               onPointerMove={moveDrag}
@@ -144,10 +182,12 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
               onPointerCancel={(event) => finishDrag(event, true)}
               onLostPointerCapture={(event) => finishDrag(event, true)}
               onClick={() => {
+                if (fixed) return;
                 setActiveTile(tile);
                 setPositions((current) => current.map((item, index) => index === tile ? { ...item, angle: 0 } : item));
               }}
               onKeyDown={(event) => {
+                if (fixed) return;
                 const delta = { ArrowLeft: [-2, 0], ArrowRight: [2, 0], ArrowUp: [0, -2], ArrowDown: [0, 2] }[event.key];
                 if (!delta) return;
                 event.preventDefault();

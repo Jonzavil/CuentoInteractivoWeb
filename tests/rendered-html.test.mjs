@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
-import { placeSecretLetter, SECRET_LETTERS, secretLetterResult } from "../app/features/story/letter-order.ts";
+import { isSecretLetterCorrect, keepCorrectSecretLetters, placeSecretLetter, SECRET_LETTERS, secretLetterResult } from "../app/features/story/letter-order.ts";
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -118,6 +118,15 @@ test("moves letters freely between chosen slots and validates the complete messa
   assert.equal(moved.filter((tile) => tile === 0).length, 1);
   assert.equal(secretLetterResult(moved), null);
   assert.equal(secretLetterResult([0, 1, 2, 3, 4, 5, 6, 7]), "error");
+  const partialAttempt = [0, 1, 2, 6, 3, 7, 4, 5];
+  assert.deepEqual(
+    partialAttempt.map((_, slot) => isSecretLetterCorrect(partialAttempt, slot)),
+    [true, true, false, true, false, true, true, true],
+  );
+  assert.deepEqual(
+    keepCorrectSecretLetters(partialAttempt),
+    [0, 1, null, 6, null, 7, 4, 5],
+  );
   assert.equal(secretLetterResult([0, 1, 0, 6, 2, 7, 4, 5]), "error");
   assert.equal(placeSecretLetter(selected, -1, 0), selected);
   assert.equal(placeSecretLetter(selected, 8, 0), selected);
