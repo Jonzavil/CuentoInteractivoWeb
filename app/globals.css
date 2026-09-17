@@ -598,6 +598,7 @@ button:focus-visible, input:focus-visible {
   background: rgba(48, 34, 50, .36);
   font-size: 2.8cqw;
   line-height: 1.2;
+  text-wrap: balance;
 }
 
 .click-word-game__answer {

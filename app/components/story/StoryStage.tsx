@@ -160,10 +160,10 @@ export function StoryStage({
   const requiredWordClicks = clickWord?.clickGoals[clickWordStep] ?? 0;
   const remainingWordClicks = requiredWordClicks - clicksInWordStep;
   const clickWordInstruction = clickWordStep === 0
-    ? "Haz clic una vez para ver la primera letra."
+    ? "Haz clic una vez para ver la primera\u00a0letra."
     : clicksInWordStep === 0
-      ? `Ahora suma 1 clic más: haz ${requiredWordClicks} clics para descubrir la siguiente letra.`
-      : `Te ${remainingWordClicks === 1 ? "falta 1 clic" : `faltan ${remainingWordClicks} clics`} para descubrir la siguiente letra.`;
+      ? `Ahora suma 1 clic más: haz ${requiredWordClicks} clics para descubrir la siguiente\u00a0letra.`
+      : `Te ${remainingWordClicks === 1 ? "falta 1 clic" : `faltan ${remainingWordClicks} clics`} para descubrir la siguiente\u00a0letra.`;
   const characterActionIsReady = interaction?.type === "character" && (
     scene.id === "guacamayo-verde-mayor"
       ? showGuacamayoAction
