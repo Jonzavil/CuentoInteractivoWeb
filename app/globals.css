@@ -544,6 +544,13 @@ button:focus-visible, input:focus-visible {
   white-space: pre;
 }
 
+.story-stage[data-scene="nuevo-destino"] .scene-copy {
+  right: var(--stage-edge-inset);
+  left: auto;
+  text-align: center;
+  white-space: pre;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;

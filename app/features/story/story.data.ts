@@ -549,4 +549,17 @@ export const STORY_SCENES = [
       tone: "light",
     }],
   },
+  {
+    id: "nuevo-destino",
+    title: "Un nuevo destino",
+    videoSrc: "/assets/ANIMACIONES/ULT 02.mp4",
+    copyBlocks: [{
+      text: "Al llegar, Lola y Mario descubrieron un paisaje\nde rocas oscuras rodeado por el mar. Frente a\nellos, un pequeño pingüino de Galápagos los\nobservaba con curiosidad.",
+      top: 8,
+      left: 55,
+      width: 42,
+      align: "center",
+      tone: "dark",
+    }],
+  },
 ] as const satisfies readonly StoryScene[];
