@@ -68,6 +68,10 @@ test("keeps the story content aligned with the delivered media", async () => {
   assert.match(storyStyles, /\.scene-copy \{[^}]*color: #fff;/);
   assert.match(storyStyles, /\.scene-copy \{[^}]*white-space: pre-line;/);
   assert.match(storyData, /dijo:\\n—¡Cálmate, Mario!/);
+  for (const sceneId of ["el-remolino", "remolino-hacia-la-sierra", "remolino-nuevo-destino", "un-nuevo-recorrido"]) {
+    const sceneBlock = storyData.match(new RegExp(`id: "${sceneId}"[\\s\\S]*?(?=\\n  \\{\\n    id:|\\n\\] as const)`))?.[0] ?? "";
+    assert.match(sceneBlock, /toneSrc: WHIRLWIND_TONE_SRC/, `Missing whirlwind tone in ${sceneId}`);
+  }
   for (const [, video] of storyData.matchAll(/videoSrc: "\/assets\/ANIMACIONES\/([^"]+)"/g)) {
     assert.ok(animationFiles.includes(video), `Missing animation: ${video}`);
   }

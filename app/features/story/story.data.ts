@@ -456,6 +456,7 @@ export const STORY_SCENES = [
     id: "remolino-nuevo-destino",
     title: "La aventura continúa",
     videoSrc: "/assets/ANIMACIONES/P23.mp4",
+    toneSrc: WHIRLWIND_TONE_SRC,
     posterSrc: "/assets/POSTERS/P23.jpg",
     copyBlocks: [{
       text: "De pronto, un remolino rosado envolvió a Lola y Mario y los llevó hacia un enorme río.",
