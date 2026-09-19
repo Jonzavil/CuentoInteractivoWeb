@@ -535,4 +535,18 @@ export const STORY_SCENES = [
       label: "¡Toca las bolsas para eliminar la basura!",
     },
   },
+  {
+    id: "un-nuevo-recorrido",
+    title: "La aventura continúa",
+    videoSrc: "/assets/ANIMACIONES/ULT 01.mp4",
+    toneSrc: WHIRLWIND_TONE_SRC,
+    copyBlocks: [{
+      text: "Al obtener su tercera insignia, todo\ncomenzó a girar nuevamente. Una fría\ncorriente de aire envolvió a Lola y Mario\ny los llevó hacia un nuevo destino.",
+      top: 6,
+      left: 4,
+      width: 49,
+      align: "center",
+      tone: "light",
+    }],
+  },
 ] as const satisfies readonly StoryScene[];

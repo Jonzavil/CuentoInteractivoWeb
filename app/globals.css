@@ -539,6 +539,11 @@ button:focus-visible, input:focus-visible {
   transform: translateX(-50%);
 }
 
+.story-stage[data-scene="un-nuevo-recorrido"] .scene-copy {
+  text-align: center;
+  white-space: pre;
+}
+
 .page-arrow {
   position: absolute;
   z-index: 8;
