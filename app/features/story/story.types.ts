@@ -33,7 +33,9 @@ export interface StoryCopyBlock {
 export interface StoryScene {
   id: string;
   title: string;
-  videoSrc: string;
+  videoSrc?: string;
+  backgroundImageSrc?: string;
+  overlayImageSrc?: string;
   toneSrc?: string;
   posterSrc?: string;
   copyBlocks: readonly StoryCopyBlock[];

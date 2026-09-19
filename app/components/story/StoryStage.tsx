@@ -192,54 +192,74 @@ export function StoryStage({
 
   return (
     <section className="story-stage" data-scene={scene.id} aria-labelledby="scene-title">
-      <video
-        key={`${scene.id}-${activeVideoSrc}`}
-        ref={videoRef}
-        className={videoIsReady ? "story-video is-ready" : "story-video"}
-        src={activeVideoSrc}
-        poster={activePosterSrc}
-        playsInline
-        controls={false}
-        disablePictureInPicture
-        preload="auto"
-        autoPlay={autoPlays}
-        muted={autoPlays || muted}
-        loop={videoLoops}
-        onLoadedData={(event) => {
-          const video = event.currentTarget;
-          if (!autoPlays && !isPlaying && video.currentTime === 0 && Number.isFinite(video.duration)) {
-            video.pause();
-            video.currentTime = Math.min(0.001, video.duration);
-          }
-        }}
-        onCanPlay={() => setReadyVideoSrc(activeVideoSrc)}
-        onPlay={() => {
-          allowToneToFinishRef.current = false;
-          setHasAnimationEnded(false);
-          onPlayingChange(true);
-        }}
-        onPause={(event) => {
-          const video = event.currentTarget;
-          const reachedFinalFrame = video.ended
-            || (Number.isFinite(video.duration) && video.duration - video.currentTime < 0.15);
-          if (
-            toneFinishesOnce &&
-            reachedFinalFrame
-          ) {
-            allowToneToFinishRef.current = true;
-          }
-          if (waitsForAnimationEnd && reachedFinalFrame) {
-            setHasAnimationEnded(true);
-          }
-          onPlayingChange(false);
-        }}
-        onEnded={() => {
-          if (toneFinishesOnce) allowToneToFinishRef.current = true;
-          if (waitsForAnimationEnd) setHasAnimationEnded(true);
-          onPlayingChange(false);
-        }}
-        aria-hidden="true"
-      />
+      {scene.backgroundImageSrc ? (
+        <Image
+          className="story-image"
+          src={scene.backgroundImageSrc}
+          alt=""
+          fill
+          sizes="(max-width: 1120px) 100vw, 1120px"
+          priority
+          aria-hidden="true"
+        />
+      ) : activeVideoSrc ? (
+        <video
+          key={`${scene.id}-${activeVideoSrc}`}
+          ref={videoRef}
+          className={videoIsReady ? "story-video is-ready" : "story-video"}
+          src={activeVideoSrc}
+          poster={activePosterSrc}
+          playsInline
+          controls={false}
+          disablePictureInPicture
+          preload="auto"
+          autoPlay={autoPlays}
+          muted={autoPlays || muted}
+          loop={videoLoops}
+          onLoadedData={(event) => {
+            const video = event.currentTarget;
+            if (!autoPlays && !isPlaying && video.currentTime === 0 && Number.isFinite(video.duration)) {
+              video.pause();
+              video.currentTime = Math.min(0.001, video.duration);
+            }
+          }}
+          onCanPlay={() => setReadyVideoSrc(activeVideoSrc)}
+          onPlay={() => {
+            allowToneToFinishRef.current = false;
+            setHasAnimationEnded(false);
+            onPlayingChange(true);
+          }}
+          onPause={(event) => {
+            const video = event.currentTarget;
+            const reachedFinalFrame = video.ended
+              || (Number.isFinite(video.duration) && video.duration - video.currentTime < 0.15);
+            if (toneFinishesOnce && reachedFinalFrame) {
+              allowToneToFinishRef.current = true;
+            }
+            if (waitsForAnimationEnd && reachedFinalFrame) {
+              setHasAnimationEnded(true);
+            }
+            onPlayingChange(false);
+          }}
+          onEnded={() => {
+            if (toneFinishesOnce) allowToneToFinishRef.current = true;
+            if (waitsForAnimationEnd) setHasAnimationEnded(true);
+            onPlayingChange(false);
+          }}
+          aria-hidden="true"
+        />
+      ) : null}
+
+      {scene.overlayImageSrc ? (
+        <Image
+          className="story-finale-logo"
+          src={scene.overlayImageSrc}
+          alt="Guardianes de la Fauna"
+          width={1736}
+          height={894}
+          priority
+        />
+      ) : null}
 
       {scene.toneSrc ? (
         <audio
@@ -255,7 +275,7 @@ export function StoryStage({
         />
       ) : null}
 
-      {!autoPlays && !trashCleanup && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
+      {activeVideoSrc && !autoPlays && !trashCleanup && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button
           className="scene-play-button"
           type="button"

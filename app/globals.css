@@ -127,6 +127,21 @@ button:focus-visible, input:focus-visible {
 }
 .story-video.is-ready { opacity: 1; }
 
+.story-image {
+  z-index: 0;
+  object-fit: cover;
+}
+
+.story-finale-logo {
+  position: absolute;
+  z-index: 4;
+  top: 72%;
+  left: 50%;
+  width: 29%;
+  height: auto;
+  transform: translateX(-50%);
+}
+
 .scene-play-button {
   position: absolute;
   z-index: 9;
@@ -547,6 +562,29 @@ button:focus-visible, input:focus-visible {
 .story-stage[data-scene="nuevo-destino"] .scene-copy {
   right: var(--stage-edge-inset);
   left: auto;
+  text-align: center;
+  white-space: pre;
+}
+
+.story-stage[data-scene="el-alimento-del-pinguino"] .scene-copy {
+  right: var(--stage-edge-inset);
+  left: auto;
+  text-align: center;
+  white-space: pre;
+}
+
+.story-stage[data-scene="guardianes-de-galapagos"] .scene-copy {
+  text-align: center;
+  white-space: pre;
+}
+
+.story-stage[data-scene="guardianes-de-la-fauna"] .scene-copy {
+  border-radius: 1cqw;
+  padding: .55cqw 1.2cqw;
+  background: rgba(255, 248, 232, .58);
+  color: var(--ink);
+  font-size: 1.8cqw;
+  line-height: 1.3;
   text-align: center;
   white-space: pre;
 }

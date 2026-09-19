@@ -14,7 +14,7 @@ import {
   STORY_SYNOPSIS,
 } from "@/app/features/story/story.data";
 import { useStory } from "@/app/features/story/StoryProvider";
-import type { CharacterId, StoryView } from "@/app/features/story/story.types";
+import type { CharacterId, StoryScene, StoryView } from "@/app/features/story/story.types";
 import { StoryStage } from "./StoryStage";
 import { CharacterOverlay } from "./CharacterOverlay";
 
@@ -29,15 +29,17 @@ export function StoryExperience() {
   const { state, dispatch } = useStory();
   const [selectedCharacter, setSelectedCharacter] = useState<CharacterId | null>(null);
 
-  const scene = STORY_SCENES[state.currentSceneIndex];
+  const scene = STORY_SCENES[state.currentSceneIndex] as StoryScene;
   const progress = ((state.currentSceneIndex + 1) / STORY_SCENES.length) * 100;
 
   useEffect(() => {
-    const nextScene = STORY_SCENES[state.currentSceneIndex + 1];
-    const nextPoster = nextScene && "posterSrc" in nextScene ? nextScene.posterSrc : undefined;
-    if (!nextPoster) return;
-    const image = new window.Image();
-    image.src = nextPoster;
+    const nextScene = STORY_SCENES[state.currentSceneIndex + 1] as StoryScene | undefined;
+    const images = [nextScene?.backgroundImageSrc, nextScene?.overlayImageSrc, nextScene?.posterSrc];
+    images.forEach((src) => {
+      if (!src) return;
+      const image = new window.Image();
+      image.src = src;
+    });
   }, [state.currentSceneIndex]);
 
   const setPlaying = useCallback(

@@ -55,9 +55,9 @@ test("keeps the story content aligned with the delivered media", async () => {
     readdir(new URL("../public/assets/POSTERS/", import.meta.url)),
   ]);
 
-  assert.equal(storyData.match(/videoSrc:/g)?.length, 33);
+  assert.equal(storyData.match(/videoSrc:/g)?.length, 36);
   assert.equal(storyData.match(/posterSrc:/g)?.length, 29);
-  assert.equal(storyData.match(/copyBlocks:/g)?.length, 33);
+  assert.equal(storyData.match(/copyBlocks:/g)?.length, 37);
   assert.doesNotMatch(storyData, /copyPosition:|copyTone:/);
   assert.match(storyData, /Lola y Mario entraron a la biblioteca\\nen busca de una nueva historia/);
   assert.match(storyData, /¿Dónde crees que están Lola y Mario\?/);
@@ -76,6 +76,9 @@ test("keeps the story content aligned with the delivered media", async () => {
   }
   for (const [, poster] of storyData.matchAll(/completedPosterSrc: "\/assets\/POSTERS\/([^"]+)"/g)) {
     assert.ok(posterFiles.includes(poster), `Missing completed poster: ${poster}`);
+  }
+  for (const [, image] of storyData.matchAll(/(?:backgroundImageSrc|overlayImageSrc): "\/assets\/ANIMACIONES\/([^"]+)"/g)) {
+    assert.ok(animationFiles.includes(image), `Missing scene image: ${image}`);
   }
   for (const [, poster] of storyData.matchAll(/posterSrc: "\/assets\/POSTERS\/([^"]+)"/g)) {
     assert.ok(posterFiles.includes(poster), `Missing poster: ${poster}`);
