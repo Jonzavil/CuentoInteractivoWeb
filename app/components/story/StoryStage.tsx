@@ -74,8 +74,7 @@ export function StoryStage({
     || scene.id === "semillas-en-el-camino"
     || scene.id === "limpiemos-el-rio";
   const toneFinishesOnce = scene.id === "un-bosque-enorme"
-    || scene.id === "es-hora-de-descubrirlo"
-    || scene.id === "guacamayo-verde-mayor";
+    || scene.id === "es-hora-de-descubrirlo";
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
     || scene.id === "mensaje-ayuda"
@@ -106,16 +105,22 @@ export function StoryStage({
     if (!video) return;
     const tone = toneRef.current;
     video.muted = autoPlays || muted;
-    if (isPlaying || (autoPlays && !hasAnimationEnded && !video.ended)) {
+    const shouldPlayVideo = isPlaying || (autoPlays && !hasAnimationEnded && !video.ended);
+    const shouldPlayTone = shouldPlayVideo
+      || (scene.id === "guacamayo-verde-mayor" && showGuacamayoAction);
+    if (shouldPlayVideo) {
       void video.play().catch(() => onPlayingChange(false));
-      playTone();
     } else {
       video.pause();
+    }
+    if (shouldPlayTone) {
+      playTone();
+    } else {
       if (!(toneFinishesOnce && allowToneToFinishRef.current && !tone?.ended)) {
         tone?.pause();
       }
     }
-  }, [autoPlays, hasAnimationEnded, isPlaying, muted, onPlayingChange, scene.id, toneFinishesOnce]);
+  }, [autoPlays, hasAnimationEnded, isPlaying, muted, onPlayingChange, scene.id, showGuacamayoAction, toneFinishesOnce]);
 
   useEffect(() => {
     if (!trashCleanupStarted) return;
