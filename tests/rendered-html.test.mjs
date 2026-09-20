@@ -72,6 +72,10 @@ test("keeps the story content aligned with the delivered media", async () => {
     const sceneBlock = storyData.match(new RegExp(`id: "${sceneId}"[\\s\\S]*?(?=\\n  \\{\\n    id:|\\n\\] as const)`))?.[0] ?? "";
     assert.match(sceneBlock, /toneSrc: WHIRLWIND_TONE_SRC/, `Missing whirlwind tone in ${sceneId}`);
   }
+  for (const sceneId of ["fondo-1", "mensaje-ayuda", "bosque-de-neblina"]) {
+    const sceneBlock = storyData.match(new RegExp(`id: "${sceneId}"[\\s\\S]*?(?=\\n  \\{\\n    id:|\\n\\] as const)`))?.[0] ?? "";
+    assert.match(sceneBlock, /toneSrc: MESSAGE_TONE_SRC/, `Missing message tone in ${sceneId}`);
+  }
   for (const [, video] of storyData.matchAll(/videoSrc: "\/assets\/ANIMACIONES\/([^"]+)"/g)) {
     assert.ok(animationFiles.includes(video), `Missing animation: ${video}`);
   }

@@ -4,6 +4,7 @@ export const STORY_TITLE = "Lola y Mario: Guardianes del bosque";
 
 // Usar este tono también en las futuras escenas de remolinos.
 const WHIRLWIND_TONE_SRC = "/assets/tonos/p5.mp3";
+const MESSAGE_TONE_SRC = "/assets/tonos/p9.mp3";
 
 export const STORY_SYNOPSIS =
   "Lola y Mario encuentran un libro misterioso que los transporta a los bosques del Ecuador. Para volver a casa deberán observar, ayudar a sus nuevos amigos y descifrar las palabras que guarda un antiguo pergamino.";
@@ -163,6 +164,7 @@ export const STORY_SCENES = [
     id: "fondo-1",
     title: "La aventura continúa",
     videoSrc: "/assets/ANIMACIONES/FONDO1.mp4",
+    toneSrc: MESSAGE_TONE_SRC,
     posterSrc: "/assets/POSTERS/FONDO1.jpg",
     copyBlocks: [],
     interaction: {
@@ -204,7 +206,7 @@ export const STORY_SCENES = [
     id: "mensaje-ayuda",
     title: "El primer mensaje",
     videoSrc: "/assets/ANIMACIONES/P9.mp4",
-    toneSrc: "/assets/tonos/p9.mp3",
+    toneSrc: MESSAGE_TONE_SRC,
     posterSrc: "/assets/POSTERS/P9.jpg",
     copyBlocks: [{
       text: "Observa el abecedario y escribe las letras\ncorrectas en los recuadros amarillos.",
@@ -346,7 +348,7 @@ export const STORY_SCENES = [
     id: "bosque-de-neblina",
     title: "Entre montañas y neblina",
     videoSrc: "/assets/ANIMACIONES/P17.mp4",
-    toneSrc: "/assets/tonos/p9.mp3",
+    toneSrc: MESSAGE_TONE_SRC,
     posterSrc: "/assets/POSTERS/P17.jpg",
     copyBlocks: [],
     interaction: {
