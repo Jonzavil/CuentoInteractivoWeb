@@ -177,6 +177,7 @@ export const STORY_SCENES = [
     id: "es-hora-de-descubrirlo",
     title: "¡Es hora de descubrirlo!",
     videoSrc: "/assets/ANIMACIONES/FONDO1.mp4",
+    toneSrc: "/assets/tonos/afirmacion.wav",
     posterSrc: "/assets/POSTERS/FONDO1.jpg",
     copyBlocks: [{
       text: "¡ES HORA\nDE DESCUBRIRLO!",

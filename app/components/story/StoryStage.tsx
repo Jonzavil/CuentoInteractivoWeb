@@ -52,6 +52,7 @@ export function StoryStage({
   const videoRef = useRef<HTMLVideoElement>(null);
   const toneRef = useRef<HTMLAudioElement>(null);
   const allowToneToFinishRef = useRef(false);
+  const toneHasPlayedRef = useRef(false);
   const [readyVideoSrc, setReadyVideoSrc] = useState<string | null>(null);
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const [, setBearSteps] = useState(0);
@@ -72,7 +73,9 @@ export function StoryStage({
     || scene.id === "remolino-hacia-la-sierra"
     || scene.id === "semillas-en-el-camino"
     || scene.id === "limpiemos-el-rio";
-  const toneFinishesOnce = scene.id === "un-bosque-enorme" || scene.id === "guacamayo-verde-mayor";
+  const toneFinishesOnce = scene.id === "un-bosque-enorme"
+    || scene.id === "es-hora-de-descubrirlo"
+    || scene.id === "guacamayo-verde-mayor";
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
     || scene.id === "mensaje-ayuda"
@@ -88,6 +91,16 @@ export function StoryStage({
   const videoIsReady = Boolean(activePosterSrc) || readyVideoSrc === activeVideoSrc;
   const videoLoops = !reducedMotion && (!waitsForAnimationEnd || trashCleanupStarted);
 
+  function playTone(restart = false) {
+    const tone = toneRef.current;
+    if (!tone || (toneFinishesOnce && toneHasPlayedRef.current)) return;
+    if (restart) tone.currentTime = 0;
+    if (toneFinishesOnce) toneHasPlayedRef.current = true;
+    void tone.play().catch(() => {
+      if (toneFinishesOnce) toneHasPlayedRef.current = false;
+    });
+  }
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -95,7 +108,7 @@ export function StoryStage({
     video.muted = autoPlays || muted;
     if (isPlaying || (autoPlays && !hasAnimationEnded && !video.ended)) {
       void video.play().catch(() => onPlayingChange(false));
-      void tone?.play().catch(() => undefined);
+      playTone();
     } else {
       video.pause();
       if (!(toneFinishesOnce && allowToneToFinishRef.current && !tone?.ended)) {
@@ -123,8 +136,7 @@ export function StoryStage({
     if (!video) return;
     video.currentTime = 0;
     if (toneRef.current) {
-      toneRef.current.currentTime = 0;
-      void toneRef.current.play().catch(() => undefined);
+      playTone(true);
     }
     void video.play().then(() => onPlayingChange(true)).catch(() => onPlayingChange(false));
   }
@@ -132,7 +144,7 @@ export function StoryStage({
   function startPlayback() {
     const video = videoRef.current;
     if (!video) return;
-    void toneRef.current?.play().catch(() => undefined);
+    playTone();
     void video.play().catch(() => onPlayingChange(false));
   }
 
