@@ -1,0 +1,7 @@
+celebracion.mp3
+Sound: arcade/level_up
+Library: react-sounds 1.0.30
+Website: https://www.reactsounds.com/
+Original: https://reactsounds.sfo3.cdn.digitaloceanspaces.com/v1/arcade/level_up.0aba301.mp3
+Downloaded: 2026-09-23
+Unmodified local copy. Package license: MIT (see react-sounds.LICENSE.txt).

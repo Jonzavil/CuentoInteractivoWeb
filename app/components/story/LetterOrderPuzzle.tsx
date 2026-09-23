@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import {
   isSecretLetterCorrect,
   keepCorrectSecretLetters,
@@ -40,7 +40,27 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
   const slotsRef = useRef<Array<HTMLButtonElement | null>>([]);
   const dragRef = useRef<Drag | null>(null);
   const reported = useRef(false);
+  const affirmationRef = useRef<HTMLAudioElement>(null);
+  const affirmationPlayingRef = useRef(false);
+  const pendingAffirmationsRef = useRef<string[]>([]);
   const fixedSlots = selected.map((_, slot) => isSecretLetterCorrect(selected, slot));
+
+  const playAffirmation = useCallback((src = "/assets/tonos/afirmacion.wav") => {
+    const audio = affirmationRef.current;
+    if (!audio) return;
+    // Queue feedback so the final celebration does not cut off the last letter.
+    if (affirmationPlayingRef.current) {
+      pendingAffirmationsRef.current.push(src);
+      return;
+    }
+    affirmationPlayingRef.current = true;
+    if (audio.getAttribute("src") !== src) audio.src = src;
+    audio.currentTime = 0;
+    void audio.play().catch(() => {
+      affirmationPlayingRef.current = false;
+      pendingAffirmationsRef.current = [];
+    });
+  }, []);
 
   function tileIsFixed(tile: number) {
     const slot = selected.indexOf(tile);
@@ -54,6 +74,7 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
     if (reported.current) return;
     reported.current = true;
     if (result === "success") {
+      playAffirmation("/assets/tonos/celebracion.mp3");
       onSolved();
     } else {
       const incorrectTiles = selected.flatMap((tile, slot) => (
@@ -68,7 +89,7 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
       setActiveTile(null);
       onIncorrect();
     }
-  }, [selected, draggedTile, onSolved, onIncorrect]);
+  }, [selected, draggedTile, onSolved, onIncorrect, playAffirmation]);
 
   function startDrag(event: PointerEvent<HTMLButtonElement>, tile: number) {
     if (event.button !== 0 || dragRef.current || !gameRef.current || tileIsFixed(tile)) return;
@@ -132,11 +153,26 @@ export function LetterOrderPuzzle({ onSolved, onIncorrect }: LetterOrderPuzzlePr
       const [x, y] = TILE_POSITIONS[displaced];
       setPositions((current) => current.map((position, index) => index === displaced ? { x, y, angle: 0 } : position));
     }
-    setSelected((current) => placeSecretLetter(current, tile, slot));
+    const next = placeSecretLetter(selected, tile, slot);
+    setSelected(next);
+    if (slot !== null && isSecretLetterCorrect(next, slot)) {
+      playAffirmation();
+    }
   }
 
   return (
     <div ref={gameRef} className="letter-order-game" aria-labelledby="letter-order-prompt">
+      <audio
+        ref={affirmationRef}
+        src="/assets/tonos/afirmacion.wav"
+        preload="auto"
+        aria-hidden="true"
+        onEnded={() => {
+          affirmationPlayingRef.current = false;
+          const nextSound = pendingAffirmationsRef.current.shift();
+          if (nextSound) playAffirmation(nextSound);
+        }}
+      />
       <p id="letter-order-prompt" className="letter-order-game__prompt">
         TOCA Y ARRASTRA LAS LETRAS A LOS CUADROS<br />
         MORADOS PARA DESCUBRIR EL MENSAJE SECRETO.
