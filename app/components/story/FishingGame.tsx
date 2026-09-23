@@ -15,8 +15,9 @@ const FISH = [
   { x: 87, y: 74, width: 23, angle: -48, flip: true },
 ] as const;
 
-export function FishingGame({ fishImageSrc, onSolved }: {
+export function FishingGame({ fishImageSrc, onStart, onSolved }: {
   fishImageSrc: string;
+  onStart: () => void;
   onSolved: () => void;
 }) {
   const [started, setStarted] = useState(false);
@@ -45,7 +46,7 @@ export function FishingGame({ fishImageSrc, onSolved }: {
         <div className="fishing-game__intro">
           <h3>¡ES HORA DE PESCAR!</h3>
           <p>Atrapa los peces para<br />alimentar al pingüino.</p>
-          <button type="button" className="fishing-game__start" onClick={() => setStarted(true)} aria-label="Comenzar a pescar">
+          <button type="button" className="fishing-game__start" onClick={() => { onStart(); setStarted(true); }} aria-label="Comenzar a pescar">
             <Image src="/assets/Iconos/Recurso 3@450x.png" alt="" width={100} height={100} />
           </button>
         </div>

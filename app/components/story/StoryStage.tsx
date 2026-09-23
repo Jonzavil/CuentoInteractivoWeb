@@ -87,6 +87,7 @@ export function StoryStage({
     "el-hogar-del-delfin",
     "peligros-en-el-rio",
     "limpiemos-el-rio",
+    "aventura-en-galapagos",
   ].includes(scene.id);
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
@@ -390,7 +391,7 @@ export function StoryStage({
       ) : null}
 
       {interaction?.type === "fishing" ? (
-        <FishingGame fishImageSrc={interaction.fishImageSrc} onSolved={() => setCipherFeedback("success")} />
+        <FishingGame fishImageSrc={interaction.fishImageSrc} onStart={playTone} onSolved={() => setCipherFeedback("success")} />
       ) : null}
 
       {answerFeedback ? (

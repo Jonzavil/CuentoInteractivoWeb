@@ -566,6 +566,7 @@ export const STORY_SCENES = [
     id: "nuevo-destino",
     title: "Un nuevo destino",
     videoSrc: "/assets/ANIMACIONES/ULT 02.mp4",
+    toneSrc: "/assets/tonos/penguin.mp3",
     copyBlocks: [{
       text: "Al llegar, Lola y Mario descubrieron un paisaje\nde rocas oscuras rodeado por el mar. Frente a\nellos, un pequeño pingüino de Galápagos los\nobservaba con curiosidad.",
       top: 8,
@@ -579,6 +580,7 @@ export const STORY_SCENES = [
     id: "el-alimento-del-pinguino",
     title: "El alimento del pingüino",
     videoSrc: "/assets/ANIMACIONES/ULT 03.mp4",
+    toneSrc: "/assets/tonos/penguin.mp3",
     copyBlocks: [{
       text: "—El mar me da alimento, pero\ncuando el agua se calienta,\nlos peces se alejan y encontrar\ncomida se vuelve más difícil\n—explicó el pingüino.",
       top: 7,
@@ -592,6 +594,7 @@ export const STORY_SCENES = [
     id: "aventura-en-galapagos",
     title: "Una aventura en Galápagos",
     videoSrc: "/assets/ANIMACIONES/ULT 04.mp4",
+    toneSrc: "/assets/tonos/peces.mp3",
     copyBlocks: [],
     interaction: { type: "fishing", fishImageSrc: "/assets/ANIMACIONES/PECES PARA ANIMACION.png" },
   },
