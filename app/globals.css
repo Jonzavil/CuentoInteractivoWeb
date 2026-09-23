@@ -1022,7 +1022,7 @@ button:focus-visible, input:focus-visible {
 
 .content-view, .gallery-view { width: min(calc(100% - 32px), 1120px); margin: 14px auto 32px; }
 .content-view { position: relative; min-height: min(680px, calc(100dvh - 135px)); overflow: hidden; border: 5px solid var(--green-dark); border-radius: 8px; background: var(--green); box-shadow: 0 14px 34px rgba(55,65,48,.18); }
-.story-app[data-view="sinopsis"] { background: var(--cream); }
+.story-app[data-view="sinopsis"], .story-app[data-view="creditos"] { background: var(--cream); }
 .synopsis-view { width: min(calc(100% - 64px), 1120px); margin: 20px auto 0; padding-bottom: 48px; text-align: center; }
 .synopsis-view__cover { display: block; width: 100%; height: auto; }
 .synopsis-view__start {
@@ -1041,14 +1041,25 @@ button:focus-visible, input:focus-visible {
 .content-view__eyebrow { margin: 0 0 7px; color: var(--green); font-size: 12px; font-weight: 900; text-transform: uppercase; }
 .content-view h2, .gallery-view h2 { margin: 0; color: var(--green-dark); font-size: 38px; line-height: 1.05; }
 
-.content-view--credits { display: grid; grid-template-columns: 1fr 1fr; background: #ffd757; }
-.credits-art { display: flex; align-items: flex-end; justify-content: center; gap: 0; overflow: hidden; }
-.credits-art img { width: 48%; height: auto; object-fit: contain; object-position: bottom; }
-.credits-copy { display: flex; flex-direction: column; justify-content: center; padding: 8%; background: var(--paper); }
-.credits-copy dl { margin: 28px 0 0; display: grid; gap: 22px; }
-.credits-copy dl div { padding-left: 15px; border-left: 5px solid var(--purple); }
-.credits-copy dt { color: var(--green); font-size: 12px; font-weight: 900; text-transform: uppercase; }
-.credits-copy dd { margin: 4px 0 0; font-size: 18px; font-weight: 800; }
+.credits-view { width: min(calc(100% - 32px), 1120px); margin: 28px auto 0; padding-bottom: 48px; color: #080808; text-align: center; }
+.credits-view__section + .credits-view__section { margin-top: 72px; }
+.credits-view__title { display: inline-block; min-width: 185px; margin: 0; padding: 10px 28px; border-radius: 11px; background: var(--purple); color: var(--cream); font-size: 24px; font-weight: 800; line-height: 1.2; }
+.credits-view__roles { margin: 12px 0 34px; color: var(--purple); font-size: clamp(14px, 1.8vw, 20px); }
+.credits-view__people { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; width: min(100%, 1000px); margin: 0 auto; }
+.credits-view__person { min-width: 0; margin: 0; }
+.credits-view__person img { display: block; width: min(100%, 282px); height: auto; margin: 0 auto; border-radius: 18px; }
+.credits-view__person h3 { margin: 16px 0 0; font-size: clamp(21px, 2.5vw, 30px); font-weight: 800; line-height: 1.2; }
+.credits-view__person a { display: inline-block; padding: 2px 0; color: inherit; font-size: clamp(15px, 1.8vw, 20px); line-height: 1.4; text-decoration: none; overflow-wrap: anywhere; }
+.credits-view__person a:hover { color: var(--purple); text-decoration: underline; }
+.credits-view__person a:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: 2px; }
+.credits-view__section--tutors .credits-view__people { margin-top: 38px; }
+.credits-view__section--tutors .credits-view__person img { width: min(100%, 302px); }
+.credits-view__section--tutors .credits-view__person h3 { margin-top: 4px; }
+@media (max-width: 600px) {
+  .credits-view__people { grid-template-columns: 1fr; gap: 36px; }
+  .credits-view__section + .credits-view__section { margin-top: 48px; }
+  .credits-view__person img, .credits-view__section--tutors .credits-view__person img { width: min(75vw, 302px); }
+}
 
 .gallery-view { padding: 22px 0; }
 .gallery-view__heading { margin-bottom: 22px; }
@@ -1535,10 +1546,6 @@ button:focus-visible, input:focus-visible {
   .content-view, .gallery-view { width: calc(100% - 20px); margin-top: 8px; }
   .content-view { min-height: calc(100dvh - 155px); border-width: 3px; }
   .content-view h2, .gallery-view h2 { font-size: 29px; }
-  .content-view--credits { grid-template-columns: 1fr; }
-  .credits-art { min-height: 260px; }
-  .credits-art img { max-height: 280px; }
-  .credits-copy { padding: 28px 22px; }
   .character-grid { gap: 10px; }
   .character-card { border-width: 3px; }
   .character-card img { height: 190px; padding-top: 10px; }

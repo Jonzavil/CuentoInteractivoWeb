@@ -17,6 +17,7 @@ import { useStory } from "@/app/features/story/StoryProvider";
 import type { CharacterId, StoryScene, StoryView } from "@/app/features/story/story.types";
 import { StoryStage } from "./StoryStage";
 import { CharacterOverlay } from "./CharacterOverlay";
+import { CreditsView } from "./CreditsView";
 
 const VIEWS: Array<{ id: StoryView; label: string; icon: typeof BookOpen }> = [
   { id: "cuento", label: "Cuento", icon: BookOpen },
@@ -163,23 +164,7 @@ export function StoryExperience() {
         </section>
       ) : null}
 
-      {state.currentView === "creditos" ? (
-        <section className="content-view content-view--credits" aria-labelledby="credits-title">
-          <div className="credits-art" aria-hidden="true">
-            <Image src={CHARACTERS.lola.imageSrc!} alt="" width={260} height={360} />
-            <Image src={CHARACTERS.mario.imageSrc!} alt="" width={260} height={360} />
-          </div>
-          <div className="credits-copy">
-            <p className="content-view__eyebrow">Detrás de la aventura</p>
-            <h2 id="credits-title">Créditos</h2>
-            <dl>
-              <div><dt>Diseño, ilustración y animación</dt><dd>Equipo creativo de Guardianes del bosque</dd></div>
-              <div><dt>Adaptación y desarrollo web</dt><dd>Jonathan Zavala</dd></div>
-              <div><dt>Proyecto</dt><dd>Cuento interactivo sobre la fauna y los bosques del Ecuador</dd></div>
-            </dl>
-          </div>
-        </section>
-      ) : null}
+      {state.currentView === "creditos" ? <CreditsView /> : null}
 
       {state.currentView === "galeria" ? (
         <section className="gallery-view" aria-labelledby="gallery-title">
