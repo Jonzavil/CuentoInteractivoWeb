@@ -487,6 +487,7 @@ export const STORY_SCENES = [
     id: "delfin-rosado",
     title: "El delfín rosado",
     videoSrc: "/assets/ANIMACIONES/PF1.MP4",
+    toneSrc: "/assets/tonos/delfines.mp3",
     posterSrc: "/assets/POSTERS/PF1.jpg",
     copyBlocks: [{
       text: "De pronto, un delfín rosado saltó y los salpicó.\n—¡Bienvenidos! El río y el bosque forman un solo hogar.",
@@ -502,6 +503,7 @@ export const STORY_SCENES = [
     id: "el-hogar-del-delfin",
     title: "El hogar del delfín",
     videoSrc: "/assets/ANIMACIONES/PF2.mp4",
+    toneSrc: "/assets/tonos/delfines.mp3",
     copyBlocks: [{
       text: "Lola y Mario observaron al delfín rosado nadar\nágilmente entre los peces del enorme río.\n—Me alimento de peces y necesito que el agua\nesté limpia para vivir —les explicó.",
       top: 8,
@@ -515,6 +517,7 @@ export const STORY_SCENES = [
     id: "peligros-en-el-rio",
     title: "Peligros en el río",
     videoSrc: "/assets/ANIMACIONES/PF3.mp4",
+    toneSrc: "/assets/tonos/delfines.mp3",
     copyBlocks: [{
       text: "Más adelante, el delfín encontró una red abandonada y muchos residuos flotando en el río.\n—La contaminación y las redes pueden atraparnos, enfermarnos y destruir nuestro hogar\n—explicó con tristeza.",
       top: 6,
@@ -528,6 +531,7 @@ export const STORY_SCENES = [
     id: "limpiemos-el-rio",
     title: "Limpiemos el río",
     videoSrc: "/assets/ANIMACIONES/PF4.mp4",
+    toneSrc: "/assets/tonos/delfines.mp3",
     posterSrc: "/assets/POSTERS/PF4.jpg",
     copyBlocks: [{
       text: "Lola y Mario trabajaron juntos para\nrecoger los residuos que contaminaban\nel río y los colocaron en bolsas.",
@@ -589,6 +593,7 @@ export const STORY_SCENES = [
     title: "Una aventura en Galápagos",
     videoSrc: "/assets/ANIMACIONES/ULT 04.mp4",
     copyBlocks: [],
+    interaction: { type: "fishing", fishImageSrc: "/assets/ANIMACIONES/PECES PARA ANIMACION.png" },
   },
   {
     id: "guardianes-de-galapagos",

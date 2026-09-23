@@ -9,6 +9,7 @@ export type StoryInteraction =
   | { type: "reveal"; label: string }
   | { type: "cipher"; word: "AYUDA" | "COSTA" | "SIERRA" | "AMAZONIA" }
   | { type: "letter-order"; word: "AMAZONIA" }
+  | { type: "fishing"; fishImageSrc: string }
   | { type: "character"; characterId: CharacterId; label: string }
   | { type: "trash-cleanup"; completedVideoSrc: string; completedPosterSrc: string; label: string }
   | { type: "papers" }

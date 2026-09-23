@@ -12,6 +12,7 @@ import type { CharacterId, StoryScene } from "@/app/features/story/story.types";
 import { CharacterOverlay } from "./CharacterOverlay";
 import { CipherPuzzle } from "./CipherPuzzle";
 import { LetterOrderPuzzle } from "./LetterOrderPuzzle";
+import { FishingGame } from "./FishingGame";
 
 interface StoryStageProps {
   scene: StoryScene;
@@ -82,6 +83,10 @@ export function StoryStage({
     "el-oso-trepa-arboles",
     "un-nuevo-amigo-en-la-sierra",
     "semillas-en-el-camino",
+    "delfin-rosado",
+    "el-hogar-del-delfin",
+    "peligros-en-el-rio",
+    "limpiemos-el-rio",
   ].includes(scene.id);
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
@@ -116,7 +121,7 @@ export function StoryStage({
     video.muted = autoPlays || muted;
     const shouldPlayVideo = isPlaying || (autoPlays && !hasAnimationEnded && !video.ended);
     const shouldPlayTone = shouldPlayVideo
-      || (keepsToneAfterInteraction && (persistentToneStartedRef.current || showBearAction))
+      || (keepsToneAfterInteraction && (persistentToneStartedRef.current || showBearAction || showDolphinAction || trashCleanupStarted))
       || (scene.id === "guacamayo-verde-mayor" && showGuacamayoAction);
     if (shouldPlayVideo) {
       void video.play().catch(() => onPlayingChange(false));
@@ -130,7 +135,7 @@ export function StoryStage({
         tone?.pause();
       }
     }
-  }, [autoPlays, hasAnimationEnded, isPlaying, keepsToneAfterInteraction, muted, onPlayingChange, playTone, scene.id, showBearAction, showGuacamayoAction, toneFinishesOnce]);
+  }, [autoPlays, hasAnimationEnded, isPlaying, keepsToneAfterInteraction, muted, onPlayingChange, playTone, scene.id, showBearAction, showDolphinAction, showGuacamayoAction, toneFinishesOnce, trashCleanupStarted]);
 
   useEffect(() => {
     if (!trashCleanupStarted) return;
@@ -302,7 +307,7 @@ export function StoryStage({
         />
       ) : null}
 
-      {activeVideoSrc && !autoPlays && !trashCleanup && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
+      {activeVideoSrc && interaction?.type !== "fishing" && !autoPlays && !trashCleanup && !isPlaying && !(waitsForAnimationEnd && hasAnimationEnded) ? (
         <button
           className="scene-play-button"
           type="button"
@@ -384,6 +389,10 @@ export function StoryStage({
         />
       ) : null}
 
+      {interaction?.type === "fishing" ? (
+        <FishingGame fishImageSrc={interaction.fishImageSrc} onSolved={() => setCipherFeedback("success")} />
+      ) : null}
+
       {answerFeedback ? (
         <div
           className={`scene-answer-feedback${answerFeedback === "success" ? " scene-answer-feedback--success" : ""}`}
@@ -399,11 +408,13 @@ export function StoryStage({
           <div className="scene-answer-feedback__panel">
             <p>
               <strong id="cipher-feedback-title">
-                {answerFeedback === "success" ? "¡Lo descubriste!" : "¡Ups! Ese no es el mensaje"}
+                {answerFeedback === "success" ? (interaction?.type === "fishing" ? "¡Bien hecho!" : "¡Lo descubriste!") : "¡Ups! Ese no es el mensaje"}
               </strong>
               <span id="cipher-feedback-description">
                 {answerFeedback === "success"
-                  ? `\n\nEl mensaje dice ${answerRegion}.\n¡Lola y Mario están en la región ${answerRegion} del Ecuador!`
+                  ? interaction?.type === "fishing"
+                    ? "\n\n¡Atrapaste todos los peces!\nGracias por ayudar a alimentar al pingüino de Galápagos."
+                    : `\n\nEl mensaje dice ${answerRegion}.\n¡Lola y Mario están en la región ${answerRegion} del Ecuador!`
                   : interaction?.type === "letter-order"
                     ? "\nMira nuevamente\nlas letras e\ninténtalo otra vez."
                     : "\nMira nuevamente\nlos símbolos e\ninténtalo otra vez."}
