@@ -24,7 +24,7 @@ async function render() {
   );
 }
 
-test("server-renders the interactive story shell", async () => {
+test("server-renders the synopsis as the initial view", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
@@ -33,15 +33,15 @@ test("server-renders the interactive story shell", async () => {
   assert.match(html, /<html lang="es">/i);
   assert.match(html, /Lola y Mario: Guardianes del bosque/i);
   assert.doesNotMatch(html, /Escena 1 de 17/i);
-  assert.match(html, /Una tarde especial/i);
+  assert.match(html, /data-view="sinopsis"/i);
+  assert.match(html, /EMPEZAR A LEER/i);
+  assert.match(html, /Una historia llena de aventura y compromiso/i);
   assert.match(html, /Sinopsis/i);
   assert.match(html, /Créditos/i);
   assert.match(html, /Galería/i);
   assert.doesNotMatch(html, /Abrir ajustes/i);
   assert.doesNotMatch(html, /Activar sonido|Silenciar/i);
-  assert.match(html, /Reproducir escena/i);
-  assert.match(html, /aria-label="Progreso del cuento"/i);
-  assert.match(html, /aria-valuenow="1"/i);
+  assert.doesNotMatch(html, /aria-label="Progreso del cuento"/i);
   assert.doesNotMatch(html, /class="scene-play-button"[^>]*disabled/i);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });

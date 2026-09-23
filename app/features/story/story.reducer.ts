@@ -10,7 +10,7 @@ const DEFAULT_PREFERENCES: StoryState["preferences"] = {
 
 export function createInitialStoryState(): StoryState {
   return {
-    currentView: "cuento",
+    currentView: "sinopsis",
     currentSceneIndex: 0,
     isPlaying: false,
     hasHydrated: false,

@@ -85,6 +85,7 @@ export function StoryExperience() {
   return (
     <main
       className="story-app"
+      data-view={state.currentView}
       data-contrast={state.preferences.highContrast ? "high" : "standard"}
       data-text-scale={state.preferences.textScale}
     >
@@ -141,16 +142,24 @@ export function StoryExperience() {
       ) : null}
 
       {state.currentView === "sinopsis" ? (
-        <section className="content-view content-view--synopsis" aria-labelledby="synopsis-title">
-          <Image src="/assets/ESCENAS/P1.jpg" alt="Lola y Mario al comienzo de su aventura" fill sizes="(max-width: 900px) 100vw, 1100px" priority />
-          <div className="content-view__copy">
-            <p className="content-view__eyebrow">Una aventura por el Ecuador</p>
-            <h2 id="synopsis-title">El bosque necesita guardianes</h2>
-            <p>{STORY_SYNOPSIS}</p>
-            <button className="action-button action-button--purple" type="button" onClick={() => dispatch({ type: "SET_VIEW", payload: "cuento" })}>
-              <BookOpen aria-hidden="true" /> Comenzar el cuento
-            </button>
-          </div>
+        <section className="synopsis-view" aria-labelledby="synopsis-title">
+          <h2 id="synopsis-title" className="visually-hidden">Sinopsis de Guardianes de la Fauna</h2>
+          <Image
+            className="synopsis-view__cover"
+            src="/assets/SINOPSIS/Sin título1787116725001.png"
+            alt="Guardianes de la Fauna: Lola y Mario junto a un lago, entre árboles y montañas del Ecuador"
+            width={1920}
+            height={1200}
+            sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1184px) calc(100vw - 64px), 1120px"
+            priority
+          />
+          <button className="synopsis-view__start" type="button" onClick={() => {
+            setSelectedCharacter(null);
+            dispatch({ type: "RESTART" });
+          }}>
+            EMPEZAR A LEER
+          </button>
+          <p className="synopsis-view__description">{STORY_SYNOPSIS}</p>
         </section>
       ) : null}
 

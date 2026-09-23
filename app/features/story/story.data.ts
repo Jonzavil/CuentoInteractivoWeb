@@ -7,7 +7,7 @@ const WHIRLWIND_TONE_SRC = "/assets/tonos/p5.mp3";
 const MESSAGE_TONE_SRC = "/assets/tonos/p9.mp3";
 
 export const STORY_SYNOPSIS =
-  "Lola y Mario encuentran un libro misterioso que los transporta a los bosques del Ecuador. Para volver a casa deberán observar, ayudar a sus nuevos amigos y descifrar las palabras que guarda un antiguo pergamino.";
+  "Una historia llena de aventura y compromiso. Es momento de conocer a Lola y a Mario, una científica y un explorador que recorren todo el Ecuador al recibir un mensaje de ayuda. Empiezan en la región Costa y van de región en región para ayudar a varios animales que se encuentran en peligro. ¿Estás listo para sumarte a la aventura?";
 
 export const CHARACTERS: Record<CharacterId, {
   name: string;
