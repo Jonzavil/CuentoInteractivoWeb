@@ -7,7 +7,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import type { CharacterId, StoryScene } from "@/app/features/story/story.types";
 import { CharacterOverlay } from "./CharacterOverlay";
 import { CipherPuzzle } from "./CipherPuzzle";
@@ -53,6 +53,7 @@ export function StoryStage({
   const toneRef = useRef<HTMLAudioElement>(null);
   const allowToneToFinishRef = useRef(false);
   const toneHasPlayedRef = useRef(false);
+  const persistentToneStartedRef = useRef(false);
   const [readyVideoSrc, setReadyVideoSrc] = useState<string | null>(null);
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const [, setBearSteps] = useState(0);
@@ -75,6 +76,13 @@ export function StoryStage({
     || scene.id === "limpiemos-el-rio";
   const toneFinishesOnce = scene.id === "un-bosque-enorme"
     || scene.id === "es-hora-de-descubrirlo";
+  const keepsToneAfterInteraction = [
+    "oso-de-anteojos",
+    "frutos-para-el-oso",
+    "el-oso-trepa-arboles",
+    "un-nuevo-amigo-en-la-sierra",
+    "semillas-en-el-camino",
+  ].includes(scene.id);
   const autoPlays = scene.id === "fondo-1"
     || scene.id === "es-hora-de-descubrirlo"
     || scene.id === "mensaje-ayuda"
@@ -90,15 +98,16 @@ export function StoryStage({
   const videoIsReady = Boolean(activePosterSrc) || readyVideoSrc === activeVideoSrc;
   const videoLoops = !reducedMotion && (!waitsForAnimationEnd || trashCleanupStarted);
 
-  function playTone(restart = false) {
+  const playTone = useCallback((restart = false) => {
     const tone = toneRef.current;
     if (!tone || (toneFinishesOnce && toneHasPlayedRef.current)) return;
-    if (restart) tone.currentTime = 0;
+    if (restart && !keepsToneAfterInteraction) tone.currentTime = 0;
+    if (keepsToneAfterInteraction) persistentToneStartedRef.current = true;
     if (toneFinishesOnce) toneHasPlayedRef.current = true;
     void tone.play().catch(() => {
       if (toneFinishesOnce) toneHasPlayedRef.current = false;
     });
-  }
+  }, [keepsToneAfterInteraction, toneFinishesOnce]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -107,6 +116,7 @@ export function StoryStage({
     video.muted = autoPlays || muted;
     const shouldPlayVideo = isPlaying || (autoPlays && !hasAnimationEnded && !video.ended);
     const shouldPlayTone = shouldPlayVideo
+      || (keepsToneAfterInteraction && (persistentToneStartedRef.current || showBearAction))
       || (scene.id === "guacamayo-verde-mayor" && showGuacamayoAction);
     if (shouldPlayVideo) {
       void video.play().catch(() => onPlayingChange(false));
@@ -120,7 +130,7 @@ export function StoryStage({
         tone?.pause();
       }
     }
-  }, [autoPlays, hasAnimationEnded, isPlaying, muted, onPlayingChange, scene.id, showGuacamayoAction, toneFinishesOnce]);
+  }, [autoPlays, hasAnimationEnded, isPlaying, keepsToneAfterInteraction, muted, onPlayingChange, playTone, scene.id, showBearAction, showGuacamayoAction, toneFinishesOnce]);
 
   useEffect(() => {
     if (!trashCleanupStarted) return;

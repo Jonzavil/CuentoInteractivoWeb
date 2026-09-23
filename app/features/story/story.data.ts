@@ -362,6 +362,7 @@ export const STORY_SCENES = [
     id: "oso-de-anteojos",
     title: "El oso de anteojos",
     videoSrc: "/assets/ANIMACIONES/P18.mp4",
+    toneSrc: "/assets/tonos/osoA.mp3",
     posterSrc: "/assets/POSTERS/P18.jpg",
     copyBlocks: [{
       text: "Entre la neblina apareció un oso de anteojos, llamado\nasí por las manchas claras que rodean sus ojos.",
@@ -381,6 +382,7 @@ export const STORY_SCENES = [
     id: "frutos-para-el-oso",
     title: "El alimento del oso",
     videoSrc: "/assets/ANIMACIONES/P19.mp4",
+    toneSrc: "/assets/tonos/osoA.mp3",
     posterSrc: "/assets/POSTERS/P19.jpg",
     copyBlocks: [{
       text: "Mientras caminaba buscando frutos, el oso dejaba caer semillas sobre la tierra.\n—Así ayudamos a que nuevas plantas crezcan en distintos lugares.",
@@ -395,6 +397,7 @@ export const STORY_SCENES = [
     id: "el-oso-trepa-arboles",
     title: "El oso entre los árboles",
     videoSrc: "/assets/ANIMACIONES/P18 (1).mp4",
+    toneSrc: "/assets/tonos/osoA.mp3",
     posterSrc: "/assets/POSTERS/P18 (1).jpg",
     copyBlocks: [{
       text: "Me encanta trepar árboles. Desde lo alto\nencuentro alimento, descanso y observo\ntodo el bosque que me rodea.",
@@ -409,6 +412,7 @@ export const STORY_SCENES = [
     id: "un-nuevo-amigo-en-la-sierra",
     title: "Un nuevo amigo en la Sierra",
     videoSrc: "/assets/ANIMACIONES/Copia de P18 (1).mp4",
+    toneSrc: "/assets/tonos/osoA.mp3",
     posterSrc: "/assets/POSTERS/Copia de P18 (1).jpg",
     copyBlocks: [{
       text: "Pronto llegaron a un terreno donde los árboles habían sido talados.\n—Cuando cortan el bosque, perdemos nuestro alimento, refugio\ny los caminos que necesitamos para vivir —explicó el oso.",
@@ -423,6 +427,7 @@ export const STORY_SCENES = [
     id: "semillas-en-el-camino",
     title: "Semillas para el bosque",
     videoSrc: "/assets/ANIMACIONES/P21.mp4",
+    toneSrc: "/assets/tonos/osoA.mp3",
     posterSrc: "/assets/POSTERS/P21.jpg",
     copyBlocks: [{
       text: "Lola y Mario decidieron ayudar al oso a recuperar su hogar.",
