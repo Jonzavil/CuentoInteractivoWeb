@@ -1063,7 +1063,7 @@ button:focus-visible, input:focus-visible {
 
 .gallery-view { padding: 22px 0; }
 .gallery-view__heading { margin-bottom: 22px; }
-.character-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.character-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .character-card { min-width: 0; overflow: hidden; border: 5px solid var(--green); border-radius: 8px; padding: 0; background: #fff; color: var(--ink); cursor: pointer; }
 .character-card img { width: 100%; height: 280px; display: block; object-fit: contain; padding: 18px 10px 0; background: #f7d85c; }
 .character-card span { min-height: 78px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 12px 15px; text-align: left; }
@@ -1075,6 +1075,7 @@ button:focus-visible, input:focus-visible {
 .character-card--red { border-color: var(--red); }
 .character-card--brown { border-color: var(--brown); }
 .character-card--pink { border-color: #dc76aa; }
+.character-card--blue { border-color: var(--blue); }
 .character-card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 rgba(36,84,59,.16); }
 
 .gallery-view { position: relative; }
@@ -1154,16 +1155,16 @@ button:focus-visible, input:focus-visible {
 
 .character-overlay--pink .character-overlay__card {
   top: 15%;
-  right: 20%;
+  right: 12%;
   bottom: 15%;
-  left: 20%;
+  left: 16%;
   border: max(1px, .12cqw) solid rgba(116, 64, 93, .7);
   border-radius: 1.5cqw;
   background: #f5b9dd;
 }
 
 .character-overlay--pink .character-overlay__copy {
-  margin-left: 36%;
+  margin-left: 42%;
   padding: 6% 4% 6% 2%;
 }
 
@@ -1189,30 +1190,15 @@ button:focus-visible, input:focus-visible {
 }
 
 .character-overlay--pink .character-overlay__portrait {
-  top: 4%;
-  left: 2%;
-  width: 34%;
-  height: 92%;
+  top: -10%;
+  left: -24%;
+  width: 80%;
+  height: 120%;
   object-fit: contain;
   object-position: center;
 }
 
-.character-overlay--pink .character-overlay__close {
-  right: var(--stage-edge-inset);
-  bottom: var(--stage-edge-inset);
-  width: 52px;
-  height: 52px;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
 
-.character-overlay--pink .character-overlay__close img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
 
 .character-overlay--brown .character-overlay__card::before {
   position: absolute;
@@ -1374,22 +1360,7 @@ button:focus-visible, input:focus-visible {
   white-space: nowrap;
 }
 
-.character-overlay--red .character-overlay__close {
-  right: var(--stage-edge-inset);
-  bottom: var(--stage-edge-inset);
-  width: 52px;
-  height: 52px;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
 
-.character-overlay--red .character-overlay__close img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
 
 .character-overlay ~ .page-arrow { visibility: hidden; }
 
@@ -1437,30 +1408,16 @@ button:focus-visible, input:focus-visible {
   white-space: nowrap;
 }
 
-.character-overlay--brown .character-overlay__close {
-  right: var(--stage-edge-inset);
-  bottom: var(--stage-edge-inset);
-  width: 52px;
-  height: 52px;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
 
-.character-overlay--brown .character-overlay__close img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
 
 .character-overlay__close {
   position: absolute;
   z-index: 4;
-  right: 2.3%;
-  bottom: 3%;
-  width: clamp(28px, 5.2cqw, 54px);
-  height: clamp(28px, 5.2cqw, 54px);
+  top: 2.5%;
+  right: 2.5%;
+  width: clamp(36px, 5.2cqw, 54px);
+  height: clamp(36px, 5.2cqw, 54px);
+  padding: 0;
   display: grid;
   place-items: center;
   border: max(2px, .25cqw) solid var(--yellow);
@@ -1474,47 +1431,27 @@ button:focus-visible, input:focus-visible {
 .character-overlay__close svg { width: 58%; height: 58%; stroke-width: 4; }
 .character-overlay__close:hover { transform: scale(1.05); }
 
-.character-overlay--purple .character-overlay__close {
-  top: calc(var(--lola-card-top) - 2.6cqw);
-  right: calc(var(--lola-card-right) - 2.6cqw);
-  bottom: auto;
-}
 
-.character-overlay--lime .character-overlay__close {
-  top: calc(var(--mario-card-top) - 2.6cqw);
-  right: calc(var(--mario-card-right) - 2.6cqw);
-  bottom: auto;
-}
 
 .gallery-view > .character-overlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  inset: auto;
-  width: min(calc(100vw - 24px), 960px);
+  inset: 50% auto auto 50%;
+  width: min(calc(100vw - 24px), calc((100dvh - 24px) * 16 / 9), 960px);
   aspect-ratio: 16 / 9;
+  border-radius: 12px;
   transform: translate(-50%, -50%);
-  background-image: linear-gradient(rgba(241, 201, 44, .7), rgba(241, 201, 44, .7)), url("/assets/ESCENAS/P2.jpg");
+  background-image: url("/assets/SINOPSIS/Sin título1787116725001.png");
   background-position: center;
   background-size: cover;
   box-shadow: 0 0 0 100vmax rgba(20, 35, 27, .72), 0 25px 80px rgba(0, 0, 0, .38);
 }
 
-.gallery-view > .character-overlay--lime {
-  background-image: linear-gradient(rgba(129, 155, 30, .68), rgba(129, 155, 30, .68)), url("/assets/ESCENAS/P2.jpg");
-}
-
-.gallery-view > .character-overlay--red {
-  background-image: linear-gradient(rgba(119, 139, 33, .62), rgba(119, 139, 33, .62)), url("/assets/ESCENAS/P11.jpg");
-}
-
-.gallery-view > .character-overlay--brown {
-  background-image: linear-gradient(rgba(191, 143, 86, .64), rgba(191, 143, 86, .64)), url("/assets/ESCENAS/P2.jpg");
-}
-
-.gallery-view > .character-overlay--pink {
-  background-image: linear-gradient(rgba(214, 116, 166, .48), rgba(214, 116, 166, .48)), url("/assets/POSTERS/PF1.jpg");
-}
+.character-overlay--blue .character-overlay__card { top: 12%; bottom: 12%; left: 16%; right: 12%; background: #275f89; border-radius: 1.5cqw; }
+.character-overlay--blue .character-overlay__portrait { top: -8%; left: -27%; width: 85%; height: 116%; object-position: center; }
+.character-overlay--blue .character-overlay__copy { margin-left: 40%; padding: 4%; }
+.character-overlay--blue .character-overlay__title-line { display: block; }
+.character-overlay--blue .character-overlay__copy h2 { font-size: clamp(16px, 3.5cqw, 39px); }
+.character-overlay--blue .character-overlay__copy p { color: #fff; font-size: clamp(11px, 2.2cqw, 25px); line-height: 1.25; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
@@ -1542,7 +1479,6 @@ button:focus-visible, input:focus-visible {
   .action-button { min-height: 32px; padding: 5px 8px; border-radius: 5px; font-size: 9px; gap: 4px; box-shadow: 0 2px 0 rgba(31,42,35,.23); }
   .action-button svg { width: 14px; height: 14px; }
   .page-arrow { width: 36px; height: 36px; }
-  .character-overlay--red .character-overlay__close { width: 36px; height: 36px; }
   .content-view, .gallery-view { width: calc(100% - 20px); margin-top: 8px; }
   .content-view { min-height: calc(100dvh - 155px); border-width: 3px; }
   .content-view h2, .gallery-view h2 { font-size: 29px; }

@@ -9,27 +9,37 @@ import type { CharacterId } from "@/app/features/story/story.types";
 interface CharacterOverlayProps {
   characterId: CharacterId;
   onClose: () => void;
+  variant?: "story" | "gallery";
 }
 
-export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps) {
+export function CharacterOverlay({ characterId, onClose, variant = "story" }: CharacterOverlayProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const character = CHARACTERS[characterId];
   const titleId = `character-name-${characterId}`;
 
   useEffect(() => {
-    closeRef.current?.focus();
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    if (variant === "gallery") document.body.style.overflow = "hidden";
+    closeRef.current?.focus({ preventScroll: true });
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") onClose();
       if (event.key === "Tab") {
         event.preventDefault();
-        closeRef.current?.focus();
+        closeRef.current?.focus({ preventScroll: true });
       }
     }
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      if (variant === "gallery") document.body.style.overflow = previousOverflow;
+      if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+        previousFocus.focus({ preventScroll: true });
+      }
+    };
+  }, [onClose, variant]);
 
   return (
     <section
@@ -66,6 +76,12 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
               <>
                 <span className="character-overlay__title-line">Hola, soy el</span>
                 <span className="character-overlay__title-line">Delfín rosado</span>
+              </>
+            ) : characterId === "pinguino" ? (
+              <>
+                <span className="character-overlay__title-line">Hola, soy el</span>
+                <span className="character-overlay__title-line">Pingüino de</span>
+                <span className="character-overlay__title-line">Galápagos</span>
               </>
             ) : (
               <>
@@ -132,19 +148,10 @@ export function CharacterOverlay({ characterId, onClose }: CharacterOverlayProps
         className="character-overlay__close"
         type="button"
         onClick={onClose}
-        aria-label="Cerrar ficha y volver al cuento"
+        aria-label="Cerrar ficha del personaje"
         title="Cerrar"
       >
-        {characterId === "guacamayo" || characterId === "oso" || characterId === "delfin" ? (
-          <Image
-            src="/assets/Iconos/Recurso 2@450x.png"
-            alt=""
-            width={64}
-            height={64}
-          />
-        ) : (
-          <X aria-hidden="true" />
-        )}
+        <X aria-hidden="true" />
       </button>
     </section>
   );

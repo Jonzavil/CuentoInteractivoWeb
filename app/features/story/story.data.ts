@@ -14,7 +14,7 @@ export const CHARACTERS: Record<CharacterId, {
   shortName: string;
   description: string;
   imageSrc: string | null;
-  accent: "purple" | "lime" | "red" | "brown" | "pink";
+  accent: "purple" | "lime" | "red" | "brown" | "pink" | "blue";
 }> = {
   lola: {
     name: "Lola",
@@ -48,8 +48,15 @@ export const CHARACTERS: Record<CharacterId, {
     name: "Delfín rosado",
     shortName: "Delfín",
     description: "Vivo en los ríos de la Amazonía ecuatoriana y me alimento de peces. Necesito aguas limpias y libres de basura para nadar, alimentarme y vivir.",
-    imageSrc: null,
+    imageSrc: "/assets/PERSONAJES/DELFIN ROSADO.png",
     accent: "pink",
+  },
+  pinguino: {
+    name: "Pingüino de Galápagos",
+    shortName: "Pingüino",
+    description: "Vivo en las islas Galápagos y el mar me da alimento. Cuando el agua se calienta, los peces se alejan y encontrar comida se vuelve más difícil. ¡Ayúdame a cuidar mi hogar!",
+    imageSrc: "/assets/PERSONAJES/PINGUINO DE GALAPAGOS.png",
+    accent: "blue",
   },
 };
 

@@ -188,7 +188,7 @@ export function StoryExperience() {
             })}
           </div>
           {selectedCharacter ? (
-            <CharacterOverlay characterId={selectedCharacter} onClose={closeCharacter} />
+            <CharacterOverlay characterId={selectedCharacter} onClose={closeCharacter} variant="gallery" />
           ) : null}
         </section>
       ) : null}

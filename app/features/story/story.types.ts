@@ -2,7 +2,7 @@ export type TextScale = "normal" | "large";
 
 export type StoryView = "cuento" | "sinopsis" | "creditos" | "galeria";
 
-export type CharacterId = "lola" | "mario" | "guacamayo" | "oso" | "delfin";
+export type CharacterId = "lola" | "mario" | "guacamayo" | "oso" | "delfin" | "pinguino";
 
 export type StoryInteraction =
   | { type: "characters" }
